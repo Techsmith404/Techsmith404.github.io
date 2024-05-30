@@ -1,8 +1,8 @@
 p {
-  color: purple;
+  text-color: purple;
 }
 
 img {
-  border: 2px solid green;
+  border: 2px solid white;
   border-radius: 5px;
 }
