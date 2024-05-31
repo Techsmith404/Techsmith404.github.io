@@ -18,10 +18,6 @@ body {
     /*Responsive*/
 
 
-.wrapper {
-  max-width:800px;
-}
-
 .banner {
   padding: 2px 1px 2px
   max-height:100%;
