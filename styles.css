@@ -38,7 +38,7 @@ h3 {
 }
 
 .textBox {
-  max-width: 500px;
+  max-width: 100%;
   border:2px inset RoyalBlue;
   text-indent: 25px;
   padding: 3px;
