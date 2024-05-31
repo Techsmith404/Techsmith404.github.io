@@ -4,22 +4,22 @@ p {
 }
 
 body {
-  background-image:linear-gradient(to bottom          left, blue, LightBlue); 
+  background-image: linear-gradient(to bottom          left, blue, LightBlue); 
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
 
 .topnav {
-  overflow:hidden;
-  background-color:#280999;
+  overflow: hidden;
+  background-color: #280999;
 }
 
 .topnav a {
-  float:left;
-  color:#ddd;
-  text-align:center;
-  padding:14px 16px;
+  float: left;
+  color: #ddd;
+  text-align: center;
+  padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
 }
