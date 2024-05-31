@@ -22,6 +22,12 @@ h3 {
 
     /*  Objects  */
 
+.aboutH3 {
+  border: 2px ridge RoyalBlue;
+  background-color: hsla(177, 80%, 70%, 0.5);
+  margin: 5px 85px 0px;
+}
+
 .info {
   color: #e3fffe;
   margin: 10px 20px 5px; 
