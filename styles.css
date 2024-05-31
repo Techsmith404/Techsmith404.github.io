@@ -29,6 +29,7 @@ body {
 }
 
 .banner {
+  padding: 2px 1px 2px
   max-height:100%;
   max-width:100%;
 }
