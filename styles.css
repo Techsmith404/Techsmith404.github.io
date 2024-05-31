@@ -34,6 +34,9 @@ body {
 }
 
 .textBox {
+  border:2px inset RoyalBlue;
+  padding:5px; 
+  text-indent: 25px;
   width:100%;
 }
 
