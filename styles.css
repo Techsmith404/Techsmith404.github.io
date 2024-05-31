@@ -17,6 +17,12 @@ body {
 
     /*  Objects  */
 
+.info {
+  margin: 10px 20px 5px; 
+  font-size:10px; 
+  border:2px solid blue; 
+  max-width:100%;
+}
 
 .banner {
   padding: 2px 1px 2px
@@ -70,6 +76,12 @@ body {
   padding: 5px 10px;
   margin: 5px;
   font-size: 20px;
+}
+
+.info {
+  margin: 10px 0px 5px; 
+  font-size:12px;
+  max-width:200px;
 }
 
 }
