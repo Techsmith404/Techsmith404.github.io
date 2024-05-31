@@ -26,7 +26,7 @@ h3 {
   color: #e3fffe;
   margin: 10px 20px 5px; 
   font-size: 20px; 
-  border: 2px inset RoyalBlue; 
+  border: 2px ridge RoyalBlue; 
   max-width: 100%;
   background-color: hsla(177, 80%, 70%, 0.5);
 }
