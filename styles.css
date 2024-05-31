@@ -36,10 +36,9 @@ body {
 
 .textBox {
   border:2px inset RoyalBlue;
-  padding:5px; 
   text-indent: 25px;
   width:100%;
-  padding: 1px 15px 15px;
+  padding: 3px;
   font-family: helvetica;
   background-color: hsla(177, 80%, 70%, 0.5);
 }
