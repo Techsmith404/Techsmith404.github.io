@@ -19,8 +19,8 @@ body {
 
 .info {
   margin: 10px 20px 5px; 
-  font-size:10px; 
-  border:2px solid blue; 
+  font-size:20px; 
+  border:2px solid LightPurple; 
   max-width:100%;
 }
 
