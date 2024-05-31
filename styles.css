@@ -23,6 +23,7 @@ body {
   font-size: 20px; 
   border: 2px solid LightPurple; 
   max-width: 100%;
+  background-color: hsla(177, 80%, 70%, 0.5);
 }
 
 .banner {
