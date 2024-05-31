@@ -21,7 +21,7 @@ body {
   color: #e3fffe;
   margin: 10px 20px 5px; 
   font-size: 20px; 
-  border: 2px solid LightPurple; 
+  border: 2px inset RoyalBlue; 
   max-width: 100%;
   background-color: hsla(177, 80%, 70%, 0.5);
 }
