@@ -1,3 +1,11 @@
+#techBanner {
+  width: 100%;
+  background-image: /images/TechSmith_Banner.jpg;
+  height: 200px;
+  background-position: center;
+  
+}
+
 p {
   font-family: helvetica;
   background-color: hsla(177, 80%, 70%, 0.5);
