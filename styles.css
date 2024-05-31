@@ -67,7 +67,7 @@ body {
 
 .textBox {
   max-width: 500px;
-  padding: 5px;
+  padding: 5px 10px;
   margin: 5px;
   text-size: 16px;
 }
