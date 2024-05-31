@@ -18,6 +18,7 @@ body {
     /*  Objects  */
 
 .info {
+  color: #e3fffe;
   margin: 10px 20px 5px; 
   font-size:20px; 
   border:2px solid LightPurple; 
