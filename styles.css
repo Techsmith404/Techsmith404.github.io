@@ -1,11 +1,5 @@
-#techBanner {
-  width: 100%;
-  background-image: url("/images/TechSmith_Banner.jpg");
-  height: 200px;
-  background-position: center;
-  background-size: cover;
-  
-}
+    /*  Style  */
+
 
 p {
   font-family: helvetica;
@@ -18,6 +12,10 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
+
+
+    /*  Objects  */
+
 
 .topnav {
   overflow: hidden;
