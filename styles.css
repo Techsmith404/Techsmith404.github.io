@@ -1,3 +1,10 @@
 p {
   font-family: helvetica;
 }
+
+body {
+  background-image:linear-gradient(to bottom left, blue, LightBlue); 
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: cover;
+}
