@@ -15,7 +15,7 @@ body {
 }
 
 
-    /*Responsive*/
+    /*  Objects  */
 
 
 .banner {
@@ -33,20 +33,6 @@ body {
   color: #d1fffd;
   background-color: hsla(177, 80%, 70%, 0.5);
 }
-
-
-@media only screen and (min-width: 1000px) {
-
-.textBox {
-  width:100%;
-  padding: 5px;
-  margin: 5px;
-}
-
-}
-
-    /*  Objects  */
-
 
 .topnav {
   overflow: hidden;
@@ -70,4 +56,18 @@ body {
 .topnav a.active {
   background-color: #1c70ba;
   color: white;
+}
+
+
+    /*Responsive*/
+
+
+@media only screen and (min-width: 1000px) {
+
+.textBox {
+  width:100%;
+  padding: 5px;
+  margin: 5px;
+}
+
 }
