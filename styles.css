@@ -25,7 +25,7 @@ body {
 }
 
 .textBox {
-  max-width: 50px;
+  max-width: 500px;
   border:2px inset RoyalBlue;
   text-indent: 25px;
   padding: 3px;
