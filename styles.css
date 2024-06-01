@@ -26,6 +26,12 @@ li:not(:last-child) {
 
     /*  Objects  */
 
+.projectBlock {
+  float: left;
+  max-width: 200;
+  border: 2px outset DarkBlue;
+}
+
 .aboutH3 {
   border: 2px ridge RoyalBlue;
   background-color: hsla(177, 80%, 70%, 0.5);
