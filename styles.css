@@ -29,7 +29,8 @@ li:not(:last-child) {
 .aboutH3 {
   border: 2px ridge RoyalBlue;
   background-color: hsla(177, 80%, 70%, 0.5);
-  margin: 5px 85px 0px;
+  margin-top: 5px;
+  max-width: 75%;
 }
 
 .info {
@@ -89,7 +90,7 @@ li:not(:last-child) {
 @media only screen and (min-width: 1000px) {
 
 .aboutH3 {
-  margin: 5px 200px 0px;
+  max-width: 350px;
 }
     
 .banner {
