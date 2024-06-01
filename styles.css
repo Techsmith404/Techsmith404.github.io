@@ -29,6 +29,7 @@ li:not(:last-child) {
 .aboutH3 {
   border: 2px ridge RoyalBlue;
   background-color: hsla(177, 80%, 70%, 0.5);
+  text-align: center;
   margin-top: 5px;
   max-width: 75%;
 }
