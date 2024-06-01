@@ -88,9 +88,14 @@ li:not(:last-child) {
 
 @media only screen and (min-width: 1000px) {
 
+.aboutH3 {
+  margin: 5px 170px 0px;
+}
+    
 .banner {
   max-height:50%;
   max-width:50%;
+  margin: auto;
 }
     
 .textBox {
