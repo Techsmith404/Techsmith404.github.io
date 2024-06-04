@@ -52,9 +52,9 @@ li:not(:last-child) {
   margin: auto;
   border: 2px ridge DarkBlue;
   color: #4df3ff;
-  background-color: DarkGray; 
+  /* background-color: DarkGray; 
   object-fit: cover;
-  object-position: left; 
+  object-position: left; */
 }
 
 .projectBlock {
