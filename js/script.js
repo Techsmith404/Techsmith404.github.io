@@ -13,3 +13,7 @@ function expand() {
 
 menu.onclick = expand(); */ 
 
+
+const test = document.getElementById.("test");
+
+test.onclick.classList.add("info")
