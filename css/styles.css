@@ -7,7 +7,7 @@
 }
 
 hr.short {
-  border: 1px solid DarkGray;
+  border: 1px solid #595959;
   max-width: 75%;
 }
 
@@ -22,7 +22,7 @@ h3 {
   margin: auto;
   font-family: arial; 
   text-align: center; 
-  color: DarkGray;
+  color: #595959;
 }
 
 li:not(:last-child) {
@@ -97,7 +97,7 @@ li:not(:last-child) {
   padding: 3px;
   margin: 10px 20px 5px;
   font-family: helvetica;
-  color: DarkGray;
+  color: #595959;
   background-color: hsla(184, 100%, 65%, 0.5);
 }
 
