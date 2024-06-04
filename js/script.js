@@ -9,5 +9,5 @@ function expand() {
   }
 }
 
-document.getElementById.("menu").onclick = expand;
+document.getElementById.("menu").onclick = expand();
 
