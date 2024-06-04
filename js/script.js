@@ -13,8 +13,5 @@ function expand() {
 
 menu.onclick = expand(); */ 
 
-window.alert("test working"); 
+window.alert(test working); 
 
-const test = document.getElementById.("test");
-
-test.onclick.style
