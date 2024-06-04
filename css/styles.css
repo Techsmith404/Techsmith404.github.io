@@ -6,9 +6,6 @@
   max-width 800px;
 }
 
-hr {
-  border-color: #2bd65b:
-}
 
 body {
   background-image: linear-gradient(to bottom left, blue, LightBlue); 
@@ -44,8 +41,8 @@ li:not(:last-child) {
   height: 35px;
   text-align: center;
   margin: auto;
-  color: DarkBlue;
-  background-color: LightBlue; 
+  color: #b3ad19;
+  background-color: #2bd65b; 
 }
 
 .projectBlock {
