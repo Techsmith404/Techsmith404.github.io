@@ -1,4 +1,4 @@
-// let menuOpen = false;
+/* let menuOpen = false;
 const menu = document.getElementById.("menu");
 
 function expand() {
@@ -11,5 +11,5 @@ function expand() {
   }
 }
 
-menu.onclick = expand(); // 
+menu.onclick = expand(); */ 
 
