@@ -7,7 +7,7 @@
 }
 
 hr.short {
-  border: 1px solid green;
+  border: 1px solid DarkGray;
   max-width: 75%;
 }
 
@@ -21,7 +21,7 @@ body {
 h3 {
   font-family: arial; 
   text-align: center; 
-  color: DarkBlue;
+  color: NeonBlue;
 }
 
 li:not(:last-child) {
@@ -53,8 +53,8 @@ li:not(:last-child) {
   height: 35px;
   text-align: center;
   margin: 3px 1px 3px;
-  color: #a2b00c;
-  background-color: #176117; 
+  color: NeonBlue;
+  background-color: DarkGray; 
 }
 
 .projectBlock {
