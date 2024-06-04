@@ -1,5 +1,5 @@
 let menuOpen = false;
-let menu = document.getElementById.("menu");
+const menu = document.getElementById.("menu");
 
 function expand() {
   if (menuOpen != true) { 
