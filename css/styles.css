@@ -51,13 +51,10 @@ li:not(:last-child) {
   text-align: center;
   margin: auto;
   border: 2px ridge DarkBlue;
-  /* color: #4df3ff;
+  color: #4df3ff;
   background-color: DarkGray; 
   object-fit: cover;
-  object-position: left; */
-  background-image: url=(./images/cyberBg.jpg);
-  background-size: cover;
-  background-repeat: repeat;
+  object-position: left; 
 }
 
 .projectBlock {
