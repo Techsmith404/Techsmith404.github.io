@@ -3,10 +3,11 @@ let menu = document.getElementById.("menu");
 
 function expand() {
   if (menuOpen != true) { 
-    menu.style.animation="menuOpen 1s forwards";
+    menu.classList.add("menuOpen");
     menuOpen = true;
 } else {
-    menu.style.animation="menuClose 1s forwards";
+    menu.classList.remove("menuOpen");
+    menu.classList.add("menuClose");
   }
 }
 
