@@ -1,11 +1,12 @@
 let menuOpen = false;
+let menu = document.getElementById.("menu");
 
 function expand() {
   if (menuOpen != true) { 
-    document.getElementById.("menu").style.animation="menuOpen 1s forwards";
+    menu.style.animation="menuOpen 1s forwards";
     menuOpen = true;
 } else {
-      document.getElementById.("menu").style.animation="menuClose 1s forwards";
+    menu.style.animation="menuClose 1s forwards";
   }
 }
 
