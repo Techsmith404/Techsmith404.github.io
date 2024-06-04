@@ -52,7 +52,7 @@ li:not(:last-child) {
   max-width: 75%;
   height: 35px;
   text-align: center;
-  margin: auto;
+  margin: 3px 1px 3px;
   color: #a2b00c;
   background-color: #176117; 
 }
