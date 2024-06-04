@@ -96,7 +96,7 @@ li:not(:last-child) {
   padding: 3px;
   margin: 10px 20px 5px;
   font-family: helvetica;
-  color: #4df3ff;
+  color: DarkGray;
   background-color: hsla(184, 100%, 65%, 0.5);
 }
 
