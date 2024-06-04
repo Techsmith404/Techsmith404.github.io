@@ -6,6 +6,10 @@
   max-width 800px;
 }
 
+hr.short {
+  border: 1px solid green;
+  max-width: 75%;
+}
 
 body {
   background-image: linear-gradient(to bottom left, blue, LightBlue); 
