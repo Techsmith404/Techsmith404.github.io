@@ -1,4 +1,4 @@
 function expand() {
-  document.getElementById.
+  document.getElementById.("menu").style.animation=""
 }
 
