@@ -37,9 +37,9 @@ li:not(:last-child) {
     /*  Objects  */
 
 .menuBanner {
- /* width: 95%;
+  width: 95%;
   height: 35px;
-  text-align: center; */
+  text-align: center;
   margin: auto;
   color: white;
   background-color: #40c9ff; 
