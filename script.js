@@ -1,1 +1,1 @@
-window.alert("working test");
+alert("working test");
