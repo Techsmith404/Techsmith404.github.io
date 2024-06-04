@@ -31,14 +31,22 @@ li:not(:last-child) {
 
     /*  Animation  */
 
-@keyframes menuOpen {
+@keyframes menuO {
   50% {background-color: purple;}
   100% {background-color: red;}
 }
 
-@keyframes menuClose {
+@keyframes menuC {
   50% {background-color: yellow;}
   100% {background-color: green;}
+}
+
+.menuOpen {
+  animation: menuO 1s forward;
+}
+
+.menuClose {
+  animation: menuC 1s forward;
 }
 
     /*  Objects  */
