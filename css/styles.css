@@ -31,23 +31,19 @@ li:not(:last-child) {
 
     /*  Animation  */
 
-@keyframes menuO {
-  50% {background-color: purple;}
-  100% {background-color: red;}
+@keyframes menuOpen {
+  25% {width: 25%;}
+  50% {width: 50%;}
+  75% {width: 75%;}
+  100% {width: 100%;}
+  
 }
 
-@keyframes menuC {
+@keyframes menuClose {
   50% {background-color: yellow;}
   100% {background-color: green;}
 }
 
-.menuOpen {
-  animation: menuO 1s forward;
-}
-
-.menuClose {
-  animation: menuC 1s forward;
-}
 
     /*  Objects  */
 
@@ -57,11 +53,18 @@ li:not(:last-child) {
 
 .menuBanner {
   height: 30px;
+  width : 25%;
   text-align: center;
   margin: auto;
   border: 2px ridge DarkBlue;
   color: #4df3ff;
   background-color: DarkGray;
+}
+
+.menuBanner:active {
+  animation-name: menuOpen;
+  animation-duration: 1s;
+  animation-fill-mode: forward;
 }
 
 .projectBlock {
