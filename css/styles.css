@@ -8,7 +8,7 @@
 
 
 body {
-  background-image: linear-gradient(to bottom left, red, LightBlue); 
+  background-image: linear-gradient(to bottom left, blue, LightBlue); 
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
