@@ -41,6 +41,7 @@ li:not(:last-child) {
     /*  Objects  */
 
 .sidebar {
+  display: block;
   height: 100vh;
   max-width: 20%;
   background-repeat: repeat;
