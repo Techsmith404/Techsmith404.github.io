@@ -24,7 +24,23 @@ li:not(:last-child) {
     margin-bottom: 8px;
 }
 
+    /*  Animation  */
+
+@keyframes menuOpen {
+
+}
+
+@keyframes menuClose {
+
+}
+
     /*  Objects  */
+
+.menuBanner {
+  width: 95%;
+  height: 35px;
+  background-color: #40c9ff;
+}
 
 .projectBlock {
   float: left;
@@ -66,30 +82,6 @@ li:not(:last-child) {
   font-family: helvetica;
   color: #e3fffe;
   background-color: hsla(177, 80%, 70%, 0.5);
-}
-
-.topnav {
-  overflow: hidden;
-  background-color: #280999;
-}
-
-.topnav a {
-  float: left;
-  color: #ddd;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.topnav a:hover {
-  background-color: #391cba;
-  color: black;
-}
-
-.topnav a.active {
-  background-color: #1c70ba;
-  color: white;
 }
 
 
