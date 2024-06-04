@@ -44,7 +44,7 @@ li:not(:last-child) {
   height: 35px;
   text-align: center;
   margin: auto;
-  color: white;
+  color: DarkBlue;
   background-color: LightBlue; 
 }
 
