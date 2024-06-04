@@ -61,12 +61,12 @@ li:not(:last-child) {
   float: left;
   max-width: 200;
   border: 2px outset DarkBlue;
-  background-color: hsla(177, 80%, 70%, 0.5);
+  background-color: hsla(240, 100%, 65%, 0.5);
 }
 
 .aboutH3 {
   border: 2px ridge RoyalBlue;
-  background-color: hsla(177, 80%, 70%, 0.5);
+  background-color: hsla(240, 100%, 65%, 0.5);
   margin-left: auto;
   margin-right: auto;
   margin-top: 5px;
@@ -79,7 +79,7 @@ li:not(:last-child) {
   font-size: 20px; 
   border: 2px ridge RoyalBlue; 
   max-width: 100%;
-  background-color: hsla(177, 80%, 70%, 0.5);
+  background-color: hsla(240, 100%, 65%, 0.5);
 }
 
 .banner {
@@ -96,7 +96,7 @@ li:not(:last-child) {
   margin: 10px 20px 5px;
   font-family: helvetica;
   color: #e3fffe;
-  background-color: hsla(177, 80%, 70%, 0.5);
+  background-color: hsla(240, 100%, 65%, 0.5);
 }
 
 
