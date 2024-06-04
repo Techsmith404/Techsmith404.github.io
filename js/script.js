@@ -1,4 +1,4 @@
-let menuOpen = false;
+var menuOpen = false;
 const menu = document.getElementById.("menu");
 
 function expand() {
