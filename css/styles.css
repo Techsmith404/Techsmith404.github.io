@@ -47,8 +47,7 @@ li:not(:last-child) {
 
 .menuBanner {
   display: inline-block;
-  width: auto;
-  height: 35px;
+  height: 30px;
   text-align: center;
   margin: auto;
   border: 2px ridge DarkBlue;
