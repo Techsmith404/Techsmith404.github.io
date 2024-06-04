@@ -13,5 +13,5 @@ function expand() {
 
 menu.onclick = expand(); */ 
 
-window.alert(test working); 
+alert(test working); 
 
