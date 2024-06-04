@@ -44,8 +44,7 @@ li:not(:last-child) {
   height: 100vh;
   max-width: 20%;
   background-repeat: repeat;
-  object-fit: cover;
-  object-position: top;
+  background-size: contain;
 }
 
 .menuBanner {
