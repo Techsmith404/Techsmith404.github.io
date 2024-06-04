@@ -11,4 +11,3 @@ function expand() {
   }
 }
 
-menu.onclick = expand();
