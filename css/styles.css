@@ -40,6 +40,7 @@ li:not(:last-child) {
  /* width: 95%;
   height: 35px;
   text-align: center; */
+  margin: auto;
   color: white;
   background-color: #40c9ff; 
 }
