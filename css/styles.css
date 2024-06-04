@@ -19,6 +19,7 @@ body {
 }
 
 h3 {
+  margin: auto;
   font-family: arial; 
   text-align: center; 
   color: DarkGray;
