@@ -4,7 +4,7 @@ function expand() {
   if (menuOpen != true) { 
     document.getElementById.("menu").style.animation="menuOpen 1s";
     menuOpen = true;
-  } else {
+} else {
       document.getElementById.("menu").style.animation="menuClose 1s";
   }
 }
