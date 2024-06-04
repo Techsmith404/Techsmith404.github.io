@@ -52,6 +52,7 @@ li:not(:last-child) {
   margin: auto;
   color: #4df3ff;
   background-color: DarkGray; 
+  background-image: url=("../images/cyberBg.png")
 }
 
 .projectBlock {
