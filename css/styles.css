@@ -32,8 +32,8 @@ li:not(:last-child) {
     /*  Animation  */
 
 @keyframes menuOpen {
-  50% {background-color: LightGray;}
-  100% {background-color: white;}
+  50% {background-color: purple;}
+  100% {background-color: red;}
 }
 
 @keyframes menuClose {
