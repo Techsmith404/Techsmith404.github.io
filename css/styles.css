@@ -41,9 +41,9 @@ li:not(:last-child) {
     /*  Objects  */
 
 .sidebar {
-  height: 100%
-  max-width: 25%
-  background-image:
+  height: 100%;
+  max-width: 25%;
+  background-image: url("../images/cyberBg.png");
 }
 
 .menuBanner {
