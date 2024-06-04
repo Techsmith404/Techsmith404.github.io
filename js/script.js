@@ -13,7 +13,8 @@ function expand() {
 
 menu.onclick = expand(); */ 
 
+window.alert("test working"); 
 
 const test = document.getElementById.("test");
 
-test.onclick.classList.add("info")
+test.onclick.style
