@@ -37,7 +37,8 @@ li:not(:last-child) {
 }
 
 @keyframes menuClose {
-
+  50% {background-color: yellow;}
+  100% {background-color: green;}
 }
 
     /*  Objects  */
