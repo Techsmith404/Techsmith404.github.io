@@ -1,13 +1,17 @@
 var menuOpen = false;
-var menu = document.getElementById("menu");
 
 function expand() {
+  var menu = document.getElementById("menu");
+  var banner = document.getElementsByClassName('menuBanner');
+
   if (menuOpen != true) { 
-    menu.classList.add("menuOpen");
+    menu.classList.remove("menuC");
+    menu.classList.add("menuO");
     menuOpen = true;
 } else {
-    menu.classList.remove("menuOpen");
-    menu.classList.add("menuClose");
+    menu.classList.remove("menuO");
+    menu.classList.add("menuC");
+    menuOpen = false;
   }
 }
 

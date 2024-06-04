@@ -3,7 +3,7 @@
 *{
   margin:1;
   padding:1;
-  max-width 800px;
+  max-width: 800px;
 }
 
 hr.short {
@@ -32,18 +32,39 @@ li:not(:last-child) {
     /*  Animation  */
 
 @keyframes menuOpen {
-  25% {width: 25%;}
-  50% {width: 50%;}
-  75% {width: 75%;}
-  100% {width: 100%;}
+  from {width: 25%;}
+  to {width: 75%;}
   
 }
 
 @keyframes menuClose {
-  50% {background-color: yellow;}
-  100% {background-color: green;}
+  from {width: 75%;}
+  to {width: 25%;}
 }
 
+.menuI {
+  width:25%;
+  height: 30px;
+  text-align: center;
+  margin: auto;
+  border: 2px ridge DarkBlue;
+  color: #4df3ff;
+  background-color: DarkGray;
+}
+
+.menuO { 
+ animation-name: menuOpen;
+ animation-duration: 1s;
+ animation-fill-mode: forward;
+ width: 75%;
+}
+
+.menuC {
+   animation-name: menuClose;
+   animation-duration: 1s;
+   animation-fill-mode: forward;
+   width: 25%;
+}
 
     /*  Objects  */
 
@@ -53,7 +74,6 @@ li:not(:last-child) {
 
 .menuBanner {
   height: 30px;
-  width : 25%;
   text-align: center;
   margin: auto;
   border: 2px ridge DarkBlue;
@@ -61,11 +81,7 @@ li:not(:last-child) {
   background-color: DarkGray;
 }
 
-.menuBanner:active {
-  animation-name: menuOpen;
-  animation-duration: 1s;
-  animation-fill-mode: forward;
-}
+ 
 
 .projectBlock {
   float: left;
