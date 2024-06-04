@@ -52,11 +52,11 @@ li:not(:last-child) {
   margin: auto;
   border: 2px ridge DarkBlue;
   color: #4df3ff;
-  background-color: DarkGray; 
-  background-image: url=("../images/cyberBg.png")
-  background-repeat: repeat;
+  /* background-color: DarkGray; 
   object-fit: cover;
-  object-position: left;
+  object-position: left; */
+  background-image: url=("../images/cyberBg.jpg")
+  background-repeat: repeat;
 }
 
 .projectBlock {
