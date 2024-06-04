@@ -1,1 +1,4 @@
+function expand() {
+  document.getElementById.
+}
 
