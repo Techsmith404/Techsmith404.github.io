@@ -1,4 +1,4 @@
-/* let menuOpen = false;
+let menuOpen = false;
 const menu = document.getElementById.("menu");
 
 function expand() {
@@ -11,7 +11,4 @@ function expand() {
   }
 }
 
-menu.onclick = expand(); */ 
-
-alert("folder working"); 
-
+menu.onclick = expand();
