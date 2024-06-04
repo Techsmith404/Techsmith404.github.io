@@ -53,6 +53,9 @@ li:not(:last-child) {
   color: #4df3ff;
   background-color: DarkGray; 
   background-image: url=("../images/cyberBg.png")
+  background-repeat: repeat;
+  object-fit: cover;
+  object-position: left;
 }
 
 .projectBlock {
