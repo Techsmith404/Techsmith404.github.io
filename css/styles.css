@@ -55,7 +55,7 @@ li:not(:last-child) {
   background-color: DarkGray; 
   object-fit: cover;
   object-position: left; */
-  background-image: url=(../images/cyberBg.jpg);
+  background-image: url=(./images/cyberBg.jpg);
   background-size: cover;
   background-repeat: repeat;
 }
