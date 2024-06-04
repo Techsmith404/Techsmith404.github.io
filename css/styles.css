@@ -50,6 +50,7 @@ li:not(:last-child) {
   height: 35px;
   text-align: center;
   margin: auto;
+  border: 2px ridge DarkBlue;
   color: #4df3ff;
   background-color: DarkGray; 
   background-image: url=("../images/cyberBg.png")
