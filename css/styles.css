@@ -49,7 +49,9 @@ li:not(:last-child) {
   max-width: 75%;
   height: 35px;
   text-align: center;
-  margin: 3px 1px 3px;
+  top-margin: 3px;
+  left-margin: auto;
+  right-margin: auto;
   color: #4df3ff;
   background-color: DarkGray; 
 }
