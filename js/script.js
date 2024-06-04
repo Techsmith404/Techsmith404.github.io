@@ -10,5 +10,5 @@ function expand() {
   }
 }
 
-document.getElementById.("menu").onclick = expand();
+menu.onclick = expand();
 
