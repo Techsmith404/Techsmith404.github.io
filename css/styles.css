@@ -46,6 +46,7 @@ li:not(:last-child) {
 }
 
 .menuI {
+  overflow: hidden;
   width:25%;
   height: 55px;
   font-size: 20px;
@@ -57,6 +58,7 @@ li:not(:last-child) {
 }
 
 .menuO { 
+ overflow: hidden;
  animation-name: menuOpen;
  animation-duration: 1s;
  animation-fill-mode: forward;
@@ -68,6 +70,7 @@ li:not(:last-child) {
    animation-name: menuClose;
    animation-duration: 1s;
    animation-fill-mode: forward;
+   overflow: hidden;
    width: 25%;
    height: 55px;
 }
@@ -75,6 +78,7 @@ li:not(:last-child) {
 .menuBanner {
   text-align: center;
   margin: auto;
+  overflow: hidden;
   font-size: 20 px;
   border: 2px ridge DarkBlue;
   color: #4df3ff;
