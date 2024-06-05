@@ -36,19 +36,20 @@ li:not(:last-child) {
     /*  Animation  */
 
 @keyframes menuOpen {
-  from {width: 25%; height: 30px;}
+  from {width: 25%; height: 40px;}
   to {width: 75%; height: 50px;}
   
 }
 
 @keyframes menuClose {
   from {width: 75%; height: 50px;}
-  to {width: 25%; height: 30px;}
+  to {width: 25%; height: 40px;}
 }
 
 .menuI {
   width:25%;
-  height: 30px;
+  height: 40px;
+  font-size: 20px;
   text-align: center;
   margin: auto;
   border: 2px ridge DarkBlue;
@@ -69,7 +70,7 @@ li:not(:last-child) {
    animation-duration: 1s;
    animation-fill-mode: forward;
    width: 25%;
-   height: 30px;
+   height: 40px;
 }
 
     /*  Objects  */
@@ -81,12 +82,15 @@ li:not(:last-child) {
 .menuBanner {
   text-align: center;
   margin: auto;
+  font-size: 20px;
   border: 2px ridge DarkBlue;
   color: #4df3ff;
   background-color: #595959;
 }
 
- 
+#menuCover {
+  margin-top: 5px;
+}
 
 .projectBlock {
   float: left;
@@ -115,8 +119,10 @@ li:not(:last-child) {
 
 .banner {
   padding: 1px 1px 2px;
-  max-height:100%;
-  max-width:100%;
+  display: block;
+  margin: auto;
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .textBox {
@@ -136,6 +142,10 @@ li:not(:last-child) {
 
 @media only screen and (min-width: 1000px) {
 
+* {
+  max-width: 100%;
+}
+
 .aboutH3 {
   max-width: 350px;
 }
@@ -143,12 +153,11 @@ li:not(:last-child) {
 .banner {
   max-height:50%;
   max-width:50%;
-  display: block;
-  margin: auto;
+
 }
 
 .textBox {
-  max-width: 500px;
+  max-width: 55%;
   padding: 5px 10px;
   margin: auto;
   font-size: 20px;
@@ -160,13 +169,25 @@ li:not(:last-child) {
   max-width:500px;
 }
 
+.menuBanner {
+  font-size: 35px;
+}
+
+.menuI {
+  font-size: 35px;
+}
+
+#menuCover {
+  margin-top: 0px;
+}
+
 .sidebar {
   display: block;
   height: 100vh;
-  max-width: 20%;
-  background-repeat: repeat;
+  max-width: 10%;
+  background-repeat: repeat-y;
   object-fit: cover;
   object-position: top;
+  background-color: hsla(0, 0%, 15%, 0.705);
 }
-
 }
