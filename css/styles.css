@@ -79,6 +79,29 @@ li:not(:last-child) {
   display: none;
 }
 
+#navMenu {
+  margin-top: 5px;
+}
+
+#navMenu a {
+  color: #4df3ff;
+  text-align: center;
+  padding: 0px 16px;
+  text-decoration: none;
+}
+
+#navMenu a:hover {
+  border: 2px outset #3156fa;
+  background-color: #3156fa63;
+  color:rgb(14, 0, 92);
+}
+
+#navMenu a.active {
+  border: 2px outset #3156fa;
+  background-color: #3156fa63;
+  color:rgb(14, 0, 92);
+}
+
 .menuBanner {
   text-align: center;
   margin: auto;
@@ -94,6 +117,8 @@ li:not(:last-child) {
 
 .projectBlock {
   float: left;
+  margin-left: 20px;
+  margin-top: 10px;
   max-width: 200;
   border: 2px outset DarkBlue;
   background-color: hsla(184, 100%, 65%, 0.5);
@@ -102,15 +127,17 @@ li:not(:last-child) {
 .aboutH3 {
   border: 2px ridge RoyalBlue;
   background-color: hsla(184, 100%, 65%, 0.5);
+  color: rgb(0, 0, 100);
   margin-left: auto;
   margin-right: auto;
   margin-top: 5px;
+  margin-bottom: 5px;
   max-width: 75%;
 }
 
 .info {
   color: #e3fffe;
-  margin: 10px 20px 5px; 
+  margin: 10px 20px 10px; 
   font-size: 20px; 
   border: 2px ridge RoyalBlue; 
   max-width: 100%;
@@ -132,7 +159,7 @@ li:not(:last-child) {
   padding: 3px;
   margin: 10px 20px 5px;
   font-family: helvetica;
-  color: #595959;
+  color: (0, 0, 100);
   background-color: hsla(184, 100%, 65%, 0.5);
 }
 
@@ -164,9 +191,11 @@ li:not(:last-child) {
 }
 
 .info {
-  margin: auto; 
-  font-size:12px;
-  max-width:500px;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto; 
+  font-size:24px;
+  max-width:700px;
 }
 
 .menuBanner {
