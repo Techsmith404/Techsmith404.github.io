@@ -14,7 +14,7 @@ function expand() {
 } else {
     menu.classList.remove("menuO");
     menu.classList.add("menuC");
-    setTimeout(() => { nav.classList.toggle('hidden');}, 500);
+    nav.classList.toggle('hidden');
     cover.classList.toggle('hidden');
     menuOpen = false;
   }

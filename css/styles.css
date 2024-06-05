@@ -36,19 +36,18 @@ li:not(:last-child) {
     /*  Animation  */
 
 @keyframes menuOpen {
-  from {width: 25%; height: 40px;}
-  to {width: 75%; height: 50px;}
-  
+  from {width: 25%; height: 55px;}
+  to {width: 45%; height: 120px;}
 }
 
 @keyframes menuClose {
-  from {width: 75%; height: 50px;}
-  to {width: 25%; height: 40px;}
+  from {width: 45%; height: 120px;}
+  to {width: 25%; height: 55px;}
 }
 
 .menuI {
   width:25%;
-  height: 40px;
+  height: 55px;
   font-size: 20px;
   text-align: center;
   margin: auto;
@@ -61,8 +60,8 @@ li:not(:last-child) {
  animation-name: menuOpen;
  animation-duration: 1s;
  animation-fill-mode: forward;
- width: 75%;
- height: 50px;
+ width: 45%;
+ height: 120px;
 }
 
 .menuC {
@@ -70,7 +69,16 @@ li:not(:last-child) {
    animation-duration: 1s;
    animation-fill-mode: forward;
    width: 25%;
-   height: 40px;
+   height: 55px;
+}
+
+.menuBanner {
+  text-align: center;
+  margin: auto;
+  font-size: 20 px;
+  border: 2px ridge DarkBlue;
+  color: #4df3ff;
+  background-color: #595959;
 }
 
     /*  Objects  */
@@ -102,14 +110,6 @@ li:not(:last-child) {
   color:rgb(14, 0, 92);
 }
 
-.menuBanner {
-  text-align: center;
-  margin: auto;
-  font-size: 20px;
-  border: 2px ridge DarkBlue;
-  color: #4df3ff;
-  background-color: #595959;
-}
 
 #menuCover {
   margin-top: 5px;
@@ -198,12 +198,32 @@ li:not(:last-child) {
   max-width:700px;
 }
 
+@keyframes menuOpen {
+  from {width: 25%; height: 40px;}
+  to {width: 75%; height: 50px;}
+}
+
+@keyframes menuClose {
+  from {width: 75%; height: 50px;}
+  to {width: 25%; height: 40px;}
+}
+
 .menuBanner {
   font-size: 35px;
 }
 
 .menuI {
   font-size: 35px;
+}
+
+.menuO { 
+ width: 75%;
+ height: 50px;
+}
+
+.menuC {
+   width: 25%;
+   height: 40px;
 }
 
 #menuCover {
