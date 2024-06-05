@@ -9,7 +9,7 @@ function expand() {
     menu.classList.remove("menuC");
     menu.classList.add("menuO");
     cover.classList.toggle('hidden');
-    setTimeout(() => { nav.classList.toggle('hidden');}, 500);
+    setTimeout(() => { nav.classList.toggle('hidden');}, 400);
     menuOpen = true;
 } else {
     menu.classList.remove("menuO");
