@@ -2,37 +2,56 @@
 
 <html> 
 
-      <!-- Head Tags -->
+        <!-- SideBars -->
+
+  <img class="sidebar" src="images/cyberBg.png" style="float: left;"> </img>
+  <img class="sidebar" src="images/cyberBg.png" style="float: right;"> </img>
+
+        <!-- Head Tags -->
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="css/styles.css">
   <title>TechSmith Home Page</title>
-  <link rel="icon" type="image/x-icon" href="/images/favicon.png">
-  <script src="/js/script.js"></script>
+  <link rel="icon" type="image/x-icon" href="images/favicon.png">
+
 </head>
   
       <!-- Image Header -->
-  <img class="banner" src="/images/TechSmith_Banner.jpg" 
+<header>
+  <img class="banner" src="images/techSmithGrayBanner.jpg" 
   alt="TechSmith Banner"> 
-<hr>
+</header>
+<hr class="short">
 
-      <!-- Navigation -->
-
-<div class="topnav">
-  <a class="active" href="index.html">Home</a>
-  <a href="projects.html">Projects</a>
-  <a href="contact.html">Contact</a>
-  <a href="about.html">About</a>
-</div>
-
+       <!-- Navigation -->
+<nav> 
+  <div onclick="expand()" class="menuI" class="menuBanner"  id="menu">
+    <h4 id="menuCover" style="text-align: center; margin-left: auto; margin-right: auto; margin-bottom: auto; ">Main Menu</h4>
+    <div id="navMenu" class="hidden" >
+      <a class="active" href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+</nav>
+      
       <!-- Body -->
 
 <body>
 
+  <h3 class="aboutH3">
+    Some Text
+  </h3>
 
-  
+  <p class="textBox">
+    Some content goes here.
+  </p>
+
+   <script type="text/javascript" src="js/script.js"></script> 
+
 </body>
 
 </html>
