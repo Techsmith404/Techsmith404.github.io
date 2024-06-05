@@ -29,17 +29,21 @@ li:not(:last-child) {
     margin-bottom: 8px;
 }
 
+.hidden {
+  display: none;
+}
+
     /*  Animation  */
 
 @keyframes menuOpen {
-  from {width: 25%;}
-  to {width: 75%;}
+  from {width: 25%; height: 30px;}
+  to {width: 75%; height: 50px;}
   
 }
 
 @keyframes menuClose {
-  from {width: 75%;}
-  to {width: 25%;}
+  from {width: 75%; height: 50px;}
+  to {width: 25%; height: 30px;}
 }
 
 .menuI {
@@ -49,7 +53,7 @@ li:not(:last-child) {
   margin: auto;
   border: 2px ridge DarkBlue;
   color: #4df3ff;
-  background-color: DarkGray;
+  background-color: #595959;
 }
 
 .menuO { 
@@ -57,6 +61,7 @@ li:not(:last-child) {
  animation-duration: 1s;
  animation-fill-mode: forward;
  width: 75%;
+ height: 50px;
 }
 
 .menuC {
@@ -64,6 +69,7 @@ li:not(:last-child) {
    animation-duration: 1s;
    animation-fill-mode: forward;
    width: 25%;
+   height: 30px;
 }
 
     /*  Objects  */
@@ -73,12 +79,11 @@ li:not(:last-child) {
 }
 
 .menuBanner {
-  height: 30px;
   text-align: center;
   margin: auto;
   border: 2px ridge DarkBlue;
   color: #4df3ff;
-  background-color: DarkGray;
+  background-color: #595959;
 }
 
  
