@@ -87,9 +87,6 @@ li:not(:last-child) {
 
     /*  Objects  */
 
-.sidebar {
-  display: none;
-}
 
 #navMenu {
   margin-top: 5px;
@@ -125,12 +122,12 @@ li:not(:last-child) {
   margin-top: 10px;
   max-width: 200;
   border: 2px outset DarkBlue;
-  background-color: hsla(184, 100%, 65%, 0.5);
+  background-color: hsla(184, 100%, 65%, 0.9);
 }
 
 .aboutH3 {
   border: 2px ridge RoyalBlue;
-  background-color: hsla(184, 100%, 65%, 0.5);
+  background-color: hsla(184, 100%, 65%, 0.9);
   color: rgb(0, 0, 100);
   margin-left: auto;
   margin-right: auto;
@@ -145,7 +142,7 @@ li:not(:last-child) {
   font-size: 20px; 
   border: 2px ridge RoyalBlue; 
   max-width: 100%;
-  background-color: hsla(184, 100%, 65%, 0.5);
+  background-color: hsla(184, 100%, 65%, 0.9);
 }
 
 .banner {
@@ -164,7 +161,7 @@ li:not(:last-child) {
   margin: 10px 20px 5px;
   font-family: helvetica;
   color: (0, 0, 100);
-  background-color: hsla(184, 100%, 65%, 0.5);
+  background-color: hsla(184, 100%, 65%, 0.9);
 }
 
 
@@ -234,13 +231,4 @@ li:not(:last-child) {
   margin-top: 0px;
 }
 
-.sidebar {
-  display: block;
-  height: 100vh;
-  max-width: 10%;
-  background-repeat: repeat-y;
-  object-fit: cover;
-  object-position: top;
-  background-color: hsla(0, 0%, 15%, 0.705);
-}
 }
