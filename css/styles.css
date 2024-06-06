@@ -13,9 +13,9 @@ hr.short {
 
 body {
   background-image: url("../images/techBg.png"); 
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-attachment: fixed;
-  background-size: cover;
+  background-size: contain;
 }
 
 h3 {
@@ -50,11 +50,13 @@ li:not(:last-child) {
   width:25%;
   height: 55px;
   font-size: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-shadow: -4px 3px 4px #000000;
   text-align: center;
   margin: auto;
-  border: 2px ridge DarkBlue;
+  border: 4px ridge DarkBlue;
   color: #4df3ff;
-  background-color: #595959;
+  background-color: #333333;
 }
 
 .menuO { 
@@ -79,10 +81,12 @@ li:not(:last-child) {
   text-align: center;
   margin: auto;
   overflow: hidden;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-shadow: -4px 3px 4px #000000;
   font-size: 20 px;
-  border: 2px ridge DarkBlue;
+  border: 4px ridge DarkBlue;
   color: #4df3ff;
-  background-color: #595959;
+  background-color: #000000;
 }
 
     /*  Objects  */
@@ -116,6 +120,20 @@ li:not(:last-child) {
   margin-top: 5px;
 }
 
+.container {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  padding: 15px 0px;
+  background: linear-gradient(navy, rgb(0, 132, 255));
+  border: 2px groove DarkBlue;
+  border-radius: 5%;
+  /* width: fit-content; */
+  max-width: 85%;
+  height: fit-content;
+
+}
+
 .projectBlock {
   float: left;
   margin-left: 20px;
@@ -127,7 +145,7 @@ li:not(:last-child) {
 
 .aboutH3 {
   border: 2px ridge RoyalBlue;
-  background-color: hsla(184, 100%, 65%, 0.9);
+  background-color: hsla(184, 55%, 50%, 0.9);
   color: rgb(0, 0, 100);
   margin-left: auto;
   margin-right: auto;
@@ -142,7 +160,7 @@ li:not(:last-child) {
   font-size: 20px; 
   border: 2px ridge RoyalBlue; 
   max-width: 100%;
-  background-color: hsla(184, 100%, 65%, 0.9);
+  background-color: hsla(204, 55%, 50%, 0.9);
 }
 
 .banner {
@@ -161,7 +179,7 @@ li:not(:last-child) {
   margin: 10px 20px 5px;
   font-family: helvetica;
   color: (0, 0, 100);
-  background-color: hsla(184, 100%, 65%, 0.9);
+  background-color: hsla(204, 55%, 50%, 0.9);
 }
 
 
@@ -172,6 +190,10 @@ li:not(:last-child) {
 
 * {
   max-width: 100%;
+}
+
+.container {
+  max-width: 65%;
 }
 
 .aboutH3 {
@@ -205,7 +227,7 @@ li:not(:last-child) {
 }
 
 @keyframes menuClose {
-  from {width: 75%; height: 50px;}
+  from {width: 75%; height: 40px;}
   to {width: 25%; height: 40px;}
 }
 
@@ -215,6 +237,7 @@ li:not(:last-child) {
 
 .menuI {
   font-size: 35px;
+  height: 40px;
 }
 
 .menuO { 
