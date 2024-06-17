@@ -169,6 +169,7 @@ li:not(:last-child) {
   font-size: 20px; 
   border: 2px ridge RoyalBlue; 
   max-width: 100%;
+  word-wrap: break-word;
   background-color: hsla(204, 55%, 50%, 0.9);
 }
 
