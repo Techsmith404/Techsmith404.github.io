@@ -92,6 +92,18 @@ li:not(:last-child) {
     /*  Objects  */
 
 
+#projectContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 8px;
+}
+
+#projectContainer div{
+  margin: 10px 5px;
+  padding: 4px;
+}
+
 #navMenu {
   margin-top: 5px;
 }
@@ -135,9 +147,6 @@ li:not(:last-child) {
 }
 
 .projectBlock {
-  float: left;
-  margin-left: 20px;
-  margin-top: 10px;
   max-width: 200;
   border: 2px outset DarkBlue;
   background-color: hsla(184, 100%, 65%, 0.9);
