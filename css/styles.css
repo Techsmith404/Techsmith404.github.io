@@ -11,6 +11,10 @@ hr.short {
   max-width: 75%;
 }
 
+hr.project {
+  border: 1px solid #0004ff;
+}
+
 body {
   background-image: url("../images/techBg.png"); 
   background-repeat: repeat;
@@ -63,7 +67,7 @@ li:not(:last-child) {
  overflow: hidden;
  animation-name: menuOpen;
  animation-duration: 1s;
- animation-fill-mode: forward;
+ animation-fill-mode: forwards;
  width: 45%;
  height: 120px;
 }
@@ -71,7 +75,7 @@ li:not(:last-child) {
 .menuC {
    animation-name: menuClose;
    animation-duration: 1s;
-   animation-fill-mode: forward;
+   animation-fill-mode: forwards;
    overflow: hidden;
    width: 25%;
    height: 55px;
@@ -147,20 +151,26 @@ li:not(:last-child) {
 }
 
 .projectBlock {
-  max-width: 200;
+  max-width: 400px;
   border: 2px outset DarkBlue;
-  background-color: hsla(184, 100%, 65%, 0.9);
+  background-color: hsla(184, 95%, 50%, 0.938);
+  font-size: large;
+}
+
+.projectImg {
+  display: block;
+  margin: auto;
+  max-width: 300px;
+  max-height: 300px;
 }
 
 .aboutH3 {
-  border: 2px ridge RoyalBlue;
-  background-color: hsla(184, 55%, 50%, 0.9);
+  background-color: #3156fa;
   color: rgb(0, 0, 100);
   margin-left: auto;
   margin-right: auto;
   margin-top: 5px;
   margin-bottom: 5px;
-  max-width: 75%;
 }
 
 .info {
@@ -207,7 +217,16 @@ li:not(:last-child) {
 }
 
 .aboutH3 {
-  max-width: 350px;
+  max-width: 500px;
+}
+
+.info li{
+  font-size: larger;
+  color: #001885;
+}
+
+.info a{
+  color: rgb(50, 4, 94);
 }
 
 .banner {

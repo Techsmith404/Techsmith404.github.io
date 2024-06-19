@@ -20,3 +20,9 @@ function expand() {
   }
 }
 
+function enlarge(block) {
+  var id = document.getElementById(block);
+  
+  // open a div with description of project
+
+}
