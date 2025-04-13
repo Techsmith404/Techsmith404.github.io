@@ -1,53 +1,217 @@
 <!DOCTYPE html>
-
-<html> 
-
-        <!-- Head Tags -->
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/styles.css">
-  <title>TechSmith Home Page</title>
-  <link rel="icon" type="image/x-icon" href="images/favicon.png">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechSmith | Computer Solutions & Web Development</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-  
-      <!-- Image Header -->
-<header>
-  <img class="banner" src="images/techSmithClearBanner.png" 
-  alt="TechSmith Banner"> 
-</header>
-
-       <!-- Navigation -->
-<nav> 
-  <div onclick="expand()" class="menuI" class="menuBanner"  id="menu">
-    <h4 id="menuCover" style="text-align: center; margin-left: auto; margin-right: auto; margin-bottom: auto; ">Main Menu</h4>
-    <div id="navMenu" class="hidden" >
-      <a class="active" href="index.html">Home</a>
-      <a href="projects">Projects</a>
-      <a href="contact">Contact</a>
-      <a href="about">About</a>
-    </div>
-  </div>
-</nav>
-      
-      <!-- Body -->
-
 <body>
-  
-<div class="container">
-  <h3 class="aboutH3">
-    Some Text
-  </h3>
+    <div class="circuit-overlay"></div>
+    <div class="glitch-overlay"></div>
+    
+    <header>
+        <div class="container">
+            <div class="logo">
+                <span class="tech">TECH</span><span class="smith">SMITH</span>
+                <div class="logo-pulse"></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
 
-  <p class="textBox">
-    Some content goes here.
-  </p>
-</div>
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1 class="glitch" data-text="TECHSMITH">TECHSMITH</h1>
+                <h2>Computer Solutions & Web Development</h2>
+                <p>Building, fixing, and optimizing technology solutions tailored to your needs.</p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn pulse">Get in Touch</a>
+                    <a href="#services" class="btn btn-outline">Our Services</a>
+                </div>
+            </div>
+        </section>
 
-   <script type="text/javascript" src="js/script.js"></script> 
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section-title">Our <span>Services</span></h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <h3>Computer Building</h3>
+                        <p>Custom-built PCs tailored to your specific needs, whether for gaming, work, or creative projects.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3>Repair & Maintenance</h3>
+                        <p>Diagnosing and fixing hardware/software issues to keep your systems running smoothly.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Web Development</h3>
+                        <p>Custom websites built from scratch with clean code and modern technologies.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <h3>Debugging</h3>
+                        <p>Identifying and resolving complex technical issues in software and systems.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section id="projects" class="projects">
+            <div class="container">
+                <h2 class="section-title">Recent <span>Projects</span></h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <div class="project-overlay">
+                                <h3>Custom Gaming PC</h3>
+                                <a href="#" class="btn btn-small">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">
+                            <div class="project-overlay">
+                                <h3>Business Website</h3>
+                                <a href="#" class="btn btn-small">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">
+                            <div class="project-overlay">
+                                <h3>System Optimization</h3>
+                                <a href="#" class="btn btn-small">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <div class="about-content">
+                    <h2 class="section-title">About <span>TechSmith</span></h2>
+                    <p>I'm a self-made IT professional with a passion for all things technology. From building high-performance computers to crafting elegant websites from scratch, I love solving technical challenges.</p>
+                    <p>With years of hands-on experience, I've developed a deep understanding of computer systems and web technologies. My approach combines technical expertise with creative problem-solving to deliver solutions that work.</p>
+                    <div class="skills">
+                        <div class="skill">
+                            <div class="skill-name">Hardware</div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-name">Web Development</div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-name">Debugging</div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 92%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="circuit-mask"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">Get in <span>Touch</span></h2>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@techsmith.com</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <span>(123) 456-7890</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Tech City, Digital State 10101</span>
+                        </div>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-github"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Subject">
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn pulse">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="tech">TECH</span><span class="smith">SMITH</span>
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-copy">
+                    <p>&copy; 2023 TechSmith. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
 </body>
-
 </html>
