@@ -48,12 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Create circuit animation
     createCircuitAnimation();
-    
-    // Add active class to current section in navigation
-    window.addEventListener('scroll', highlightCurrentSection);
-    
-    // Initialize with current section highlighted
-    highlightCurrentSection();
+
 });
 
 function createCircuitAnimation() {
@@ -87,7 +82,8 @@ function createCircuitAnimation() {
  // Highlight current page in navigation
  const pathParts = location.pathname.split('/');
  const currentPage = pathParts[pathParts.length - 2] || 'index.html'; // Gets the folder name or defaults to index.html
- 
+ const navLinks = document.querySelectorAll('nav ul li a');
+
  navLinks.forEach(link => {
      let linkPage = link.getAttribute('href');
      if (linkPage.endsWith('/')) {
