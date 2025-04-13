@@ -1,35 +1,69 @@
 <!DOCTYPE html>
-
-<html> 
-
-      <!-- Head Tags -->
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/styles.css">
-  <title>CHANGE ME!</title>
-  <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechSmith | Your Tech Solutions</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-
-      <!-- Image Header -->
-
-<img class="banner" src="/images/TechSmith_Banner.jpg" 
-  alt="TechSmith Banner">
-<hr>
-
-<div class="topnav">
-  <a class="active" href="index.html">Home</a>
-  <a href="projects.html">Projects</a>
-  <a href="#contact">Contact</a>
-  <a href="about.html">About</a>
-</div>
-<hr>
-
-      <!-- Body -->
-
 <body>
+    <!-- Circuit Background Elements -->
+    <div class="circuit-overlay"></div>
+    <div class="glitch-overlay"></div>
+    
+    <!-- Header/Navigation -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <span class="tech">TECH</span><span class="smith">SMITH</span>
+                <div class="logo-pulse"></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../services/index.html">Services</a></li>
+                    <li><a href="../index.html">Projects</a></li>
+                    <li><a href="../about/index.html">About</a></li>
+                    <li><a href="../contact/index.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
 
+    <!-- Main Content Area -->
+    <main class="container">
+        <!-- Your content will go here -->
+        <section class="content-section">
+            <h1>Welcome to TechSmith</h1>
+            <p>This is your blank template. Start building your pages here.</p>
+            
+            <!-- Example content block - remove or modify -->
+            <div class="content-block">
+                <h2>Section Title</h2>
+                <p>Add your content here. This template includes all the core styling from the full version.</p>
+                <a href="#" class="btn">Example Button</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="tech">TECH</span><span class="smith">SMITH</span>
+                </div>
+                <div class="footer-copy">
+                    <p>&copy; <span id="year"></span> TechSmith. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
 </body>
-
 </html>

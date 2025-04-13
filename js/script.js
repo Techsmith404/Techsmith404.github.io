@@ -84,25 +84,42 @@ function createCircuitAnimation() {
     }
 }
 
-function highlightCurrentSection() {
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('nav ul li a');
+ // Highlight current page in navigation
+ const pathParts = location.pathname.split('/');
+ const currentPage = pathParts[pathParts.length - 2] || 'index.html'; // Gets the folder name or defaults to index.html
+ 
+ navLinks.forEach(link => {
+     let linkPage = link.getAttribute('href');
+     if (linkPage.endsWith('/')) {
+         linkPage = linkPage.slice(0, -1); // Remove trailing slash if present
+     }
+     const linkFolder = linkPage.split('/').pop(); //Extracts the folder name from the href.
+     if (currentPage === linkFolder) {
+         link.classList.add('active');
+     } else {
+         link.classList.remove('active');
+     }
+ });
+
+// function highlightCurrentSection() {
+//     const sections = document.querySelectorAll('section');
+//     const navLinks = document.querySelectorAll('nav ul li a');
     
-    let currentSection = '';
+//     let currentSection = '#';
     
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
+//     sections.forEach(section => {
+//         const sectionTop = section.offsetTop;
+//         const sectionHeight = section.clientHeight;
         
-        if (window.scrollY >= sectionTop - 150 && window.scrollY < sectionTop + sectionHeight - 150) {
-            currentSection = section.getAttribute('id');
-        }
-    });
+//         if (window.scrollY >= sectionTop - 150 && window.scrollY < sectionTop + sectionHeight - 150) {
+//             currentSection = section.getAttribute('id');
+//         }
+//     });
     
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${currentSection}`) {
-            link.classList.add('active');
-        }
-    });
-}
+//     navLinks.forEach(link => {
+//         link.classList.remove('active');
+//         if (link.getAttribute('href') === `#${currentSection}`) {
+//             link.classList.add('active');
+//         }
+//     });
+// }
