@@ -45,6 +45,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Get the current year
+    const currentYear = new Date().getFullYear();
+
+    // Find the span element with the id 'year'
+    const yearSpan = document.getElementById('year');
+
+    // Update the content of the span with the current year
+    yearSpan.textContent = currentYear;
     
     // Create circuit animation
     createCircuitAnimation();
@@ -81,41 +90,18 @@ function createCircuitAnimation() {
 
  // Highlight current page in navigation
  const pathParts = location.pathname.split('/');
- const currentPage = pathParts[pathParts.length - 2] || 'index.html'; // Gets the folder name or defaults to index.html
+ const currentPage = pathParts[pathParts.length - 2] || 'index.html'; 
  const navLinks = document.querySelectorAll('nav ul li a');
 
  navLinks.forEach(link => {
      let linkPage = link.getAttribute('href');
      if (linkPage.endsWith('/')) {
-         linkPage = linkPage.slice(0, -1); // Remove trailing slash if present
+         linkPage = linkPage.slice(0, -1); 
      }
-     const linkFolder = linkPage.split('/').pop(); //Extracts the folder name from the href.
+     const linkFolder = linkPage.split('/').pop(); 
      if (currentPage === linkFolder) {
          link.classList.add('active');
      } else {
          link.classList.remove('active');
      }
  });
-
-// function highlightCurrentSection() {
-//     const sections = document.querySelectorAll('section');
-//     const navLinks = document.querySelectorAll('nav ul li a');
-    
-//     let currentSection = '#';
-    
-//     sections.forEach(section => {
-//         const sectionTop = section.offsetTop;
-//         const sectionHeight = section.clientHeight;
-        
-//         if (window.scrollY >= sectionTop - 150 && window.scrollY < sectionTop + sectionHeight - 150) {
-//             currentSection = section.getAttribute('id');
-//         }
-//     });
-    
-//     navLinks.forEach(link => {
-//         link.classList.remove('active');
-//         if (link.getAttribute('href') === `#${currentSection}`) {
-//             link.classList.add('active');
-//         }
-//     });
-// }
