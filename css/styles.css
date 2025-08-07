@@ -766,3 +766,38 @@ footer {
         font-size: 2rem;
     }
 }
+        /* This is a simple class to style the price inline */
+        .service-price {
+            display: block;
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Styling for the new FormBricks embed section */
+        .formbricks-section {
+            padding: 100px 0;
+            background: rgba(5, 5, 5, 0.7);
+        }
+        
+        .formbricks-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Basic styling for the Formbricks embed to look decent in the theme */
+        .formbricks-embed-placeholder {
+            min-height: 500px; /* Adjust height as needed */
+            width: 100%;
+            background: rgba(20, 20, 20, 0.7);
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            color: #888;
+        }
