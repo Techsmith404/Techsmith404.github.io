@@ -1,24 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Mobile Menu Toggle
-    const mobileMenuBtn = document.querySelector('.mobile-menu');
-    const navMenu = document.querySelector('nav ul');
-    
-    mobileMenuBtn.addEventListener('click', function() {
-        navMenu.classList.toggle('active');
-        mobileMenuBtn.querySelector('i').classList.toggle('fa-times');
-    });
-    
-    // Close mobile menu when clicking on a link
-    const navLinks = document.querySelectorAll('nav ul li a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            if (navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
-            }
-        });
-    });
-    
     // Header scroll effect
     const header = document.querySelector('header');
     window.addEventListener('scroll', function() {
@@ -48,12 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Create circuit animation
     createCircuitAnimation();
-    
-    // Add active class to current section in navigation
-    window.addEventListener('scroll', highlightCurrentSection);
-    
-    // Initialize with current section highlighted
-    highlightCurrentSection();
 });
 
 function createCircuitAnimation() {
@@ -83,43 +57,3 @@ function createCircuitAnimation() {
         circuitOverlay.appendChild(line);
     }
 }
-
- // Highlight current page in navigation
- const pathParts = location.pathname.split('/');
- const currentPage = pathParts[pathParts.length - 2] || 'index.html'; // Gets the folder name or defaults to index.html
- 
- navLinks.forEach(link => {
-     let linkPage = link.getAttribute('href');
-     if (linkPage.endsWith('/')) {
-         linkPage = linkPage.slice(0, -1); // Remove trailing slash if present
-     }
-     const linkFolder = linkPage.split('/').pop(); //Extracts the folder name from the href.
-     if (currentPage === linkFolder) {
-         link.classList.add('active');
-     } else {
-         link.classList.remove('active');
-     }
- });
-
-// function highlightCurrentSection() {
-//     const sections = document.querySelectorAll('section');
-//     const navLinks = document.querySelectorAll('nav ul li a');
-    
-//     let currentSection = '#';
-    
-//     sections.forEach(section => {
-//         const sectionTop = section.offsetTop;
-//         const sectionHeight = section.clientHeight;
-        
-//         if (window.scrollY >= sectionTop - 150 && window.scrollY < sectionTop + sectionHeight - 150) {
-//             currentSection = section.getAttribute('id');
-//         }
-//     });
-    
-//     navLinks.forEach(link => {
-//         link.classList.remove('active');
-//         if (link.getAttribute('href') === `#${currentSection}`) {
-//             link.classList.add('active');
-//         }
-//     });
-// }
