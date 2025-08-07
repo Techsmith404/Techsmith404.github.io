@@ -6,7 +6,28 @@
     <title>TechSmith | Computer Solutions & Web Development</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* This is a simple class to style the price inline */
+        .service-price {
+            display: block;
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
 
+        /* Styling for the Formbricks section */
+        .formbricks-section {
+            padding: 100px 0;
+            background: rgba(5, 5, 5, 0.7);
+            text-align: center;
+        }
+        
+        .formbricks-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
     <div class="circuit-overlay"></div>
@@ -212,8 +233,7 @@
             <div class="container formbricks-container">
                 <h2 class="section-title">Request a <span>Service</span></h2>
                 <p>Click the button below to start a quick request form. It'll only take a minute.</p>
-                <!-- This button will be used to trigger the FormBricks survey -->
-                <button id="request-form-button" class="btn pulse btn-lg">Request Service Now</button>
+                <button id="request-form-button" class="btn pulse btn-lg" type="button">Request Service Now</button>
             </div>
         </section>
     </main>
@@ -232,11 +252,31 @@
     </footer>
 
     <script src="js/script.js"></script>
-<!-- START Formbricks Surveys -->
-<script type="text/javascript">
-!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://form.techsmith404.com/js/formbricks.umd.cjs",t.onload=function(){window.formbricks?window.formbricks.setup({environmentId:"cmdybndr70009mu0106h2w97f",appUrl:"https://form.techsmith404.com"}):console.error("Formbricks library failed to load properly. The formbricks object is not available.");};var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}();
-</script>
-<!-- END Formbricks Surveys -->
+
+    <!-- This script is a code action trigger that is more reliable than passive listeners -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const button = document.getElementById('request-form-button');
+            if (button) {
+                button.addEventListener('click', () => {
+                    // Check if the formbricks object is available before trying to use it.
+                    if (window.formbricks) {
+                        // This is the code action. The string "button_clicked" needs to match the key
+                        // you set up in your Formbricks dashboard.
+                        window.formbricks.track("button_clicked");
+                    } else {
+                        console.error("Formbricks object not found. Cannot track event.");
+                    }
+                });
+            }
+        });
+    </script>
+    
+    <!-- START Formbricks Surveys -->
+    <script type="text/javascript">
+    !function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://form.techsmith404.com/js/formbricks.umd.cjs",t.onload=function(){window.formbricks?window.formbricks.setup({environmentId:"cmdybndr70009mu0106h2w97f",appUrl:"https://form.techsmith404.com"}):console.error("Formbricks library failed to load properly. The formbricks object is not available.");};var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}();
+    </script>
+    <!-- END Formbricks Surveys -->
+
 </body>
 </html>
-
