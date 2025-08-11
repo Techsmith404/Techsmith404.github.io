@@ -30,6 +30,20 @@ document.addEventListener('DOMContentLoaded', function() {
     createCircuitAnimation();
 });
 
+const button = document.getElementById('request-form-button');
+            if (button) {
+                button.addEventListener('click', () => {
+                    // Check if the formbricks object is available before trying to use it.
+                    if (window.formbricks) {
+                        // This is the code action. The string "button_clicked" needs to match the key
+                        // you set up in your Formbricks dashboard.
+                        window.formbricks.track("button_clicked");
+                    } else {
+                        console.error("Formbricks object not found. Cannot track event.");
+                    }
+                });
+            }
+
 function createCircuitAnimation() {
     const circuitOverlay = document.querySelector('.circuit-overlay');
     
