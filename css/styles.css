@@ -333,6 +333,37 @@ nav ul li a:hover::after, nav ul li a.active::after {
     gap: 20px;
 }
 
+/*
+    ==============================
+    CIRCUIT ANIMATION LINES
+    ==============================
+*/
+/* Styles for the dynamically created circuit lines. */
+.circuit-line {
+    position: absolute;
+    background-color: var(--primary);
+    box-shadow: var(--glow);
+    opacity: 0.1;
+    z-index: -1;
+    animation: circuit-line-flow 5s linear infinite;
+}
+
+.circuit-line.horizontal {
+    height: 1px;
+}
+
+.circuit-line.vertical {
+    width: 1px;
+}
+
+/* Keyframe animation for the flowing circuit lines. */
+@keyframes circuit-line-flow {
+    0% { transform: scale(0); opacity: 0; }
+    20% { transform: scale(1); opacity: 0.2; }
+    80% { transform: scale(1); opacity: 0.2; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
 /* Glitch Effect */
 .glitch {
     position: relative;
