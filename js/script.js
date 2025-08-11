@@ -1,17 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Header scroll effect
-    const header = document.querySelector('header');
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
+    // Smooth scroll for nav links
+    const scrollLinks = document.querySelectorAll('nav ul li a[href^="#"], .cta-buttons a[href^="#"], .btn-sticky[href^="#"]');
     
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+    scrollLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
             e.preventDefault();
             
             const targetId = this.getAttribute('href');
@@ -28,21 +20,29 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Create circuit animation
     createCircuitAnimation();
-});
 
-const button = document.getElementById('request-form-button');
-            if (button) {
-                button.addEventListener('click', () => {
-                    // Check if the formbricks object is available before trying to use it.
-                    if (window.formbricks) {
-                        // This is the code action. The string "button_clicked" needs to match the key
-                        // you set up in your Formbricks dashboard.
-                        window.formbricks.track("button_clicked");
-                    } else {
-                        console.error("Formbricks object not found. Cannot track event.");
-                    }
-                });
-            }
+    // Scroll to section for sticky button
+    document.querySelector('.btn-sticky').addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetElement = document.querySelector(this.getAttribute('href'));
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
+            });
+        }
+    });
+
+    // Sticky header logic
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+});
 
 function createCircuitAnimation() {
     const circuitOverlay = document.querySelector('.circuit-overlay');
