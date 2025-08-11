@@ -667,6 +667,9 @@ footer {
 .scrolling-words .word:nth-child(5) {
     color: #e0e0e0; /* Errors */
 }
+.scrolling-words .word:nth-child(6) {
+    color: #00ffc8; /* Problems */
+}
 
 
 /* Keyframes */
@@ -699,7 +702,7 @@ footer {
     40% { transform: translateY(-3em); } /* Viruses */
     60% { transform: translateY(-4.5em); } /* Crashes */
     80% { transform: translateY(-6em); } /* Errors */
-    100% { transform: translateY(0); } /* Loop back to Problems */
+    100% { transform: translateY(-7.5em); } /* Loop back to Problems */
 }
 
 /* Media Queries */
