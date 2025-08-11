@@ -208,14 +208,11 @@
         </section>
 
         <section id="request-service" class="formbricks-section">
-    <div class="container formbricks-container">
-        <h2 class="section-title">Request a <span>Service</span></h2>
-        <p>The form is temporarily offline. Please contact me directly to discuss your needs.</p>
-        <div class="btn btn-disabled">
-            <p>Service Request Offline</p>
-            <p class="alt-contact">Email me at techsmith@techsmith404.com or call/text (708) 316-8782</p>
-        </div>
-    </div>
+            <div class="container formbricks-container">
+                <h2 class="section-title">Request a <span>Service</span></h2>
+                <p>Click the button below to start a quick request form. It'll only take a minute.</p>
+                <button id="request-form-button" class="btn pulse btn-lg" type="button">Request Service Now</button>
+            </div>
         </section>
     </main>
 

@@ -597,6 +597,29 @@ nav ul li a.active::after {
     resize: vertical;
 }
 
+.btn-disabled {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--gray);
+    color: rgba(255, 255, 255, 0.6);
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: not-allowed;
+    text-align: center;
+    line-height: 1;
+}
+
+.btn-disabled .alt-contact {
+    text-transform: none;
+    font-weight: 400;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+
 /* Footer */
 footer {
     padding: 50px 0;
