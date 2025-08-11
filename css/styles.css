@@ -131,6 +131,18 @@ a:hover {
     box-shadow: var(--glow);
 }
 
+/* Styling for the Formbricks section */
+.formbricks-section {
+    padding: 100px 0;
+    background: rgba(5, 5, 5, 0.7);
+    text-align: center;
+}
+
+.formbricks-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 /* Buttons */
 .btn {
     display: inline-block;
@@ -604,6 +616,59 @@ footer {
     color: #aaa;
 }
 
+/* Container for the slogan. Sets up a flexbox layout. */
+.slogan-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem; /* Adjust font size as needed. */
+    color: var(--primary); /* Sets color for the static text "404 - ... not found!" */
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Hides the words that are not currently visible. */
+.scrolling-words-container {
+    height: 1.5em; /* Height should be slightly larger than font-size. */
+    overflow: hidden;
+    margin: 0 0.5em; /* Space between "404 -" and "not found!". */
+    display: inline-block;
+}
+
+/* The inner container that holds all the words and moves up and down. */
+.scrolling-words {
+    display: flex;
+    flex-direction: column;
+    animation: scroll-words 10s cubic-bezier(0.85, 0, 0.15, 1) infinite;
+}
+
+/* Individual words. */
+.scrolling-words .word {
+    height: 1.5em;
+    display: block;
+    text-align: center;
+    /* Add a subtle shadow for a glow effect. */
+    text-shadow: 0 0 5px currentColor, 0 0 10px currentColor;
+    font-weight: bold;
+}
+
+/* Assign unique colors to each word using :nth-child() */
+.scrolling-words .word:nth-child(1) {
+    color: #00ffc8; /* Problems */
+}
+.scrolling-words .word:nth-child(2) {
+    color: #ff0077; /* Slowness */
+}
+.scrolling-words .word:nth-child(3) {
+    color: #00aaff; /* Viruses */
+}
+.scrolling-words .word:nth-child(4) {
+    color: #ffaa00; /* Crashes */
+}
+.scrolling-words .word:nth-child(5) {
+    color: #e0e0e0; /* Errors */
+}
+
+
 /* Keyframes */
 @keyframes pulse {
     0% { transform: scale(1); box-shadow: var(--glow); }
@@ -626,6 +691,15 @@ footer {
     60% { transform: skew(-3deg); opacity: 0.7; }
     80% { transform: skew(3deg); opacity: 1; }
     100% { transform: skew(0deg); opacity: 0.8; }
+}
+
+@keyframes scroll-words {
+    0% { transform: translateY(0); } /* Problems */
+    20% { transform: translateY(-1.5em); } /* Slowness */
+    40% { transform: translateY(-3em); } /* Viruses */
+    60% { transform: translateY(-4.5em); } /* Crashes */
+    80% { transform: translateY(-6em); } /* Errors */
+    100% { transform: translateY(0); } /* Loop back to Problems */
 }
 
 /* Media Queries */
