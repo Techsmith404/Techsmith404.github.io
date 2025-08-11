@@ -10,7 +10,7 @@
 <body>
     <div class="circuit-overlay"></div>
     <div class="glitch-overlay"></div>
-    
+
     <header>
         <div class="container">
             <div class="logo">
@@ -22,24 +22,22 @@
 
     <main>
         <section id="home" class="hero">
-    <div class="container">
-        <h1><span class="glitch" data-text="TECHSMITH">TECHSMITH</span><span class="error-code">404</span></h1>
-        <h2>Computer Solutions & Web Development</h2>
-        <p class="tagline">I'll be your problems biggest problem!</p>
-        <p>Building, fixing, and optimizing technology solutions tailored to your needs.</p>
-        <div class="cta-buttons">
-            <a href="#request-service" class="btn pulse">Request a Service</a>
-            <a href="#services" class="btn btn-outline">Our Services</a>
-        </div>
-    </div>
-</section>
-
+            <div class="container">
+                <h1><span class="glitch" data-text="TECHSMITH">TECHSMITH</span><span class="error-code">404</span></h1>
+                <h2>Computer Solutions & Web Development</h2>
+                <p class="tagline">I'll be your problems biggest problem!</p>
+                <p>Building, fixing, and optimizing technology solutions tailored to your needs.</p>
+                <div class="cta-buttons">
+                    <a href="#request-service" class="btn pulse">Request a Service</a>
+                    <a href="#services" class="btn btn-outline">Our Services</a>
+                </div>
+            </div>
+        </section>
 
         <section id="services" class="services">
             <div class="container">
                 <h2 class="section-title">Our <span>Services</span></h2>
                 <div class="services-grid">
-                    
                     <!-- SERVICE CARDS -->
                     <div class="service-card">
                         <div class="icon">
@@ -130,7 +128,7 @@
                         <p>Attempt to recover data from a non-functional or damaged drive using professional software and tools.</p>
                         <span class="service-price">$250.00</span>
                     </div>
-                    
+
                     <div class="service-card">
                         <div class="icon">
                             <i class="fas fa-headset"></i>
@@ -139,7 +137,7 @@
                         <p>Get instant help for software issues without leaving your home. We'll connect securely and fix your problem fast.</p>
                         <span class="service-price">$80.00</span>
                     </div>
-                    
+
                 </div>
             </div>
         </section>
@@ -149,14 +147,14 @@
                 <div class="about-content">
                     <h2 class="section-title">About <span>TechSmith</span><span class="error-code">404</span></h2>
                     <p>
-                        TechSmith is a local, independent IT solutions provider based right here in Northwest Indiana. 
-                        My mission is simple: to provide high-quality, honest, and reliable technical support 
+                        TechSmith is a local, independent IT solutions provider based right here in Northwest Indiana.
+                        My mission is simple: to provide high-quality, honest, and reliable technical support
                         without the inflated costs or impersonal service of a big-box store.
                     </p>
                     <p>
-                        As a self-made professional with a deep passion for technology and years of hands-on experience, 
-                        I specialize in building, repairing, and optimizing computer systems for both home and business users. 
-                        My approach is to combine meticulous technical expertise with straightforward, transparent communication, 
+                        As a self-made professional with a deep passion for technology and years of hands-on experience,
+                        I specialize in building, repairing, and optimizing computer systems for both home and business users.
+                        My approach is to combine meticulous technical expertise with straightforward, transparent communication,
                         so you always know exactly what's happening with your hardware.
                     </p>
                     <div class="skills">
@@ -210,14 +208,14 @@
         </section>
 
         <section id="request-service" class="formbricks-section">
-    <div class="container formbricks-container">
-        <h2 class="section-title">Request a <span>Service</span></h2>
-        <p>The form is temporarily offline. Please contact me directly to discuss your needs.</p>
-        <div class="btn btn-disabled">
-            <p>Service Request Offline</p>
-            <p class="alt-contact">Email me at techsmith@techsmith404.com or call/text (708) 316-8782</p>
-        </div>
-    </div>
+            <div class="container formbricks-container">
+                <h2 class="section-title">Request a <span>Service</span></h2>
+                <p>The form is temporarily offline. Please contact me directly to discuss your needs.</p>
+                <div class="btn btn-disabled">
+                    <p>Service Request Offline</p>
+                    <p class="alt-contact">Email me at techsmith@techsmith404.com or call/text (708) 316-8782</p>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -225,7 +223,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <span class="tech">TECH</span><span class="smith">SMITH</span>
+                    <span class="tech">TECH</span><span class="smith">SMITH</span><span class="error-code">404</span>
                 </div>
                 <div class="footer-copy">
                     <p>&copy; 2023 TechSmith. All rights reserved.</p>
@@ -234,8 +232,30 @@
         </div>
     </footer>
 
+    <!-- Sticky request button -->
+    <div class="btn-disabled btn-sticky">Service Request Offline</div>
+
     <script src="js/script.js"></script>
-    
+
+    <!-- This script is a code action trigger that is more reliable than passive listeners -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const button = document.getElementById('request-form-button');
+            if (button) {
+                button.addEventListener('click', () => {
+                    // Check if the formbricks object is available before trying to use it.
+                    if (window.formbricks) {
+                        // This is the code action. The string "button_clicked" needs to match the key
+                        // you set up in your Formbricks dashboard.
+                        window.formbricks.track("button_clicked");
+                    } else {
+                        console.error("Formbricks object not found. Cannot track event.");
+                    }
+                });
+            }
+        });
+    </script>
+
     <!-- START Formbricks Surveys -->
     <script type="text/javascript">
     !function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://form.techsmith404.com/js/formbricks.umd.cjs",t.onload=function(){window.formbricks?window.formbricks.setup({environmentId:"cmdybndr70009mu0106h2w97f",appUrl:"https://form.techsmith404.com"}):console.error("Formbricks library failed to load properly. The formbricks object is not available.");};var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}();
@@ -244,3 +264,4 @@
 
 </body>
 </html>
+
