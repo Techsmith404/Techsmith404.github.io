@@ -536,6 +536,13 @@ nav ul li a:hover::after, nav ul li a.active::after {
     z-index: 2;
 }
 
+.service-card .subtext {
+    font-size: 0.6rem;
+    position: relative;
+    z-index: 2;
+    color: var(--primary);
+}
+
 .service-card p {
     font-size: 0.9rem;
     position: relative;
