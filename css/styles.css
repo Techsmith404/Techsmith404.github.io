@@ -843,5 +843,31 @@ footer {
     .scrolling-words .word {
         height: 1.4em;
     }
+    
+    .terminal-container {
+    width: 95% !important; /* Force the width to be smaller. */
+    max-width: none !important; /* Remove the desktop max-width limit. */
+    margin: 1rem auto !important; /* Center it and add some breathing room. */
+    border-radius: 6px !important;
+}
+
+    .terminal-header {
+    padding: 0.3rem 0.6rem !important;
+}
+
+    .terminal-header .dot {
+    width: 8px !important;
+    height: 8px !important;
+    margin-right: 6px !important;
+}
+
+    .terminal-header .terminal-title {
+    font-size: 0.65rem !important;
+}
+
+    .terminal-body {
+    padding: 0.75rem !important;
+    font-size: 0.7rem !important;
+}
 
 }
