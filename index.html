@@ -248,28 +248,33 @@
     </footer>
 
     <!-- Sticky request button -->
-    <div class="btn btn-sticky">Request Service</div>
+    <div id="sticky-request-button" class="btn btn-sticky">Request Service</div>
 
     <script src="js/script.js"></script>
 
     <!-- This script is a code action trigger that is more reliable than passive listeners -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const button = document.getElementById('request-form-button');
-            if (button) {
-                button.addEventListener('click', () => {
-                    // Check if the formbricks object is available before trying to use it.
-                    if (window.formbricks) {
-                        // This is the code action. The string "button_clicked" needs to match the key
-                        // you set up in your Formbricks dashboard.
-                        window.formbricks.track("button_clicked");
-                    } else {
-                        console.error("Formbricks object not found. Cannot track event.");
-                    }
-                });
-            }
+    document.addEventListener('DOMContentLoaded', () => {
+        const primaryButton = document.getElementById('request-form-button');
+        const stickyButton = document.getElementById('sticky-request-button');
+        
+        // Put all buttons that should trigger the form in this array.
+        const buttons = [primaryButton, stickyButton].filter(btn => btn !== null);
+        
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Check if the formbricks object is available before trying to use it.
+                if (window.formbricks) {
+                    // This is the code action. The string "button_clicked" needs to match the key
+                    // you set up in your Formbricks dashboard.
+                    window.formbricks.track("button_clicked");
+                } else {
+                    console.error("Formbricks object not found. Cannot track event.");
+                }
+            });
         });
-    </script>
+    });
+</script>
 
     <!-- START Formbricks Surveys -->
     <script type="text/javascript">
