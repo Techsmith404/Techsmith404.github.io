@@ -41,7 +41,104 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             header.classList.remove('scrolled');
         }
+    })
+    
+    // This is the text we'll "type" out.
+const diagnosticText = [
+    `> system_diagnostics.exe --run-full-scan`,
+    `> Initializing hardware subsystem check... [ OK ]`,
+    `> Initializing software subsystem check... [ OK ]`,
+    `> [ SKILL CHECK ]`,
+    `>   - Hardware Assembly: <span class="diagnostic-status">[ PASSED ]</span>`,
+    `>   - Troubleshooting:   <span class="diagnostic-status">[ PASSED ]</span>`,
+    `>   - Sys. Optimization: <span class="diagnostic-status">[ PASSED ]</span>`,
+    `> All systems are fully operational.`,
+    `> No problems found.`,
+];
+
+// Reference to the element where we'll display the output.
+const outputElement = document.getElementById('diagnostic-output');
+
+// A flag to prevent multiple runs of the animation.
+let isTyping = false;
+
+// The corrected function to "type" a single line of text.
+function typeLine(line, callback) {
+    // A regular expression to split the line at the HTML tags.
+    const parts = line.split(/(<span.*?<\/span>)/g).filter(Boolean);
+    let partIndex = 0;
+    
+    function typePart() {
+        if (partIndex >= parts.length) {
+            outputElement.innerHTML += '\n'; // Add a new line after the whole line is done.
+            return callback();
+        }
+
+        const currentPart = parts[partIndex];
+        partIndex++;
+
+        // If the part is an HTML tag, inject it all at once for proper rendering.
+        if (currentPart.startsWith('<')) {
+            outputElement.innerHTML += currentPart;
+            typePart(); // Immediately move to the next part.
+        } else {
+            // Otherwise, type out the plain text character by character.
+            let charIndex = 0;
+            const lineInterval = setInterval(() => {
+                outputElement.innerHTML += currentPart[charIndex];
+                charIndex++;
+                if (charIndex === currentPart.length) {
+                    clearInterval(lineInterval);
+                    typePart(); // Move to the next part after this one is done.
+                }
+            }, 25); // Typing speed in milliseconds.
+        }
+    }
+    
+    typePart(); // Start typing the first part.
+}
+
+// Function to start the whole animation sequence.
+function startTypingAnimation() {
+    if (isTyping) return;
+    isTyping = true;
+    outputElement.innerHTML = '';
+    let lineIndex = 0;
+
+    function nextLine() {
+        if (lineIndex < diagnosticText.length) {
+            typeLine(diagnosticText[lineIndex], () => {
+                lineIndex++;
+                setTimeout(nextLine, 500); // Delay before typing the next line.
+            });
+        } else {
+            isTyping = false;
+        }
+    }
+    
+    nextLine();
+}
+
+// We'll run the animation when the user scrolls to the about section.
+// Or, if you want it to run right away, just call startTypingAnimation() directly.
+const aboutSection = document.getElementById('about');
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !isTyping) {
+            startTypingAnimation();
+            observer.unobserve(entry.target); // Stop observing after it runs once.
+        }
     });
+}, {
+    rootMargin: '0px 0px -20% 0px' // Trigger when 80% of the element is visible.
+});
+
+if (aboutSection) {
+    observer.observe(aboutSection);
+} else {
+    // Fallback: If no about section, just run it on load.
+    startTypingAnimation();
+}
 
     /*
         ==============================

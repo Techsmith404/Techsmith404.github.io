@@ -251,19 +251,6 @@ header.scrolled {
     color: var(--light);
 }
 
-.logo-pulse {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: var(--primary);
-    border-radius: 50%;
-    top: 50%;
-    right: -15px;
-    transform: translateY(-50%);
-    box-shadow: 0 0 10px var(--primary);
-    animation: pulse 1.5s infinite;
-}
-
 nav ul {
     display: flex;
     list-style: none;
@@ -343,6 +330,87 @@ nav ul li a:hover::after, nav ul li a.active::after {
 .cta-buttons {
     display: flex;
     gap: 20px;
+}
+
+/*
+    ==============================
+    TERMINAL-STYLE SKILLS
+    ==============================
+*/
+.skills {
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.terminal-container {
+    background-color: rgba(17, 17, 17, 0.9);
+    border: 1px solid rgba(0, 255, 200, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 255, 200, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+}
+
+.terminal-header {
+    display: flex;
+    align-items: center;
+    background-color: #333;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #444;
+}
+
+.terminal-header .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.terminal-header .dot.red { background-color: #ff5f56; }
+.terminal-header .dot.yellow { background-color: #ffbd2e; }
+.terminal-header .dot.green { background-color: #27c93f; }
+
+.terminal-header .terminal-title {
+    color: #999;
+    font-size: 0.8rem;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.terminal-body {
+    padding: 1rem;
+    color: #e0e0e0;
+    font-size: 0.9rem;
+    white-space: pre-wrap; /* Preserve whitespace and wrap text */
+}
+
+/* This is the magic for the typing cursor animation. */
+#diagnostic-output::after {
+    content: '_';
+    opacity: 1;
+    animation: blink-cursor 1s infinite;
+    display: inline-block;
+    width: 0.5em;
+    vertical-align: top;
+}
+
+@keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Specific styling for the diagnostic output lines. */
+.diagnostic-line {
+    color: var(--primary-light);
+}
+
+.diagnostic-status {
+    color: var(--primary);
+    font-weight: bold;
 }
 
 /*
@@ -702,7 +770,7 @@ footer {
     40% { transform: translateY(-3em); } /* Viruses */
     60% { transform: translateY(-4.5em); } /* Crashes */
     80% { transform: translateY(-6em); } /* Errors */
-    100% { transform: translateY(-7.5em); } /* Loop back to Problems */
+    100% { transform: translateY(-7em); } /* Loop back to Problems */
 }
 
 /* Media Queries */
@@ -757,4 +825,23 @@ footer {
         justify-content: center;
         flex-direction: column;
     }
+    
+     .hero h1 {
+        font-size: 3rem; /* Adjust this value as needed. */
+    }
+
+    /* Shrink the slogan text to fit on one line. */
+    .slogan-container {
+        font-size: 1rem;
+        /* Adjust the margins and height for the scrolling words to fit. */
+    }
+    
+    .scrolling-words-container {
+        height: 1.4em; 
+    }
+    
+    .scrolling-words .word {
+        height: 1.4em;
+    }
+
 }
