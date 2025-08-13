@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+    
+    !function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://form.techsmith404.com/js/formbricks.umd.cjs",t.onload=function(){window.formbricks?window.formbricks.setup({environmentId:"cmdybndr70009mu0106h2w97f",appUrl:"https://form.techsmith404.com"}):console.error("Formbricks library failed to load properly. The formbricks object is not available.");};var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}();
+    
     /*
         ==============================
         EVENT LISTENERS
@@ -12,6 +15,25 @@ document.addEventListener('DOMContentLoaded', function() {
         '.cta-buttons a[href^="#"], ' +
         '.btn-sticky[href^="#"]'
     );
+    
+    const primaryButton = document.getElementById('request-form-button');
+        const stickyButton = document.getElementById('sticky-request-button');
+        
+        // Put all buttons that should trigger the form in this array.
+        const buttons = [primaryButton, stickyButton].filter(btn => btn !== null);
+        
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Check if the formbricks object is available before trying to use it.
+                if (window.formbricks) {
+                    // This is the code action. The string "button_clicked" needs to match the key
+                    // you set up in your Formbricks dashboard.
+                    window.formbricks.track("button_clicked");
+                } else {
+                    console.error("Formbricks object not found. Cannot track event.");
+                }
+            });
+        });
 
     // Add a click event listener to each selected link.
     scrollLinks.forEach(link => {
