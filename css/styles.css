@@ -738,6 +738,32 @@ footer {
 }
 
 
+/* CUSTOM SCROLLBAR STYLES */
+
+/* The scrollbar track itself (the background area) */
+body::-webkit-scrollbar {
+    width: 12px; /* Width of the vertical scrollbar */
+}
+
+/* The scrollbar track */
+body::-webkit-scrollbar-track {
+    background: #0f172a; /* Same as your primary-dark background color */
+    border-radius: 10px;
+}
+
+/* The scrollbar handle (the draggable part) */
+body::-webkit-scrollbar-thumb {
+    background: #34d399; /* Your accent-green color */
+    border-radius: 10px;
+    border: 3px solid #0f172a; /* Creates a clean border around the thumb */
+}
+
+/* On hover, make the thumb a little darker */
+body::-webkit-scrollbar-thumb:hover {
+    background: #22c55e; /* A slightly darker green */
+}
+
+
 /* Keyframes */
 @keyframes pulse {
     0% { transform: scale(1); box-shadow: var(--glow); }
