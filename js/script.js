@@ -1,13 +1,17 @@
-/*
-    ==============================
-    EVENT LISTENERS
-    ==============================
-*/
-document.addEventListener('DOMContentLoaded', function() {
-    // Initializes the Formbricks library for tracking events.
-    !function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://form.techsmith404.com/js/formbricks.umd.cjs",t.onload=function(){window.formbricks?window.formbricks.setup({environmentId:"cmdybndr70009mu0106h2w97f",appUrl:"https://form.techsmith404.com"}):console.error("Formbricks library failed to load properly. The formbricks object is not available.");};var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}();
+// Function to handle the header's scroll behavior.
+function setupHeaderScrollClass() {
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+}
 
-    // Smooth scrolling for all internal anchor links.
+// Function to set up smooth scrolling for internal anchor links.
+function setupSmoothScrolling() {
     document.querySelectorAll(
         'nav ul li a[href^="#"], ' +
         '.cta-buttons a[href^="#"], ' +
@@ -26,37 +30,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+}
 
-    // Event listeners for Formbricks buttons.
-    const primaryButton = document.getElementById('request-form-button');
-    const stickyButton = document.getElementById('sticky-request-button');
-    const buttons = [primaryButton, stickyButton].filter(btn => btn !== null);
-    
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            if (window.formbricks) {
-                window.formbricks.track("button_clicked");
-            } else {
-                console.error("Formbricks object not found. Cannot track event.");
-            }
-        });
-    });
-    
-    // Toggles the 'scrolled' class on the header based on scroll position.
-    const header = document.querySelector('header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-
-    /*
-        ==============================
-        TERMINAL ANIMATION
-        ==============================
-    */
+// Function to handle all the logic for the terminal animation.
+// All related variables and nested functions are contained within this scope.
+function setupTerminalAnimation() {
     const diagnosticText = [
         `> system_diagnostics.exe --run-full-scan`,
         `> Initializing hardware subsystem check... [ OK ]`,
@@ -72,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const outputElement = document.getElementById('diagnostic-output');
     let isTyping = false;
 
+    // Helper function to type a single line, nested for scope.
     function typeLine(line, callback) {
         const parts = line.split(/(<span.*?<\/span>)/g).filter(Boolean);
         let partIndex = 0;
@@ -100,10 +79,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 25);
             }
         }
-        
         typePart();
     }
 
+    // Main function to start the entire animation sequence.
     function startTypingAnimation() {
         if (isTyping) return;
         isTyping = true;
@@ -120,7 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 isTyping = false;
             }
         }
-        
         nextLine();
     }
 
@@ -140,39 +118,61 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         startTypingAnimation();
     }
+}
 
-    /*
-        ==============================
-        HELPER FUNCTIONS
-        ==============================
-    */
-
-    // Creates and appends animated circuit lines to the circuit overlay.
-    function createCircuitAnimation() {
-        const circuitOverlay = document.querySelector('.circuit-overlay');
-        if (!circuitOverlay) return;
-        
-        for (let i = 0; i < 10; i++) {
-            const line = document.createElement('div');
-            line.className = 'circuit-line horizontal';
-            line.style.width = `${Math.random() * 300 + 100}px`;
-            line.style.top = `${Math.random() * 100}%`;
-            line.style.left = `${Math.random() * 100}%`;
-            line.style.animationDelay = `${Math.random() * 3}s`;
-            circuitOverlay.appendChild(line);
-        }
-        
-        for (let i = 0; i < 10; i++) {
-            const line = document.createElement('div');
-            line.className = 'circuit-line vertical';
-            line.style.height = `${Math.random() * 300 + 100}px`;
-            line.style.top = `${Math.random() * 100}%`;
-            line.style.left = `${Math.random() * 100}%`;
-            line.style.animationDelay = `${Math.random() * 3}s`;
-            circuitOverlay.appendChild(line);
-        }
+// Creates and appends animated circuit lines to the circuit overlay.
+function createCircuitAnimation() {
+    const circuitOverlay = document.querySelector('.circuit-overlay');
+    if (!circuitOverlay) return;
+    
+    for (let i = 0; i < 10; i++) {
+        const line = document.createElement('div');
+        line.className = 'circuit-line horizontal';
+        line.style.width = `${Math.random() * 300 + 100}px`;
+        line.style.top = `${Math.random() * 100}%`;
+        line.style.left = `${Math.random() * 100}%`;
+        line.style.animationDelay = `${Math.random() * 3}s`;
+        circuitOverlay.appendChild(line);
     }
     
-    // Trigger the background circuit animation on page load.
+    for (let i = 0; i < 10; i++) {
+        const line = document.createElement('div');
+        line.className = 'circuit-line vertical';
+        line.style.height = `${Math.random() * 300 + 100}px`;
+        line.style.top = `${Math.random() * 100}%`;
+        line.style.left = `${Math.random() * 100}%`;
+        line.style.animationDelay = `${Math.random() * 3}s`;
+        circuitOverlay.appendChild(line);
+    }
+}
+
+/*
+    ==============================
+    EVENT LISTENERS
+    ==============================
+*/
+document.addEventListener('DOMContentLoaded', function() {
+    // Initializes the Formbricks library for tracking events.
+    !function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://form.techsmith404.com/js/formbricks.umd.cjs",t.onload=function(){window.formbricks?window.formbricks.setup({environmentId:"cmdybndr70009mu0106h2w97f",appUrl:"https://form.techsmith404.com"}):console.error("Formbricks library failed to load properly. The formbricks object is not available.");};var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}();
+
+    // Event listeners for Formbricks buttons.
+    const primaryButton = document.getElementById('request-form-button');
+    const stickyButton = document.getElementById('sticky-request-button');
+    const buttons = [primaryButton, stickyButton].filter(btn => btn !== null);
+    
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            if (window.formbricks) {
+                window.formbricks.track("button_clicked");
+            } else {
+                console.error("Formbricks object not found. Cannot track event.");
+            }
+        });
+    });
+    
+    // Function Calls
+    setupHeaderScrollClass();
+    setupSmoothScrolling();
+    setupTerminalAnimation();
     createCircuitAnimation();
 });
