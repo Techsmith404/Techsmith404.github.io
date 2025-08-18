@@ -412,6 +412,25 @@ header {
     background: url(../images/TechSmithLogoTP.png) center / contain no-repeat;
 }
 
+/* Social Icons specific styling */
+.social-links {
+    display: flex;
+    justify-content: center; /* Center the icons horizontally */
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px; /* Space between contact info and social icons */
+}
+
+.social-links a {
+    color: var(--primary);
+    font-size: 2rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #5dff00; /* Change color on hover for a cool effect */
+}
+
 /* Terminal-Style Skills */
 .skills {
     margin-top: 2rem;
