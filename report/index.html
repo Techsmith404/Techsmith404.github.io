@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechSmith404 Health Check Report Generator</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body class="bg-darker text-light">
+    <!-- Overlay effects -->
+    <div class="circuit-overlay"></div>
+    <div class="glitch-overlay"></div>
+    
+    <div class="container" id="report-container">
+        <header>
+            <div class="logo">
+                <span class="tech">Tech</span><span class="smith">Smith</span><span class="error-code">404</span>
+            </div>
+        </header>
+        
+        <h2 class="section-title">Health Check Report Generator</h2>
+
+        <form id="reportForm" class="report-form">
+            <!-- Client & Machine Info -->
+            <div class="form-section">
+                <h3 class="form-section-title">Client & Machine Info</h3>
+                <div class="form-field">
+                    <label for="clientName">Client Name</label>
+                    <input type="text" id="clientName" placeholder="John Doe">
+                </div>
+                <div class="form-field">
+                    <label for="machineName">Machine Name</label>
+                    <input type="text" id="machineName" placeholder="PC-01">
+                </div>
+                <div class="form-field">
+                    <label for="date">Date</label>
+                    <input type="text" id="date" value="" readonly>
+                </div>
+            </div>
+
+            <!-- Metrics -->
+            <div class="form-section">
+                <h3 class="form-section-title">Startup Time</h3>
+                <div class="form-field">
+                    <label for="fullStartupTime">Fully Started (seconds)</label>
+                    <input type="number" id="fullStartupTime" placeholder="45">
+                </div>
+                <div class="form-field">
+                    <label for="desktopTime">Desktop Shown (seconds)</label>
+                    <input type="number" id="desktopTime" placeholder="30">
+                </div>
+                <div class="form-field">
+                    <label for="longestProcess">Longest Process (name - seconds)</label>
+                    <input type="text" id="longestProcess" placeholder="Steam - 15s">
+                </div>
+                <div class="form-field">
+                    <label for="startupComments">Recommendations & Notes</label>
+                    <textarea id="startupComments" placeholder="Disable unnecessary startup items..."></textarea>
+                </div>
+            </div>
+
+            <!-- Disk Health -->
+            <div class="form-section" id="diskSection">
+                <h3 class="form-section-title">Disk Health</h3>
+                <div id="diskInputs" class="disk-fields">
+                    <!-- Disk inputs will be added here dynamically -->
+                </div>
+                <div class="section-actions">
+                    <button type="button" class="btn btn-outline" id="addDiskBtn">Add Disk</button>
+                </div>
+                <div class="form-field">
+                    <label for="diskComments">Recommendations & Notes</label>
+                    <textarea id="diskComments" placeholder="Consider replacing the drive if health is poor..."></textarea>
+                </div>
+            </div>
+
+            <!-- CPU Benchmark -->
+            <div class="form-section">
+                <h3 class="form-section-title">CPU Benchmark (Cinebench)</h3>
+                <div class="form-field">
+                    <label for="cinebenchScore">Score</label>
+                    <input type="number" id="cinebenchScore" placeholder="12345">
+                </div>
+                <div class="form-field">
+                    <label for="cpuTemp">Idle Temp (°C)</label>
+                    <input type="number" id="cpuTemp" placeholder="35">
+                </div>
+                <div class="form-field">
+                    <label for="cpuLoadTemp">Load Temp (°C)</label>
+                    <input type="number" id="cpuLoadTemp" placeholder="75">
+                </div>
+                <div class="form-field">
+                    <label for="cpuComments">Recommendations & Notes</label>
+                    <textarea id="cpuComments" placeholder="Suggest a new thermal paste application..."></textarea>
+                </div>
+            </div>
+
+            <!-- GPU Benchmark -->
+            <div class="form-section">
+                <h3 class="form-section-title">GPU Benchmark (Furmark)</h3>
+                <div class="form-field">
+                    <label for="furmarkScore">Score</label>
+                    <input type="number" id="furmarkScore" placeholder="6789">
+                </div>
+                <div class="form-field">
+                    <label for="gpuTemp">Idle Temp (°C)</label>
+                    <input type="number" id="gpuTemp" placeholder="40">
+                </div>
+                <div class="form-field">
+                    <label for="gpuLoadTemp">Load Temp (°C)</label>
+                    <input type="number" id="gpuLoadTemp" placeholder="85">
+                </div>
+                <div class="form-field">
+                    <label for="gpuComments">Recommendations & Notes</label>
+                    <textarea id="gpuComments" placeholder="Advise cleaning the fans and case for better airflow..."></textarea>
+                </div>
+            </div>
+
+            <!-- Screenshots -->
+            <div class="form-section">
+                <h3 class="form-section-title">Proof of Work (Screenshots)</h3>
+                <label for="screenshotUpload" class="file-upload-container">
+                    <p>Click to upload screenshots</p>
+                    <input type="file" id="screenshotUpload" accept="image/*" multiple>
+                </label>
+                <div id="screenshotPreview" class="screenshot-preview">
+                    <!-- Image previews will be added here dynamically -->
+                </div>
+                <div class="form-field">
+                    <label for="screenshotComments">General Comments on Screenshots</label>
+                    <textarea id="screenshotComments" placeholder="Screenshots show before/after results..."></textarea>
+                </div>
+            </div>
+
+            <button type="button" class="btn generate-btn" id="generatePdfBtn">Generate PDF Report</button>
+            
+        </form>
+    </div>
+
+    <script src="./js/script.js"></script>
+</body>
+</html>
+
