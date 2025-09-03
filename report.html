@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechSmith404 Health Check Report Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #00ff9d;
+            --primary-dark: #00c97a;
+            --secondary: #00b8ff;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --light: #f5f5f5;
+            --gray: #333;
+            --glow: 0 0 10px rgba(0, 255, 157, 0.7);
+            --text-glow: 0 0 5px rgba(0, 255, 157, 0.5);
+            --error-color: #ff0000;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--darker);
+            color: var(--light);
+            position: relative;
+            overflow-x: hidden;
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+        /* Circuit Overlay */
+        .circuit-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="rgba(0,255,157,0.03)" stroke-width="1"/><path d="M30,30 L70,30 L70,70 L30,70 Z" fill="none" stroke="rgba(0,255,157,0.03)" stroke-width="1"/><path d="M40,40 L60,40 L60,60 L40,60 Z" fill="none" stroke="rgba(0,255,157,0.03)" stroke-width="1"/><path d="M10,50 L90,50" fill="none" stroke="rgba(0,255,157,0.03)" stroke-width="1"/><path d="M50,10 L50,90" fill="none" stroke="rgba(0,255,157,0.03)" stroke-width="1"/></svg>');
+            background-size: 100px 100px;
+            opacity: 0.5;
+            z-index: -1;
+        }
+        /* Glitch Effect Overlay */
+        .glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+            background-size: 3px 3px;
+            pointer-events: none;
+            z-index: -1;
+            animation: glitch 10s infinite linear;
+        }
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.8rem; }
+        p { margin-bottom: 15px; }
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        a:hover {
+            color: var(--secondary);
+            text-shadow: var(--text-glow);
+        }
+        .section-title {
+            position: relative;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        .section-title span {
+            color: var(--primary);
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+            box-shadow: var(--glow);
+        }
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: var(--dark);
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--glow);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--dark);
+        }
+        /* Header */
+        header {
+            padding: 20px 0;
+            text-align: center;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: inline-block;
+            position: relative;
+        }
+        .tech { color: var(--primary); }
+        .smith { color: var(--light); }
+        .error-code {
+            color: var(--error-color);
+            font-weight: 700;
+            font-size: 0.8em;
+            position: relative;
+            top: -0.5em;
+            left: 0.1em;
+            display: inline-block;
+            animation: glitch-404 0.5s infinite steps(1);
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.7);
+        }
+        /* Form & Input Styles */
+        .report-form {
+            background: rgba(10, 10, 10, 0.7);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .form-section {
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+        }
+        .form-section-title {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--dark);
+            padding: 0 10px;
+            color: var(--primary);
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .form-field {
+            margin-bottom: 15px;
+        }
+        .form-field label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--light);
+            font-size: 0.9rem;
+        }
+        .form-field input[type="text"],
+        .form-field input[type="number"],
+        .form-field textarea,
+        .form-field select {
+            width: 100%;
+            padding: 10px;
+            background: var(--darker);
+            border: 1px solid var(--primary);
+            color: var(--light);
+            border-radius: 4px;
+            box-shadow: var(--text-glow);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .form-field input[type="text"]:focus,
+        .form-field input[type="number"]:focus,
+        .form-field textarea:focus,
+        .form-field select:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 8px rgba(0, 184, 255, 0.7);
+        }
+        .form-field textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .disk-fields, .screenshot-preview {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .disk-item {
+            border: 1px dashed rgba(0, 255, 157, 0.1);
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .disk-item .remove-btn {
+            float: right;
+            background: none;
+            border: none;
+            color: var(--error-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+        .screenshot-preview img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            border: 1px solid var(--primary);
+            box-shadow: var(--text-glow);
+        }
+        .file-upload-container {
+            border: 2px dashed var(--primary);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .file-upload-container:hover {
+            background: rgba(0, 255, 157, 0.05);
+        }
+        .file-upload-container p {
+            margin: 0;
+            color: var(--primary);
+        }
+        .file-upload-container input {
+            display: none;
+        }
+        .section-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        .generate-btn {
+            margin-top: 30px;
+            align-self: center;
+        }
+        /* PDF specific styles */
+        .pdf-content {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            color: #000;
+            background: #fff;
+        }
+        .pdf-content h1, .pdf-content h2, .pdf-content h3 {
+            color: #000;
+        }
+        .pdf-content h1 {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .pdf-content h2 {
+            margin-top: 30px;
+            border-bottom: 1px solid #aaa;
+            padding-bottom: 5px;
+        }
+        .pdf-content p {
+            font-size: 12px;
+        }
+        .pdf-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .pdf-logo h1 {
+            border: none;
+            font-size: 2rem;
+        }
+        .pdf-logo h1 .tech { color: #000; }
+        .pdf-logo h1 .smith { color: #000; }
+        .pdf-logo h1 .error-code { color: var(--error-color); }
+        .pdf-screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .pdf-screenshot-grid img {
+            width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+        }
+        .pdf-notes {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        /* Keyframes */
+        @keyframes glitch-404 {
+            0% { transform: skew(0deg); opacity: 1; }
+            20% { transform: skew(-5deg); opacity: 0.8; }
+            40% { transform: skew(5deg); opacity: 1; }
+            60% { transform: skew(-3deg); opacity: 0.7; }
+            80% { transform: skew(3deg); opacity: 1; }
+            100% { transform: skew(0deg); opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlay effects -->
+    <div class="circuit-overlay"></div>
+    <div class="glitch-overlay"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="tech">Tech</span><span class="smith">Smith</span><span class="error-code">404</span>
+            </div>
+        </header>
+        
+        <h2 class="section-title">Health Check Report Generator</h2>
+
+        <form id="reportForm" class="report-form">
+            <!-- Client & Machine Info -->
+            <div class="form-section">
+                <h3 class="form-section-title">Client & Machine Info</h3>
+                <div class="form-field">
+                    <label for="clientName">Client Name</label>
+                    <input type="text" id="clientName" placeholder="John Doe">
+                </div>
+                <div class="form-field">
+                    <label for="machineName">Machine Name</label>
+                    <input type="text" id="machineName" placeholder="PC-01">
+                </div>
+                <div class="form-field">
+                    <label for="date">Date</label>
+                    <input type="text" id="date" value="" readonly>
+                </div>
+            </div>
+
+            <!-- Metrics -->
+            <div class="form-section">
+                <h3 class="form-section-title">Startup Time</h3>
+                <div class="form-field">
+                    <label for="fullStartupTime">Fully Started (seconds)</label>
+                    <input type="number" id="fullStartupTime" placeholder="45">
+                </div>
+                <div class="form-field">
+                    <label for="desktopTime">Desktop Shown (seconds)</label>
+                    <input type="number" id="desktopTime" placeholder="30">
+                </div>
+                <div class="form-field">
+                    <label for="longestProcess">Longest Process (name - seconds)</label>
+                    <input type="text" id="longestProcess" placeholder="Steam - 15s">
+                </div>
+                <div class="form-field">
+                    <label for="startupComments">Recommendations & Notes</label>
+                    <textarea id="startupComments" placeholder="Disable unnecessary startup items..."></textarea>
+                </div>
+            </div>
+
+            <!-- Disk Health -->
+            <div class="form-section" id="diskSection">
+                <h3 class="form-section-title">Disk Health</h3>
+                <div id="diskInputs" class="disk-fields">
+                    <!-- Disk inputs will be added here dynamically -->
+                </div>
+                <div class="section-actions">
+                    <button type="button" class="btn btn-outline" id="addDiskBtn">Add Disk</button>
+                </div>
+                <div class="form-field">
+                    <label for="diskComments">Recommendations & Notes</label>
+                    <textarea id="diskComments" placeholder="Consider replacing the drive if health is poor..."></textarea>
+                </div>
+            </div>
+
+            <!-- CPU Benchmark -->
+            <div class="form-section">
+                <h3 class="form-section-title">CPU Benchmark (Cinebench)</h3>
+                <div class="form-field">
+                    <label for="cinebenchScore">Score</label>
+                    <input type="number" id="cinebenchScore" placeholder="12345">
+                </div>
+                <div class="form-field">
+                    <label for="cpuTemp">Idle Temp (°C)</label>
+                    <input type="number" id="cpuTemp" placeholder="35">
+                </div>
+                <div class="form-field">
+                    <label for="cpuLoadTemp">Load Temp (°C)</label>
+                    <input type="number" id="cpuLoadTemp" placeholder="75">
+                </div>
+                <div class="form-field">
+                    <label for="cpuComments">Recommendations & Notes</label>
+                    <textarea id="cpuComments" placeholder="Suggest a new thermal paste application..."></textarea>
+                </div>
+            </div>
+
+            <!-- GPU Benchmark -->
+            <div class="form-section">
+                <h3 class="form-section-title">GPU Benchmark (Furmark)</h3>
+                <div class="form-field">
+                    <label for="furmarkScore">Score</label>
+                    <input type="number" id="furmarkScore" placeholder="6789">
+                </div>
+                <div class="form-field">
+                    <label for="gpuTemp">Idle Temp (°C)</label>
+                    <input type="number" id="gpuTemp" placeholder="40">
+                </div>
+                <div class="form-field">
+                    <label for="gpuLoadTemp">Load Temp (°C)</label>
+                    <input type="number" id="gpuLoadTemp" placeholder="85">
+                </div>
+                <div class="form-field">
+                    <label for="gpuComments">Recommendations & Notes</label>
+                    <textarea id="gpuComments" placeholder="Advise cleaning the fans and case for better airflow..."></textarea>
+                </div>
+            </div>
+
+            <!-- Screenshots -->
+            <div class="form-section">
+                <h3 class="form-section-title">Proof of Work (Screenshots)</h3>
+                <label for="screenshotUpload" class="file-upload-container">
+                    <p>Click to upload screenshots</p>
+                    <input type="file" id="screenshotUpload" accept="image/*" multiple>
+                </label>
+                <div id="screenshotPreview" class="screenshot-preview">
+                    <!-- Image previews will be added here dynamically -->
+                </div>
+                <div class="form-field">
+                    <label for="screenshotComments">General Comments on Screenshots</label>
+                    <textarea id="screenshotComments" placeholder="Screenshots show before/after results..."></textarea>
+                </div>
+            </div>
+
+            <button type="button" class="btn generate-btn" id="generatePdfBtn">Generate PDF Report</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateInput = document.getElementById('date');
+            const addDiskBtn = document.getElementById('addDiskBtn');
+            const diskInputs = document.getElementById('diskInputs');
+            const screenshotUpload = document.getElementById('screenshotUpload');
+            const screenshotPreview = document.getElementById('screenshotPreview');
+            const generatePdfBtn = document.getElementById('generatePdfBtn');
+
+            // Set current date
+            const today = new Date();
+            const dateString = `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`;
+            dateInput.value = dateString;
+
+            // Dynamically add disk health inputs
+            const addDiskInput = () => {
+                const diskDiv = document.createElement('div');
+                diskDiv.classList.add('disk-item');
+                diskDiv.innerHTML = `
+                    <button type="button" class="remove-btn">&times;</button>
+                    <div class="form-field">
+                        <label>Disk Name</label>
+                        <input type="text" class="disk-name" placeholder="Disk 1">
+                    </div>
+                    <div class="form-field">
+                        <label>Health</label>
+                        <select class="disk-health">
+                            <option value="good">Good</option>
+                            <option value="fair">Fair</option>
+                            <option value="bad">Bad</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label>Power-On Hours (hours)</label>
+                        <input type="number" class="disk-hours" placeholder="5000">
+                    </div>
+                `;
+                diskInputs.appendChild(diskDiv);
+
+                diskDiv.querySelector('.remove-btn').addEventListener('click', () => {
+                    diskInputs.removeChild(diskDiv);
+                });
+            };
+
+            addDiskBtn.addEventListener('click', addDiskInput);
+            addDiskInput(); // Add initial disk input
+
+            // Handle screenshot uploads and previews
+            screenshotUpload.addEventListener('change', (event) => {
+                screenshotPreview.innerHTML = ''; // Clear previous previews
+                const files = event.target.files;
+                if (files) {
+                    for (const file of files) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.alt = file.name;
+                            screenshotPreview.appendChild(img);
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                }
+            });
+
+            // Generate PDF
+            generatePdfBtn.addEventListener('click', () => {
+                const form = document.getElementById('reportForm');
+                const pdfContent = document.createElement('div');
+                pdfContent.classList.add('pdf-content');
+
+                // Logo and Title
+                pdfContent.innerHTML += `
+                    <div class="pdf-logo">
+                        <h1><span class="tech">Tech</span><span class="smith">Smith</span><span class="error-code">404</span></h1>
+                        <p>Health Check Report</p>
+                    </div>
+                `;
+
+                // Client Info
+                pdfContent.innerHTML += `<h2>Client & Machine Info</h2>`;
+                pdfContent.innerHTML += `<p><strong>Client Name:</strong> ${document.getElementById('clientName').value || 'N/A'}</p>`;
+                pdfContent.innerHTML += `<p><strong>Machine Name:</strong> ${document.getElementById('machineName').value || 'N/A'}</p>`;
+                pdfContent.innerHTML += `<p><strong>Date:</strong> ${document.getElementById('date').value || 'N/A'}</p>`;
+
+                // Startup Time
+                pdfContent.innerHTML += `<h2>Startup Time</h2>`;
+                pdfContent.innerHTML += `<p><strong>Fully Started:</strong> ${document.getElementById('fullStartupTime').value || 'N/A'} seconds</p>`;
+                pdfContent.innerHTML += `<p><strong>Desktop Shown:</strong> ${document.getElementById('desktopTime').value || 'N/A'} seconds</p>`;
+                pdfContent.innerHTML += `<p><strong>Longest Process:</strong> ${document.getElementById('longestProcess').value || 'N/A'}</p>`;
+                const startupComments = document.getElementById('startupComments').value;
+                if (startupComments) {
+                    pdfContent.innerHTML += `<p><strong>Recommendations & Notes:</strong></p><div class="pdf-notes">${startupComments}</div>`;
+                }
+
+                // Disk Health
+                pdfContent.innerHTML += `<h2>Disk Health</h2>`;
+                const diskItems = document.querySelectorAll('.disk-item');
+                diskItems.forEach((item, index) => {
+                    const name = item.querySelector('.disk-name').value || `Disk ${index + 1}`;
+                    const health = item.querySelector('.disk-health').value || 'N/A';
+                    const hours = item.querySelector('.disk-hours').value || 'N/A';
+                    pdfContent.innerHTML += `<p><strong>${name}:</strong></p>`;
+                    pdfContent.innerHTML += `<p>&emsp;**Health:** ${health.toUpperCase()}</p>`;
+                    pdfContent.innerHTML += `<p>&emsp;**Power-On Hours:** ${hours} hours</p>`;
+                });
+                const diskComments = document.getElementById('diskComments').value;
+                if (diskComments) {
+                    pdfContent.innerHTML += `<p><strong>Recommendations & Notes:</strong></p><div class="pdf-notes">${diskComments}</div>`;
+                }
+
+                // CPU Benchmark
+                pdfContent.innerHTML += `<h2>CPU Benchmark (Cinebench)</h2>`;
+                pdfContent.innerHTML += `<p><strong>Score:</strong> ${document.getElementById('cinebenchScore').value || 'N/A'}</p>`;
+                pdfContent.innerHTML += `<p><strong>Idle Temp:</strong> ${document.getElementById('cpuTemp').value || 'N/A'} °C</p>`;
+                pdfContent.innerHTML += `<p><strong>Load Temp:</strong> ${document.getElementById('cpuLoadTemp').value || 'N/A'} °C</p>`;
+                const cpuComments = document.getElementById('cpuComments').value;
+                if (cpuComments) {
+                    pdfContent.innerHTML += `<p><strong>Recommendations & Notes:</strong></p><div class="pdf-notes">${cpuComments}</div>`;
+                }
+
+                // GPU Benchmark
+                pdfContent.innerHTML += `<h2>GPU Benchmark (Furmark)</h2>`;
+                pdfContent.innerHTML += `<p><strong>Score:</strong> ${document.getElementById('furmarkScore').value || 'N/A'}</p>`;
+                pdfContent.innerHTML += `<p><strong>Idle Temp:</strong> ${document.getElementById('gpuTemp').value || 'N/A'} °C</p>`;
+                pdfContent.innerHTML += `<p><strong>Load Temp:</strong> ${document.getElementById('gpuLoadTemp').value || 'N/A'} °C</p>`;
+                const gpuComments = document.getElementById('gpuComments').value;
+                if (gpuComments) {
+                    pdfContent.innerHTML += `<p><strong>Recommendations & Notes:</strong></p><div class="pdf-notes">${gpuComments}</div>`;
+                }
+                
+                // Screenshots
+                const screenshots = document.querySelectorAll('#screenshotPreview img');
+                if (screenshots.length > 0) {
+                    pdfContent.innerHTML += `<h2>Proof of Work (Screenshots)</h2>`;
+                    pdfContent.innerHTML += `<div class="pdf-screenshot-grid"></div>`;
+                    const screenshotGrid = pdfContent.querySelector('.pdf-screenshot-grid');
+                    screenshots.forEach(img => {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = img.src;
+                        screenshotGrid.appendChild(imgElement);
+                    });
+                    const screenshotComments = document.getElementById('screenshotComments').value;
+                    if (screenshotComments) {
+                        pdfContent.innerHTML += `<p><strong>General Comments:</strong></p><div class="pdf-notes">${screenshotComments}</div>`;
+                    }
+                }
+
+                // Generate PDF
+                const worker = html2pdf().from(pdfContent).set({
+                    margin: 10,
+                    filename: `Health_Check_Report_${document.getElementById('machineName').value || 'PC'}.pdf`,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                });
+                worker.save();
+            });
+        });
+    </script>
+</body>
+</html>
+
