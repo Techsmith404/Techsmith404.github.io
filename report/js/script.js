@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const contentWidth = pageWidth - 2 * margin;
         const lineHeight = 7;
         const sectionSpacing = 15;
-        const contentSpacing = 8; // Added space between content items
+        const contentSpacing = 8;
 
         const mainColor = '#0066cc';
         const titleColor = '#ffffff';
@@ -96,18 +96,19 @@ document.addEventListener('DOMContentLoaded', () => {
             yPos += 15;
         };
 
+        //  Fixed version: labels always on their own line, values indented
         const addSectionContent = (label, value) => {
-            const labelText = `${label}: `;
-            const textLines = doc.splitTextToSize(value || 'N/A', contentWidth - doc.getTextWidth(labelText));
-            
             doc.setFontSize(12);
             doc.setFont(undefined, 'bold');
-            doc.text(labelText, margin, yPos);
+            doc.text(`${label}:`, margin, yPos);
+            yPos += lineHeight;
+
             doc.setFont(undefined, 'normal');
-            doc.text(textLines, margin + doc.getTextWidth(labelText), yPos);
-            yPos += textLines.length * lineHeight + contentSpacing;
+            const textLines = doc.splitTextToSize(value || 'N/A', contentWidth - 10);
+            doc.text(textLines, margin + 5, yPos);
+            yPos += (textLines.length * lineHeight) + contentSpacing;
         };
-        
+
         const addCommentBlock = (title, comment) => {
             if (comment) {
                 const lines = doc.splitTextToSize(comment, contentWidth);
@@ -116,12 +117,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 doc.text(title, margin, yPos);
                 yPos += lineHeight;
                 doc.setFont(undefined, 'normal');
-                doc.text(lines, margin, yPos);
+                doc.text(lines, margin + 5, yPos);
                 yPos += lines.length * lineHeight + contentSpacing;
             }
         };
 
-        // --- Header and General Info ---
+        // --- Header ---
         doc.setFillColor(mainColor);
         doc.rect(0, 0, pageWidth, 30, 'F');
         doc.setFontSize(28);
@@ -136,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         doc.setTextColor('#000000');
         doc.setFont(undefined, 'normal');
 
-        // --- All Section Logic in a single, well-defined flow ---
+        // --- Sections ---
         const sections = [
             {
                 title: "Startup Time",
@@ -145,15 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     addSectionContent("Desktop Shown", `${document.getElementById('desktopTime').value} seconds`);
                     addSectionContent("Longest Process", document.getElementById('longestProcess').value);
                     addCommentBlock("Recommendations & Notes:", document.getElementById('startupComments').value);
-                },
-                getEstimatedHeight: () => {
-                    let height = sectionSpacing + (3 * lineHeight) + (3 * contentSpacing); // Title, 3 lines, 3 spacings
-                    const comments = document.getElementById('startupComments').value;
-                    if (comments) {
-                        const lines = doc.splitTextToSize(comments, contentWidth);
-                        height += lineHeight + (lines.length * lineHeight) + contentSpacing;
-                    }
-                    return height;
                 }
             },
             {
@@ -169,16 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         addSectionContent(`Disk: ${disk.name}`, diskContent);
                     });
                     addCommentBlock("Recommendations & Notes:", document.getElementById('diskComments').value);
-                },
-                getEstimatedHeight: () => {
-                    const diskCount = document.querySelectorAll('.disk-item').length;
-                    let height = sectionSpacing + (diskCount * 2 * lineHeight) + (diskCount * contentSpacing);
-                    const comments = document.getElementById('diskComments').value;
-                    if (comments) {
-                        const lines = doc.splitTextToSize(comments, contentWidth);
-                        height += lineHeight + (lines.length * lineHeight) + contentSpacing;
-                    }
-                    return height;
                 }
             },
             {
@@ -188,15 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     addSectionContent("Idle Temp", `${document.getElementById('cpuTemp').value} °C`);
                     addSectionContent("Load Temp", `${document.getElementById('cpuLoadTemp').value} °C`);
                     addCommentBlock("Recommendations & Notes:", document.getElementById('cpuComments').value);
-                },
-                getEstimatedHeight: () => {
-                    let height = sectionSpacing + (3 * lineHeight) + (3 * contentSpacing);
-                    const comments = document.getElementById('cpuComments').value;
-                    if (comments) {
-                        const lines = doc.splitTextToSize(comments, contentWidth);
-                        height += lineHeight + (lines.length * lineHeight) + contentSpacing;
-                    }
-                    return height;
                 }
             },
             {
@@ -206,15 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     addSectionContent("Idle Temp", `${document.getElementById('gpuTemp').value} °C`);
                     addSectionContent("Load Temp", `${document.getElementById('gpuLoadTemp').value} °C`);
                     addCommentBlock("Recommendations & Notes:", document.getElementById('gpuComments').value);
-                },
-                getEstimatedHeight: () => {
-                    let height = sectionSpacing + (3 * lineHeight) + (3 * contentSpacing);
-                    const comments = document.getElementById('gpuComments').value;
-                    if (comments) {
-                        const lines = doc.splitTextToSize(comments, contentWidth);
-                        height += lineHeight + (lines.length * lineHeight) + contentSpacing;
-                    }
-                    return height;
                 }
             },
             {
@@ -257,28 +221,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         yPos += imgHeight + rowSpacing;
                     }
                     addCommentBlock("General Comments:", document.getElementById('screenshotComments').value);
-                },
-                getEstimatedHeight: () => {
-                    const screenshotCount = document.querySelectorAll('#screenshotPreview img').length;
-                    if (screenshotCount === 0) return sectionSpacing + lineHeight;
-                    const imgWidth = contentWidth / 2 - 5;
-                    const imgHeight = imgWidth * 0.5625;
-                    const rows = Math.ceil(screenshotCount / 2);
-                    let height = sectionSpacing + (rows * (imgHeight + 10)) + contentSpacing;
-                    const comments = document.getElementById('screenshotComments').value;
-                    if (comments) {
-                        const lines = doc.splitTextToSize(comments, contentWidth);
-                        height += lineHeight + (lines.length * lineHeight) + contentSpacing;
-                    }
-                    return height;
                 }
             }
         ];
 
-        // Process each section as a block
+        // Render sections
         for (const section of sections) {
-            const neededHeight = section.getEstimatedHeight();
-            checkPageBreak(neededHeight);
+            checkPageBreak(40);
             addSectionTitle(section.title);
             if (section.content.constructor.name === 'AsyncFunction') {
                 await section.content();
@@ -288,6 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
             yPos += sectionSpacing;
         }
 
+        // Save PDF
         const formattedClientName = clientName.replace(/\s+/g, '_');
         const formattedMachineName = machineName.replace(/\s+/g, '_');
         const formattedDate = date.replace(/\//g, '-');
@@ -296,4 +246,3 @@ document.addEventListener('DOMContentLoaded', () => {
         doc.save(filename);
     });
 });
-
