@@ -173,6 +173,10 @@ a:hover {
     animation: pulse 2s infinite;
 }
 
+.sale {
+    animation: sale 1s infinite;
+}
+
 .btn-sticky {
     position: fixed;
     bottom: 30px;
@@ -305,6 +309,35 @@ header {
     color: #00ffc8;
 }
 
+.sale-banner {
+    background: var(--primary);
+    color: var(--darker);
+    padding: 15px 0;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    position: sticky;
+    top: 0; 
+    z-index: 9999; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    border-bottom: 3px solid var(--magenta);
+    text-transform: uppercase;
+}
+
+.sale-highlight {
+    color: var(--magenta);
+    text-shadow: 1px 1px 0 var(--dark);
+}
+
+.sale-urgency {
+    color: var(--darker);
+    background: var(--magenta);
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-left: 10px;
+    font-family: 'Roboto Mono', monospace;
+}
+
 /* Service Cards */
 .services {
     padding: 100px 0;
@@ -369,6 +402,22 @@ header {
     font-size: 0.9rem;
     position: relative;
     z-index: 2;
+}
+
+.price-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.service-card .service-price-old {
+    /* Gray it out and cross it off */
+    color: #999;
+    text-decoration: line-through;
+    font-size: 0.85em;
+    font-weight: 400;
+    animation: glitch-404 0.5s infinite steps(1);
 }
 
 .service-price {
@@ -661,6 +710,18 @@ body::-webkit-scrollbar-thumb:hover {
     100% {
         transform: scale(1);
         box-shadow: var(--glow);
+    }
+}
+
+@keyframes sale {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
     }
 }
 
