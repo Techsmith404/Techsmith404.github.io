@@ -1,17 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechSmith | Computer Solutions & Web Development</title>
+    
+    <!-- SEO: Title & Description -->
+    <title>TechSmith404 | Computer Repair in Portage & Northwest Indiana</title>
+    <meta name="description" content="Expert computer repair, custom PC builds, and system optimization in Portage and Northwest Indiana. Fast, reliable, and affordable local tech support by TechSmith404.">
+    <link rel="canonical" href="https://techsmith404.com/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="business.business">
+    <meta property="og:title" content="TechSmith404 | Computer Repair & Custom Builds">
+    <meta property="og:description" content="Affordable computer repair, virus removal, and custom PC builds in Portage, IN. Expert service without the big-box price.">
+    <meta property="og:url" content="https://techsmith404.com/">
+    <meta property="og:image" content="https://techsmith404.com/images/TechSmithLogoTP.png">
+
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/styles.css">
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Local Business Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ComputerRepair",
+      "name": "TechSmith404",
+      "image": "https://techsmith404.com/images/TechSmithLogoTP.png",
+      "description": "Independent IT solutions provider specializing in computer repair, custom PC builds, and performance optimization in Northwest Indiana.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Portage",
+        "addressRegion": "IN",
+        "postalCode": "46368",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 41.5759,
+        "longitude": -87.1761
+      },
+      "url": "https://techsmith404.com",
+      "telephone": "+17083168782",
+      "email": "techsmith@techsmith404.com",
+      "priceRange": "$$"
+    }
+    </script>
 </head>
 <body>
     <!-- Background circuit and glitch overlays -->
     <div class="circuit-overlay"></div>
     <div class="glitch-overlay"></div>
+    
     <!--TechSmith404 Header-->
     <header>
         <div class="container">
@@ -20,12 +63,13 @@
             </div>
         </div>
     </header>
+
     <!--Main Hero Banner-->
     <main>
         <section id="home" class="hero">
             <div class="container">
                 <h1><span class="glitch" data-text="TECHSMITH">TECHSMITH</span><span class="error-code">404</span></h1>
-                <h2>Computer Solutions & Web Development</h2>
+                <h2>Computer Solutions in Portage & NW Indiana</h2>
                 <div class="slogan-container">
                     <span>404 -</span>
                     <div class="scrolling-words-container">
@@ -189,11 +233,12 @@
                 </ul>
             </div>
         </section>
+
         <!--About Section-->
         <section id="about" class="about">
             <div class="container">
                 <div class="about-image">
-                    <div class="logo-image"></div>
+                    <div class="logo-image" role="img" aria-label="TechSmith404 Logo"></div>
                 </div>
                 <div class="about-content">
                     <h2 class="section-title">About <span>TechSmith</span><div class="error-code">404</div></h2>
@@ -226,6 +271,7 @@
                 </div>
             </div>
         </section>
+
         <!--Contact Info Section-->
         <section id="contact" class="contact">
             <div class="container">
@@ -235,11 +281,11 @@
                         <h3>Contact Information</h3>
                         <div class="info-item">
                             <i class="fas fa-envelope"></i>
-                            <span>techsmith@techsmith404.com</span>
+                            <a href="mailto:techsmith@techsmith404.com">techsmith@techsmith404.com</a>
                         </div>
                         <div class="info-item">
                             <i class="fas fa-phone"></i>
-                            <span>(708) 316-8782</span>
+                            <a href="tel:+17083168782">(708) 316-8782</a>
                         </div>
                         <div class="info-item">
                             <i class="fas fa-map-marker-alt"></i>
@@ -247,16 +293,17 @@
                         </div>
                     </div>
                     <div class="social-links">
-                            <a href="https://www.facebook.com/share/1BVzpEUZ4y/">
+                            <a href="https://www.facebook.com/share/1BVzpEUZ4y/" aria-label="TechSmith404 on Facebook">
                                 <i class="fa-brands fa-facebook"></i>
                             </a>
-                            <a href="https://maps.app.goo.gl/PNKJF1jsRVHtTsEL8?g_st=ac">
+                            <a href="https://maps.app.goo.gl/PNKJF1jsRVHtTsEL8?g_st=ac" aria-label="TechSmith404 on Google Maps">
                                 <i class="fa-brands fa-google"></i>
                             </a>
                         </div>
                 </div>
             </div>
         </section>
+
         <!--Request Service Section-->
         <section id="request-service" class="formbricks-section">
             <div class="container formbricks-container">
@@ -266,6 +313,7 @@
             </div>
         </section>
     </main>
+    
     <!--Footer-->
     <footer>
         <div class="container">
@@ -279,6 +327,7 @@
             </div>
         </div>
     </footer>
+    
     <!--Request Button That Follows You Down The Page-->
     <button id="sticky-request-button" class="btn btn-sticky" type="button">Request Service</button>
 

@@ -1,11 +1,19 @@
 // Function to handle the header's scroll behavior.
 function setupHeaderScrollClass() {
     const header = document.querySelector('header');
+    let ticking = false;
+
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                ticking = false;
+            });
+            ticking = true;
         }
     });
 }
@@ -48,6 +56,7 @@ function setupTerminalAnimation() {
     ];
 
     const outputElement = document.getElementById('diagnostic-output');
+    if (!outputElement) return;
     let isTyping = false;
 
     // Helper function to type a single line, nested for scope.
@@ -125,6 +134,8 @@ function createCircuitAnimation() {
     const circuitOverlay = document.querySelector('.circuit-overlay');
     if (!circuitOverlay) return;
     
+    const fragment = document.createDocumentFragment();
+
     for (let i = 0; i < 10; i++) {
         const line = document.createElement('div');
         line.className = 'circuit-line horizontal';
@@ -132,7 +143,7 @@ function createCircuitAnimation() {
         line.style.top = `${Math.random() * 100}%`;
         line.style.left = `${Math.random() * 100}%`;
         line.style.animationDelay = `${Math.random() * 3}s`;
-        circuitOverlay.appendChild(line);
+        fragment.appendChild(line);
     }
     
     for (let i = 0; i < 10; i++) {
@@ -142,8 +153,9 @@ function createCircuitAnimation() {
         line.style.top = `${Math.random() * 100}%`;
         line.style.left = `${Math.random() * 100}%`;
         line.style.animationDelay = `${Math.random() * 3}s`;
-        circuitOverlay.appendChild(line);
+        fragment.appendChild(line);
     }
+    circuitOverlay.appendChild(fragment);
 }
 
 /*

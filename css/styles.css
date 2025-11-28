@@ -10,6 +10,7 @@
     --glow: 0 0 10px rgba(0, 255, 157, 0.7);
     --text-glow: 0 0 5px rgba(0, 255, 157, 0.5);
     --error-color: #ff0000;
+    --magenta: #ff00ff;
 }
 
 * {
@@ -550,7 +551,7 @@ header {
 
 /* Diagnostic Output */
 .diagnostic-line {
-    color: var(--primary-light);
+    color: var(--light);
 }
 
 .diagnostic-status {
@@ -683,18 +684,18 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-track {
-    background: #0f172a;
+    background: var(--darker); /* Using CSS variable */
     border-radius: 10px;
 }
 
 body::-webkit-scrollbar-thumb {
-    background: #34d399;
+    background: var(--primary); /* Using CSS variable */
     border-radius: 10px;
-    border: 3px solid #0f172a;
+    border: 3px solid var(--darker); /* Using CSS variable */
 }
 
 body::-webkit-scrollbar-thumb:hover {
-    background: #22c55e;
+    background: var(--primary-dark); /* Using CSS variable */
 }
 
 /* Keyframes */
