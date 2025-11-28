@@ -139,6 +139,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // Skip if invalid
             if (isNaN(bVal)) return;
 
+            // If we ONLY have a "Before" value (no comparison), render as simple text row
+            if (isNaN(aVal)) {
+                addTextRow(label, `${bVal} ${unit}`);
+                return;
+            }
+
+            // If we have both, render the chart
             checkPageBreak(35); // Space for label + 2 bars
 
             // 1. Text Line
@@ -151,40 +158,35 @@ document.addEventListener('DOMContentLoaded', () => {
             let improvement = 0;
             let isImproved = false;
 
-            if (!isNaN(aVal)) {
-                if (lowerIsBetter) {
-                    improvement = ((bVal - aVal) / bVal) * 100;
-                    isImproved = aVal < bVal;
-                } else {
-                    improvement = ((aVal - bVal) / bVal) * 100;
-                    isImproved = aVal > bVal;
-                }
-                
-                const sign = improvement > 0 ? '-' : '+'; // For time, - is good. For score, + is good.
-                // Actually just show generic % diff
-                const arrow = isImproved ? '▼' : '▲'; 
-                const displayImp = Math.abs(improvement).toFixed(1);
-                
-                let impText = "";
-                if (lowerIsBetter) {
-                     // Lower is better (Time/Temp)
-                     if (isImproved) impText = `(Improved by ${displayImp}%)`;
-                     else impText = `(Slower/Hotter by ${displayImp}%)`;
-                } else {
-                    // Higher is better (Score)
-                    if (isImproved) impText = `(Improved by ${displayImp}%)`;
-                    else impText = `(Decreased by ${displayImp}%)`;
-                }
-
-                text += `  ➜  ${aVal} ${unit}  ${impText}`;
+            if (lowerIsBetter) {
+                improvement = ((bVal - aVal) / bVal) * 100;
+                isImproved = aVal < bVal;
+            } else {
+                improvement = ((aVal - bVal) / bVal) * 100;
+                isImproved = aVal > bVal;
             }
+            
+            const displayImp = Math.abs(improvement).toFixed(1);
+            
+            let impText = "";
+            if (lowerIsBetter) {
+                 // Lower is better (Time/Temp)
+                 if (isImproved) impText = `(Improved by ${displayImp}%)`;
+                 else impText = `(Slower/Hotter by ${displayImp}%)`;
+            } else {
+                // Higher is better (Score)
+                if (isImproved) impText = `(Improved by ${displayImp}%)`;
+                else impText = `(Decreased by ${displayImp}%)`;
+            }
+
+            text += `  ->  ${aVal} ${unit}  ${impText}`;
 
             doc.setFont(undefined, 'normal');
             doc.text(text, margin + 60, yPos);
             yPos += 8;
 
             // 2. Draw Bars
-            const maxVal = Math.max(bVal, isNaN(aVal) ? 0 : aVal) * 1.1; // 10% buffer
+            const maxVal = Math.max(bVal, aVal) * 1.1; // 10% buffer
             const chartWidth = 120; // Max width of bar in mm
             const barHeight = 6;
 
@@ -197,16 +199,12 @@ document.addEventListener('DOMContentLoaded', () => {
             doc.text("Before", margin + bWidth + 2, yPos + 4);
             yPos += barHeight + 2;
 
-            // After Bar (only if exists)
-            if (!isNaN(aVal)) {
-                const aWidth = (aVal / maxVal) * chartWidth;
-                doc.setFillColor(barColorAfter);
-                doc.rect(margin, yPos, aWidth, barHeight, 'F');
-                doc.text("After", margin + aWidth + 2, yPos + 4);
-                yPos += barHeight + 5;
-            } else {
-                yPos += 5; // Spacing if no second bar
-            }
+            // After Bar
+            const aWidth = (aVal / maxVal) * chartWidth;
+            doc.setFillColor(barColorAfter);
+            doc.rect(margin, yPos, aWidth, barHeight, 'F');
+            doc.text("After", margin + aWidth + 2, yPos + 4);
+            yPos += barHeight + 5;
             
             doc.setTextColor('#000000');
         };
