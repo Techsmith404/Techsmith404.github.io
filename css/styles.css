@@ -10,7 +10,7 @@
     --glow: 0 0 10px rgba(0, 255, 157, 0.7);
     --text-glow: 0 0 5px rgba(0, 255, 157, 0.5);
     --error-color: #ff0000;
-    --magenta: #ff00ff;
+    --cyan: #00ffff;
 }
 
 * {
@@ -321,18 +321,18 @@ header {
     top: 0; 
     z-index: 9999; 
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-    border-bottom: 3px solid var(--magenta);
+    border-bottom: 3px solid var(--cyan);
     text-transform: uppercase;
 }
 
 .sale-highlight {
-    color: var(--magenta);
+    color: var(--cyan);
     text-shadow: 1px 1px 0 var(--dark);
 }
 
 .sale-urgency {
     color: var(--darker);
-    background: var(--magenta);
+    background: var(--cyan);
     padding: 2px 6px;
     border-radius: 3px;
     margin-left: 10px;
