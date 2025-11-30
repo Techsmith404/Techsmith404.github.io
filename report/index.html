@@ -188,7 +188,9 @@
 
                 <!-- Furmark Stress -->
                 <div class="form-section">
-                    <h3 class="form-section-title">Stability Stress Test (Furmark)</h3>
+                    <h3 class="form-section-title">Stability Stress Test (Furmark / OCCT)</h3>
+                    
+                    <h4 style="color: var(--primary); margin-top: 10px;">GPU Stability (Furmark)</h4>
                     <div class="comparison-grid">
                         <div class="grid-header">Max Temp ($^{\circ}C$)</div>
                         <div class="grid-header">Duration (min)</div>
@@ -199,6 +201,20 @@
                         <div style="display: flex; align-items: center; gap: 10px;">
                             <input type="checkbox" id="ocFurmarkStable" style="width: auto;">
                             <label for="ocFurmarkStable" style="margin:0;">Stable</label>
+                        </div>
+                    </div>
+
+                    <h4 style="color: var(--primary); margin-top: 20px;">CPU Stability (OCCT)</h4>
+                    <div class="comparison-grid">
+                        <div class="grid-header">Max Temp ($^{\circ}C$)</div>
+                        <div class="grid-header">Duration (min)</div>
+                        <div class="grid-header">Status</div>
+
+                        <input type="number" id="ocOcctTemp" placeholder="80">
+                        <input type="number" id="ocOcctDuration" placeholder="60">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="ocOcctStable" style="width: auto;">
+                            <label for="ocOcctStable" style="margin:0;">Stable</label>
                         </div>
                     </div>
                 </div>

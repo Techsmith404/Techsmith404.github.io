@@ -410,11 +410,33 @@ document.addEventListener('DOMContentLoaded', () => {
             yPos += 10;
 
             // Stability
-            addSubHeader("Stability Stress Test (Furmark)");
+            addSubHeader("Stability Stress Tests");
+            
+            // Furmark
+            doc.setFont(undefined, 'bold');
+            doc.text("GPU Stability (Furmark):", margin, yPos);
+            yPos += 6;
+            doc.setFont(undefined, 'normal');
             addTextRow("Max Temp", document.getElementById('ocFurmarkTemp').value ? `${document.getElementById('ocFurmarkTemp').value} °C` : "");
             addTextRow("Duration", document.getElementById('ocFurmarkDuration').value ? `${document.getElementById('ocFurmarkDuration').value} min` : "");
             
-            const isStable = document.getElementById('ocFurmarkStable').checked;
+            let isStable = document.getElementById('ocFurmarkStable').checked;
+            doc.setFont(undefined, 'bold');
+            doc.text("Status:", margin, yPos);
+            doc.setTextColor(isStable ? '#009900' : '#cc0000');
+            doc.text(isStable ? "STABLE" : "UNSTABLE / NOT PASSING", margin + 50, yPos);
+            doc.setTextColor('#000000');
+            yPos += 10;
+
+            // OCCT
+            doc.setFont(undefined, 'bold');
+            doc.text("CPU Stability (OCCT):", margin, yPos);
+            yPos += 6;
+            doc.setFont(undefined, 'normal');
+            addTextRow("Max Temp", document.getElementById('ocOcctTemp').value ? `${document.getElementById('ocOcctTemp').value} °C` : "");
+            addTextRow("Duration", document.getElementById('ocOcctDuration').value ? `${document.getElementById('ocOcctDuration').value} min` : "");
+            
+            isStable = document.getElementById('ocOcctStable').checked; // Reusing variable for clarity
             doc.setFont(undefined, 'bold');
             doc.text("Status:", margin, yPos);
             doc.setTextColor(isStable ? '#009900' : '#cc0000');
