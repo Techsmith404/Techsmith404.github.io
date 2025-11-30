@@ -44,6 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
     addDiskBtn.addEventListener('click', addDiskInput);
     addDiskInput(); // Add initial disk input
 
+    // Toggle Overclocking Section
+    const ocToggle = document.getElementById('ocToggle');
+    const ocSection = document.getElementById('ocSection');
+    ocToggle.addEventListener('change', (e) => {
+        if (e.target.checked) {
+            ocSection.classList.remove('hidden');
+        } else {
+            ocSection.classList.add('hidden');
+        }
+    });
+
     // Handle screenshot uploads and previews
     screenshotUpload.addEventListener('change', (event) => {
         screenshotPreview.innerHTML = ''; // Clear previous previews
@@ -102,6 +113,19 @@ document.addEventListener('DOMContentLoaded', () => {
             doc.setFont(undefined, 'normal');
             yPos += 18;
         };
+        
+        // Function to add sub-header for OC page
+        const addSubHeader = (title) => {
+            checkPageBreak(15);
+            yPos += 5;
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'bold');
+            doc.setTextColor(mainColor);
+            doc.text(title, margin, yPos);
+            doc.setTextColor('#000000');
+            doc.setFont(undefined, 'normal');
+            yPos += 10;
+        }
 
         const addTextRow = (label, value) => {
             checkPageBreak(15);
@@ -210,36 +234,40 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // --- Header ---
-        doc.setFillColor(mainColor);
-        doc.rect(0, 0, pageWidth, 35, 'F');
-        
-        // Logo/Brand
-        doc.setFontSize(22);
-        doc.setTextColor(titleColor);
-        doc.setFont(undefined, 'bold');
-        doc.text("TechSmith404", margin, 15);
-        
-        doc.setFontSize(14);
-        doc.setFont(undefined, 'normal');
-        doc.text("Optimization & Health Report", margin, 25);
+        const drawHeader = () => {
+            doc.setFillColor(mainColor);
+            doc.rect(0, 0, pageWidth, 35, 'F');
+            
+            // Logo/Brand
+            doc.setFontSize(22);
+            doc.setTextColor(titleColor);
+            doc.setFont(undefined, 'bold');
+            doc.text("TechSmith404", margin, 15);
+            
+            doc.setFontSize(14);
+            doc.setFont(undefined, 'normal');
+            doc.text("Optimization & Health Report", margin, 25);
 
-        // Client Info (Right aligned in header)
-        doc.setFontSize(10);
-        const clientName = document.getElementById('clientName').value || 'Client';
-        const machineName = document.getElementById('machineName').value || 'Machine';
-        const date = document.getElementById('date').value;
-        
-        doc.text(`Date: ${date}`, pageWidth - margin, 15, { align: 'right' });
-        doc.text(`Client: ${clientName}`, pageWidth - margin, 20, { align: 'right' });
-        doc.text(`Machine: ${machineName}`, pageWidth - margin, 25, { align: 'right' });
+            // Client Info
+            doc.setFontSize(10);
+            const clientName = document.getElementById('clientName').value || 'Client';
+            const machineName = document.getElementById('machineName').value || 'Machine';
+            const date = document.getElementById('date').value;
+            
+            doc.text(`Date: ${date}`, pageWidth - margin, 15, { align: 'right' });
+            doc.text(`Client: ${clientName}`, pageWidth - margin, 20, { align: 'right' });
+            doc.text(`Machine: ${machineName}`, pageWidth - margin, 25, { align: 'right' });
 
-        yPos = 50;
-        doc.setTextColor('#000000');
+            yPos = 50;
+            doc.setTextColor('#000000');
+        };
+        
+        drawHeader();
 
         // --- Executive Summary (New) ---
         // Auto-generate a summary if "After" values exist
         let hasAfterValues = false;
-        const inputsToCheck = ['fullStartupTimeAfter', 'cinebenchScoreAfter', 'furmarkScoreAfter'];
+        const inputsToCheck = ['fullStartupTimeAfter', 'cpuScoreAfter', 'gpuScoreAfter'];
         inputsToCheck.forEach(id => {
             if (document.getElementById(id).value) hasAfterValues = true;
         });
@@ -308,65 +336,133 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         // 3. CPU Benchmarks
-        addSectionTitle("CPU Performance (Cinebench)");
-        addComparisonChart("Multi-Core Score", 
-            document.getElementById('cinebenchScoreBefore').value, 
-            document.getElementById('cinebenchScoreAfter').value, 
+        addSectionTitle("CPU Performance (Novabench)");
+        addComparisonChart("Overall Score", 
+            document.getElementById('cpuScoreBefore').value, 
+            document.getElementById('cpuScoreAfter').value, 
             "pts", false); // Higher is better
 
-        addComparisonChart("Idle Temp", 
-            document.getElementById('cpuTempBefore').value, 
-            document.getElementById('cpuTempAfter').value, 
-            "°C", true);
+        addComparisonChart("Clock Speed", 
+            document.getElementById('cpuClockBefore').value, 
+            document.getElementById('cpuClockAfter').value, 
+            "GHz", false); // Higher is better
 
-        addComparisonChart("Load Temp", 
-            document.getElementById('cpuLoadTempBefore').value, 
-            document.getElementById('cpuLoadTempAfter').value, 
-            "°C", true);
+        addComparisonChart("GFLOPS", 
+            document.getElementById('cpuGflopsBefore').value, 
+            document.getElementById('cpuGflopsAfter').value, 
+            "GFLOPS", false); // Higher is better
         
         addCommentBlock("Analyst Notes", document.getElementById('cpuComments').value);
 
 
         // 4. GPU Benchmarks
-        addSectionTitle("GPU Performance (Furmark)");
-        addComparisonChart("Benchmark Score", 
-            document.getElementById('furmarkScoreBefore').value, 
-            document.getElementById('furmarkScoreAfter').value, 
+        addSectionTitle("GPU Performance (Novabench)");
+        addComparisonChart("Overall Score", 
+            document.getElementById('gpuScoreBefore').value, 
+            document.getElementById('gpuScoreAfter').value, 
             "pts", false); // Higher is better
 
-        addComparisonChart("Idle Temp", 
-            document.getElementById('gpuTempBefore').value, 
-            document.getElementById('gpuTempAfter').value, 
-            "°C", true);
+        addComparisonChart("FPS", 
+            document.getElementById('gpuFpsBefore').value, 
+            document.getElementById('gpuFpsAfter').value, 
+            "FPS", false); // Higher is better
 
-        addComparisonChart("Load Temp", 
-            document.getElementById('gpuLoadTempBefore').value, 
-            document.getElementById('gpuLoadTempAfter').value, 
-            "°C", true);
+        addComparisonChart("GFLOPS", 
+            document.getElementById('gpuGflopsBefore').value, 
+            document.getElementById('gpuGflopsAfter').value, 
+            "GFLOPS", false); // Higher is better
             
         addCommentBlock("Analyst Notes", document.getElementById('gpuComments').value);
 
 
+        // --- OPTIONAL: Overclocking Section ---
+        if (document.getElementById('ocToggle').checked) {
+            doc.addPage();
+            yPos = 20; // Reset Y for new page
+            drawHeader(); // Re-draw header on new page
+            yPos = 50; // Reset Y below header
+
+            addSectionTitle("Overclocking & Stability Report");
+            
+            // Tuning Configuration
+            addSubHeader("Tuning Configuration");
+            
+            // CPU Tuning
+            doc.setFont(undefined, 'bold');
+            doc.text("CPU Settings:", margin, yPos);
+            yPos += 6;
+            doc.setFont(undefined, 'normal');
+            addTextRow("VCore", document.getElementById('ocCpuVcore').value);
+            addTextRow("Clock / Ratio", document.getElementById('ocCpuClock').value);
+            addTextRow("LLC / Misc", document.getElementById('ocCpuLlc').value);
+            
+            yPos += 5;
+
+            // GPU Tuning
+            doc.setFont(undefined, 'bold');
+            doc.text("GPU Settings:", margin, yPos);
+            yPos += 6;
+            doc.setFont(undefined, 'normal');
+            addTextRow("Core Offset", document.getElementById('ocGpuCore').value);
+            addTextRow("Mem Offset", document.getElementById('ocGpuMem').value);
+            addTextRow("Power Limit", document.getElementById('ocGpuPower').value);
+
+            yPos += 10;
+
+            // Stability
+            addSubHeader("Stability Stress Test (Furmark)");
+            addTextRow("Max Temp", document.getElementById('ocFurmarkTemp').value ? `${document.getElementById('ocFurmarkTemp').value} °C` : "");
+            addTextRow("Duration", document.getElementById('ocFurmarkDuration').value ? `${document.getElementById('ocFurmarkDuration').value} min` : "");
+            
+            const isStable = document.getElementById('ocFurmarkStable').checked;
+            doc.setFont(undefined, 'bold');
+            doc.text("Status:", margin, yPos);
+            doc.setTextColor(isStable ? '#009900' : '#cc0000');
+            doc.text(isStable ? "STABLE" : "UNSTABLE / NOT PASSING", margin + 50, yPos);
+            doc.setTextColor('#000000');
+            yPos += 15;
+
+
+            // Benchmarks
+            addSubHeader("Enthusiast Benchmarks");
+            
+            // Cinebench
+            doc.setFont(undefined, 'bold');
+            doc.text("Cinebench R23/24:", margin, yPos);
+            yPos += 6;
+            doc.setFont(undefined, 'normal');
+            addTextRow("Score", document.getElementById('ocCinebenchScore').value);
+            addTextRow("Max Temp", document.getElementById('ocCinebenchTemp').value ? `${document.getElementById('ocCinebenchTemp').value} °C` : "");
+            yPos += 5;
+
+            // Superposition
+            doc.setFont(undefined, 'bold');
+            doc.text("Unigine Superposition:", margin, yPos);
+            yPos += 6;
+            doc.setFont(undefined, 'normal');
+            addTextRow("Score", document.getElementById('ocSuperposScore').value);
+            addTextRow("Avg FPS", document.getElementById('ocSuperposFps').value);
+            addTextRow("Preset", document.getElementById('ocSuperposPreset').value);
+        }
+
+
         // 5. Screenshots
+        checkPageBreak(50); // Ensure title doesn't start at very bottom
         addSectionTitle("Visual Proof of Work");
         const screenshots = Array.from(document.querySelectorAll('#screenshotPreview img'));
         if (screenshots.length > 0) {
-            let xPos = margin;
-            const imgWidth = contentWidth / 2 - 5;
-            const imgHeight = imgWidth * 0.5625; // 16:9 aspect ratio roughly
-            const colSpacing = 10;
-            const rowSpacing = 10;
-            const imagesPerRow = 2;
-
             for (let i = 0; i < screenshots.length; i++) {
-                if (i > 0 && (i % imagesPerRow === 0)) {
-                    xPos = margin;
-                    yPos += imgHeight + rowSpacing;
-                }
-                checkPageBreak(imgHeight + rowSpacing);
+                const img = screenshots[i];
+                
+                // Calculate dimensions to fit page width while maintaining aspect ratio
+                const imgRatio = img.naturalHeight / img.naturalWidth;
+                const renderWidth = contentWidth;
+                const renderHeight = renderWidth * imgRatio;
+
+                // Check if image fits on current page, else add new page
+                checkPageBreak(renderHeight + 10);
 
                 try {
-                    const img = screenshots[i];
                     const imageData = await new Promise((resolve) => {
                         const canvas = document.createElement('canvas');
                         canvas.width = img.naturalWidth;
@@ -376,13 +472,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         resolve(canvas.toDataURL('image/jpeg', 0.8));
                     });
                     
-                    doc.addImage(imageData, 'JPEG', xPos, yPos, imgWidth, imgHeight);
-                    xPos += imgWidth + colSpacing;
+                    doc.addImage(imageData, 'JPEG', margin, yPos, renderWidth, renderHeight);
+                    yPos += renderHeight + 10; // Add spacing after image
                 } catch (e) {
                     console.error("Failed to add image to PDF:", e);
                 }
             }
-            yPos += imgHeight + rowSpacing;
         } else {
             doc.text("No screenshots attached.", margin, yPos);
             yPos += 10;

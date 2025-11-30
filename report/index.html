@@ -82,23 +82,23 @@
 
             <!-- CPU Benchmark -->
             <div class="form-section">
-                <h3 class="form-section-title">CPU Benchmark (Cinebench)</h3>
+                <h3 class="form-section-title">CPU Benchmark (Novabench)</h3>
                 <div class="comparison-grid">
                     <div class="grid-header">Metric</div>
                     <div class="grid-header">Before</div>
                     <div class="grid-header">After (Optional)</div>
 
-                    <div class="grid-label">Score</div>
-                    <input type="number" id="cinebenchScoreBefore" placeholder="Before">
-                    <input type="number" id="cinebenchScoreAfter" placeholder="After">
+                    <div class="grid-label">Overall Score</div>
+                    <input type="number" id="cpuScoreBefore" placeholder="Before">
+                    <input type="number" id="cpuScoreAfter" placeholder="After">
 
-                    <div class="grid-label">Idle Temp ($^{\circ}C$)</div>
-                    <input type="number" id="cpuTempBefore" placeholder="Before">
-                    <input type="number" id="cpuTempAfter" placeholder="After">
+                    <div class="grid-label">Clock Speed (GHz)</div>
+                    <input type="number" id="cpuClockBefore" placeholder="Before">
+                    <input type="number" id="cpuClockAfter" placeholder="After">
 
-                    <div class="grid-label">Load Temp ($^{\circ}C$)</div>
-                    <input type="number" id="cpuLoadTempBefore" placeholder="Before">
-                    <input type="number" id="cpuLoadTempAfter" placeholder="After">
+                    <div class="grid-label">GFLOPS</div>
+                    <input type="number" id="cpuGflopsBefore" placeholder="Before">
+                    <input type="number" id="cpuGflopsAfter" placeholder="After">
                 </div>
                 <div class="form-field" style="margin-top: 15px;">
                     <label for="cpuComments">Recommendations & Notes</label>
@@ -108,27 +108,128 @@
 
             <!-- GPU Benchmark -->
             <div class="form-section">
-                <h3 class="form-section-title">GPU Benchmark (Furmark)</h3>
+                <h3 class="form-section-title">GPU Benchmark (Novabench)</h3>
                 <div class="comparison-grid">
                     <div class="grid-header">Metric</div>
                     <div class="grid-header">Before</div>
                     <div class="grid-header">After (Optional)</div>
 
-                    <div class="grid-label">Score</div>
-                    <input type="number" id="furmarkScoreBefore" placeholder="Before">
-                    <input type="number" id="furmarkScoreAfter" placeholder="After">
+                    <div class="grid-label">Overall Score</div>
+                    <input type="number" id="gpuScoreBefore" placeholder="Before">
+                    <input type="number" id="gpuScoreAfter" placeholder="After">
 
-                    <div class="grid-label">Idle Temp ($^{\circ}C$)</div>
-                    <input type="number" id="gpuTempBefore" placeholder="Before">
-                    <input type="number" id="gpuTempAfter" placeholder="After">
+                    <div class="grid-label">FPS</div>
+                    <input type="number" id="gpuFpsBefore" placeholder="Before">
+                    <input type="number" id="gpuFpsAfter" placeholder="After">
 
-                    <div class="grid-label">Load Temp ($^{\circ}C$)</div>
-                    <input type="number" id="gpuLoadTempBefore" placeholder="Before">
-                    <input type="number" id="gpuLoadTempAfter" placeholder="After">
+                    <div class="grid-label">GFLOPS</div>
+                    <input type="number" id="gpuGflopsBefore" placeholder="Before">
+                    <input type="number" id="gpuGflopsAfter" placeholder="After">
                 </div>
                 <div class="form-field" style="margin-top: 15px;">
                     <label for="gpuComments">Recommendations & Notes</label>
                     <textarea id="gpuComments" placeholder="Advise cleaning the fans and case for better airflow..."></textarea>
+                </div>
+            </div>
+
+            <!-- Overclocking Toggle -->
+            <div class="form-section toggle-section">
+                <label class="switch">
+                    <input type="checkbox" id="ocToggle">
+                    <span class="slider round"></span>
+                </label>
+                <span class="toggle-label">Include Overclocking & Stress Tests</span>
+            </div>
+
+            <!-- Overclocking Section (Hidden) -->
+            <div id="ocSection" class="hidden">
+                <!-- Tuning Config -->
+                <div class="form-section">
+                    <h3 class="form-section-title">Tuning Configuration</h3>
+                    <div class="comparison-grid">
+                        <div class="grid-header" style="text-align: left;">CPU Tuning</div>
+                        <div class="grid-header" style="text-align: left;">GPU Tuning</div>
+                        <div></div> <!-- Empty Col -->
+
+                        <!-- Row 1 -->
+                        <div class="form-field" style="margin:0;">
+                            <label>VCore (Volts)</label>
+                            <input type="text" id="ocCpuVcore" placeholder="1.35v">
+                        </div>
+                        <div class="form-field" style="margin:0;">
+                            <label>Core Clock Offset</label>
+                            <input type="text" id="ocGpuCore" placeholder="+150 MHz">
+                        </div>
+                        <div></div>
+
+                        <!-- Row 2 -->
+                        <div class="form-field" style="margin:0;">
+                            <label>Clock Speed / Ratio</label>
+                            <input type="text" id="ocCpuClock" placeholder="5.1 GHz / x51">
+                        </div>
+                        <div class="form-field" style="margin:0;">
+                            <label>Memory Clock Offset</label>
+                            <input type="text" id="ocGpuMem" placeholder="+500 MHz">
+                        </div>
+                        <div></div>
+
+                         <!-- Row 3 -->
+                         <div class="form-field" style="margin:0;">
+                            <label>LLC / Settings</label>
+                            <input type="text" id="ocCpuLlc" placeholder="LLC Level 4">
+                        </div>
+                        <div class="form-field" style="margin:0;">
+                            <label>Power Limit</label>
+                            <input type="text" id="ocGpuPower" placeholder="110%">
+                        </div>
+                        <div></div>
+                    </div>
+                </div>
+
+                <!-- Furmark Stress -->
+                <div class="form-section">
+                    <h3 class="form-section-title">Stability Stress Test (Furmark)</h3>
+                    <div class="comparison-grid">
+                        <div class="grid-header">Max Temp ($^{\circ}C$)</div>
+                        <div class="grid-header">Duration (min)</div>
+                        <div class="grid-header">Status</div>
+
+                        <input type="number" id="ocFurmarkTemp" placeholder="75">
+                        <input type="number" id="ocFurmarkDuration" placeholder="30">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="ocFurmarkStable" style="width: auto;">
+                            <label for="ocFurmarkStable" style="margin:0;">Stable</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Benchmarks -->
+                <div class="form-section">
+                    <h3 class="form-section-title">Enthusiast Benchmarks</h3>
+                    
+                    <!-- Cinebench -->
+                    <h4 style="color: var(--primary); margin-top: 10px;">Cinebench R23/24</h4>
+                    <div class="comparison-grid">
+                        <div class="grid-header">Score</div>
+                        <div class="grid-header">Max Temp ($^{\circ}C$)</div>
+                        <div></div>
+                        
+                        <input type="number" id="ocCinebenchScore" placeholder="Score">
+                        <input type="number" id="ocCinebenchTemp" placeholder="Temp">
+                        <div></div>
+                    </div>
+
+                    <!-- Superposition -->
+                    <h4 style="color: var(--primary); margin-top: 20px;">Unigine Superposition</h4>
+                    <div class="comparison-grid">
+                        <div class="grid-header">Score</div>
+                        <div class="grid-header">Avg FPS</div>
+                        <div class="grid-header">Preset Used</div>
+
+                        <input type="number" id="ocSuperposScore" placeholder="Score">
+                        <input type="number" id="ocSuperposFps" placeholder="FPS">
+                        <input type="text" id="ocSuperposPreset" placeholder="1080p Extreme">
+                    </div>
                 </div>
             </div>
 
