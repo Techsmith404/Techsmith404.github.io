@@ -218,30 +218,53 @@ header {
 .disk-fields, .screenshot-preview {
     margin-top: 15px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Changed to column to stack image containers */
     gap: 15px;
 }
-.disk-item {
-    border: 1px dashed rgba(0, 255, 157, 0.1);
-    padding: 10px;
-    border-radius: 4px;
-}
-.disk-item .remove-btn {
-    float: right;
-    background: none;
-    border: none;
-    color: var(--error-color);
-    font-size: 1.2rem;
-    cursor: pointer;
-    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
-}
-.screenshot-preview img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
+/* New styles for screenshot items */
+.screenshot-item {
+    position: relative;
+    display: inline-block; /* To allow side-by-side if space, but respects gap */
+    margin-right: 10px; /* Space between images */
+    margin-bottom: 10px;
     border: 1px solid var(--primary);
-    box-shadow: var(--text-glow);
+    border-radius: 4px;
+    padding: 5px;
+    background: var(--dark);
 }
+
+.screenshot-item img {
+    width: 150px; /* Fixed width */
+    height: 100px; /* Fixed height */
+    object-fit: cover; /* Cover ensures aspect ratio is maintained within bounds */
+    display: block;
+    border-radius: 2px;
+}
+
+.screenshot-item .remove-screenshot-btn {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--error-color);
+    color: var(--light);
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--glow);
+    transition: background-color 0.2s ease;
+}
+
+.screenshot-item .remove-screenshot-btn:hover {
+    background: var(--primary-dark);
+}
+
 .file-upload-container {
     border: 2px dashed var(--primary);
     border-radius: 8px;
@@ -330,17 +353,6 @@ header {
     right: 0;
     bottom: 0;
     background-color: #333;
-    transition: .4s;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
     transition: .4s;
 }
 

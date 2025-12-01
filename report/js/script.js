@@ -59,20 +59,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const dropZone = document.getElementById('dropZone');
 
     const handleFiles = (files) => {
-        // screenshotPreview.innerHTML = ''; // Optional: Clear previous previews? User might want to append.
-        // Keeping append behavior for now, as 'multiple' allows adding more.
-        // If clear is desired: screenshotPreview.innerHTML = '';
-        
         if (files) {
             for (const file of files) {
                 if (!file.type.startsWith('image/')) continue;
                 
                 const reader = new FileReader();
                 reader.onload = (e) => {
+                    const imgContainer = document.createElement('div');
+                    imgContainer.classList.add('screenshot-item');
+
                     const img = document.createElement('img');
                     img.src = e.target.result;
                     img.alt = file.name;
-                    screenshotPreview.appendChild(img);
+
+                    const removeBtn = document.createElement('button');
+                    removeBtn.classList.add('remove-screenshot-btn');
+                    removeBtn.innerHTML = '&times;';
+                    removeBtn.addEventListener('click', () => {
+                        imgContainer.remove();
+                    });
+
+                    imgContainer.appendChild(img);
+                    imgContainer.appendChild(removeBtn);
+                    screenshotPreview.appendChild(imgContainer);
                 };
                 reader.readAsDataURL(file);
             }
