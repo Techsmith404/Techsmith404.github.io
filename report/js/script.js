@@ -451,43 +451,78 @@ document.addEventListener('DOMContentLoaded', () => {
         doc.setFontSize(11);
 
         let summaryPoints = [];
+        
+        // Check if this is a Health Check (no "After" values)
+        const hasOptimization = (parseFloat(data.bootAfter) > 0) || (parseFloat(data.cpuScoreAfter) > 0) || (parseFloat(data.gpuScoreAfter) > 0);
 
-        // 1. Boot Performance
-        const bootBefore = parseFloat(data.bootBefore) || 0;
-        const bootAfter = parseFloat(data.bootAfter) || 0;
-        if (bootBefore > 0 && bootAfter > 0 && bootAfter < bootBefore) {
-            const imp = ((bootBefore - bootAfter) / bootBefore * 100).toFixed(0);
-            summaryPoints.push(`Your system is starting up ${imp}% faster. We reduced the boot time from ${bootBefore}s to ${bootAfter}s by streamlining startup applications and disabling unnecessary system services.`);
-        }
+        if (!hasOptimization) {
+             // --- Health Check Narrative ---
+             summaryPoints.push("A comprehensive health check and diagnostic evaluation was performed to assess the current condition of the system.");
 
-        // 2. Processor (CPU)
-        const cpuBefore = parseFloat(data.cpuScoreBefore) || 0;
-        const cpuAfter = parseFloat(data.cpuScoreAfter) || 0;
-        if (cpuBefore > 0 && cpuAfter > 0 && cpuAfter > cpuBefore) {
-            const imp = ((cpuAfter - cpuBefore) / cpuBefore * 100).toFixed(0);
-            summaryPoints.push(`Processing power has increased by ${imp}%. This improvement means faster application loading, smoother multitasking, and a more responsive experience overall.`);
-        }
+             // Startup
+             if (parseFloat(data.bootBefore) > 0) {
+                 summaryPoints.push(`Current system boot time is ${data.bootBefore} seconds.`);
+                 if (data.startupComments) summaryPoints.push(data.startupComments);
+             }
 
-        // 3. Graphics (GPU)
-        const gpuBefore = parseFloat(data.gpuScoreBefore) || 0;
-        const gpuAfter = parseFloat(data.gpuScoreAfter) || 0;
-        if (gpuBefore > 0 && gpuAfter > 0 && gpuAfter > gpuBefore) {
-            const imp = ((gpuAfter - gpuBefore) / gpuBefore * 100).toFixed(0);
-            summaryPoints.push(`Graphics performance saw a ${imp}% boost. You can expect smoother visuals, higher frame rates in games, and better performance in video playback or creative tasks.`);
-        }
+             // CPU
+             if (parseFloat(data.cpuScoreBefore) > 0) {
+                 summaryPoints.push(`Processor performance baseline is ${data.cpuScoreBefore} points.`);
+                 if (data.cpuComments) summaryPoints.push(data.cpuComments);
+             }
 
-        // 4. Overclocking
-        if (data.ocEnabled) {
-            summaryPoints.push("Advanced enthusiast-level tuning was applied to your hardware. We have safely increased the operating speed of your components while verifying stability, squeezing every bit of performance out of your system.");
-        }
+             // GPU
+             if (parseFloat(data.gpuScoreBefore) > 0) {
+                 summaryPoints.push(`Graphics subsystem scored ${data.gpuScoreBefore} points.`);
+                 if (data.gpuComments) summaryPoints.push(data.gpuComments);
+             }
 
-        // 5. General Health / Maintenance
-        summaryPoints.push("We performed a comprehensive system health check, including software optimizations and internal maintenance to ensure optimal performance and stability.");
+             // Disk
+             const hasBadDisk = data.disks.some(d => d.health === 'bad');
+             if (hasBadDisk) {
+                 summaryPoints.push("CRITICAL: One or more storage drives are reporting failure or degraded health.");
+             }
+             if (data.diskComments) summaryPoints.push(data.diskComments);
 
-        // 6. Disk Warning
-        const hasBadDisk = data.disks.some(d => d.health === 'bad');
-        if (hasBadDisk) {
-            summaryPoints.push("CRITICAL NOTE: We detected potential issues with one or more storage drives. Please refer to the Disk Health section below and considering backing up your data immediately.");
+        } else {
+            // --- Optimization Narrative ---
+            // 1. Boot Performance
+            const bootBefore = parseFloat(data.bootBefore) || 0;
+            const bootAfter = parseFloat(data.bootAfter) || 0;
+            if (bootBefore > 0 && bootAfter > 0 && bootAfter < bootBefore) {
+                const imp = ((bootBefore - bootAfter) / bootBefore * 100).toFixed(0);
+                summaryPoints.push(`Your system is starting up ${imp}% faster. We reduced the boot time from ${bootBefore}s to ${bootAfter}s by streamlining startup applications and disabling unnecessary system services.`);
+            }
+
+            // 2. Processor (CPU)
+            const cpuBefore = parseFloat(data.cpuScoreBefore) || 0;
+            const cpuAfter = parseFloat(data.cpuScoreAfter) || 0;
+            if (cpuBefore > 0 && cpuAfter > 0 && cpuAfter > cpuBefore) {
+                const imp = ((cpuAfter - cpuBefore) / cpuBefore * 100).toFixed(0);
+                summaryPoints.push(`Processing power has increased by ${imp}%. This improvement means faster application loading, smoother multitasking, and a more responsive experience overall.`);
+            }
+
+            // 3. Graphics (GPU)
+            const gpuBefore = parseFloat(data.gpuScoreBefore) || 0;
+            const gpuAfter = parseFloat(data.gpuScoreAfter) || 0;
+            if (gpuBefore > 0 && gpuAfter > 0 && gpuAfter > gpuBefore) {
+                const imp = ((gpuAfter - gpuBefore) / gpuBefore * 100).toFixed(0);
+                summaryPoints.push(`Graphics performance saw a ${imp}% boost. You can expect smoother visuals, higher frame rates in games, and better performance in video playback or creative tasks.`);
+            }
+
+            // 4. Overclocking
+            if (data.ocEnabled) {
+                summaryPoints.push("Advanced enthusiast-level tuning was applied to your hardware. We have safely increased the operating speed of your components while verifying stability, squeezing every bit of performance out of your system.");
+            }
+
+            // 5. General Health / Maintenance
+            summaryPoints.push("We performed a comprehensive system health check, including software optimizations and internal maintenance to ensure optimal performance and stability.");
+
+            // 6. Disk Warning
+            const hasBadDisk = data.disks.some(d => d.health === 'bad');
+            if (hasBadDisk) {
+                summaryPoints.push("CRITICAL NOTE: We detected potential issues with one or more storage drives. Please refer to the Disk Health section below and considering backing up your data immediately.");
+            }
         }
 
         // Combine points
