@@ -56,11 +56,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Handle screenshot uploads and previews
-    screenshotUpload.addEventListener('change', (event) => {
-        screenshotPreview.innerHTML = ''; // Clear previous previews
-        const files = event.target.files;
+    const dropZone = document.getElementById('dropZone');
+
+    const handleFiles = (files) => {
+        // screenshotPreview.innerHTML = ''; // Optional: Clear previous previews? User might want to append.
+        // Keeping append behavior for now, as 'multiple' allows adding more.
+        // If clear is desired: screenshotPreview.innerHTML = '';
+        
         if (files) {
             for (const file of files) {
+                if (!file.type.startsWith('image/')) continue;
+                
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     const img = document.createElement('img');
@@ -71,10 +77,51 @@ document.addEventListener('DOMContentLoaded', () => {
                 reader.readAsDataURL(file);
             }
         }
+    };
+
+    // File Input Change
+    screenshotUpload.addEventListener('change', (event) => {
+        handleFiles(event.target.files);
+    });
+
+    // Drag & Drop Events
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, unhighlight, false);
+    });
+
+    function highlight(e) {
+        dropZone.classList.add('drag-over');
+    }
+
+    function unhighlight(e) {
+        dropZone.classList.remove('drag-over');
+    }
+
+    dropZone.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        handleFiles(files);
     });
 
     // Generate PDF
     generatePdfBtn.addEventListener('click', async () => {
+        const clientName = document.getElementById('clientName').value || 'Client';
+        const machineName = document.getElementById('machineName').value || 'Machine';
+        const date = document.getElementById('date').value;
+
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
         let yPos = 20;
@@ -250,9 +297,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Client Info
             doc.setFontSize(10);
-            const clientName = document.getElementById('clientName').value || 'Client';
-            const machineName = document.getElementById('machineName').value || 'Machine';
-            const date = document.getElementById('date').value;
             
             doc.text(`Date: ${date}`, pageWidth - margin, 15, { align: 'right' });
             doc.text(`Client: ${clientName}`, pageWidth - margin, 20, { align: 'right' });

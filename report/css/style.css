@@ -253,6 +253,12 @@ header {
 .file-upload-container:hover {
     background: rgba(0, 255, 157, 0.05);
 }
+.file-upload-container.drag-over {
+    background: rgba(0, 255, 157, 0.15);
+    border-color: var(--secondary);
+    box-shadow: 0 0 15px rgba(0, 184, 255, 0.3);
+    transform: scale(1.02);
+}
 .file-upload-container p {
     margin: 0;
     color: var(--primary);
