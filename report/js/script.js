@@ -482,7 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // 5. General Health / Maintenance
-        summaryPoints.push("We performed a comprehensive system health check, including thermal paste replacement and internal cleaning to ensure optimal airflow. This maintenance helps keep temperatures low and extends the lifespan of your computer.");
+        summaryPoints.push("We performed a comprehensive system health check, including software optimizations and internal maintenance to ensure optimal performance and stability.");
 
         // 6. Disk Warning
         const hasBadDisk = data.disks.some(d => d.health === 'bad');
