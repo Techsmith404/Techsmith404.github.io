@@ -44,6 +44,82 @@ document.addEventListener('DOMContentLoaded', () => {
     addDiskBtn.addEventListener('click', addDiskInput);
     addDiskInput(); // Add initial disk input
 
+    // --- Fill Example Data Button Logic ---
+    const fillExampleBtn = document.getElementById('fillExampleBtn');
+    if (fillExampleBtn) {
+        fillExampleBtn.addEventListener('click', () => {
+            // Client Info
+            document.getElementById('clientName').value = "John Doe";
+            document.getElementById('machineName').value = "Gaming-Rig-Alpha";
+            
+            // Startup
+            document.getElementById('fullStartupTimeBefore').value = "45";
+            document.getElementById('fullStartupTimeAfter').value = "18";
+            document.getElementById('desktopTimeBefore').value = "30";
+            document.getElementById('desktopTimeAfter').value = "12";
+            document.getElementById('longestProcess').value = "Steam Client Service - 8s";
+            document.getElementById('startupComments').value = "Disabled high-impact startup apps (Steam, Spotify, Discord). Adjusted BIOS fast boot settings.";
+
+            // Disk Health (ensure at least one disk exists)
+            if (diskInputs.children.length === 0) addDiskInput();
+            const firstDisk = diskInputs.children[0];
+            firstDisk.querySelector('.disk-name').value = "Samsung 970 EVO 1TB";
+            firstDisk.querySelector('.disk-health').value = "good";
+            firstDisk.querySelector('.disk-hours').value = "4520";
+            document.getElementById('diskComments').value = "Primary NVMe drive is in excellent health. Recommended routine file cleanup.";
+
+            // CPU
+            document.getElementById('cpuScoreBefore').value = "12500";
+            document.getElementById('cpuScoreAfter').value = "13800";
+            document.getElementById('cpuClockBefore').value = "3.8";
+            document.getElementById('cpuClockAfter').value = "4.6";
+            document.getElementById('cpuGflopsBefore').value = "210";
+            document.getElementById('cpuGflopsAfter').value = "245";
+            document.getElementById('cpuComments').value = "Applied negative voltage offset (-0.05v) to reduce thermals, allowing higher sustained boost clocks.";
+
+            // GPU
+            document.getElementById('gpuScoreBefore').value = "18000";
+            document.getElementById('gpuScoreAfter').value = "19500";
+            document.getElementById('gpuFpsBefore').value = "140";
+            document.getElementById('gpuFpsAfter').value = "165";
+            document.getElementById('gpuGflopsBefore').value = "9500";
+            document.getElementById('gpuGflopsAfter').value = "10200";
+            document.getElementById('gpuComments').value = "Custom fan curve applied. Memory overclocked +800MHz stable.";
+
+            // Overclocking
+            const ocToggle = document.getElementById('ocToggle');
+            if (!ocToggle.checked) {
+                ocToggle.click(); // Trigger change event
+            }
+            document.getElementById('ocCpuVcore').value = "1.32v";
+            document.getElementById('ocGpuCore').value = "+120 MHz";
+            document.getElementById('ocCpuClock').value = "5.1 GHz All-Core";
+            document.getElementById('ocGpuMem').value = "+1000 MHz";
+            document.getElementById('ocCpuLlc').value = "Mode 4 (Flat)";
+            document.getElementById('ocGpuPower').value = "115% Max";
+            
+            // Stability
+            document.getElementById('ocFurmarkTemp').value = "68";
+            document.getElementById('ocFurmarkDuration').value = "30";
+            document.getElementById('ocFurmarkStable').checked = true;
+
+            document.getElementById('ocOcctTemp').value = "82";
+            document.getElementById('ocOcctDuration').value = "60";
+            document.getElementById('ocOcctStable').checked = true;
+
+            // Benchmarks
+            document.getElementById('ocCinebenchScore').value = "18450";
+            document.getElementById('ocCinebenchTemp').value = "85";
+            
+            document.getElementById('ocSuperposScore').value = "8900";
+            document.getElementById('ocSuperposFps').value = "65";
+            document.getElementById('ocSuperposPreset').value = "1080p Extreme";
+            
+            // Comments
+            document.getElementById('screenshotComments').value = "Screenshots confirm stability under load and improved benchmark scores.";
+        });
+    }
+
     // Toggle Overclocking Section
     const ocToggle = document.getElementById('ocToggle');
     const ocSection = document.getElementById('ocSection');
