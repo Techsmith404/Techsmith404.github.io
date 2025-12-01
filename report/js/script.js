@@ -211,6 +211,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
+        const addExplanation = (text) => {
+             checkPageBreak(15);
+             doc.setFontSize(9);
+             doc.setTextColor('#555555');
+             doc.setFont(undefined, 'italic');
+             const lines = doc.splitTextToSize(text, contentWidth - 10); 
+             doc.text(lines, margin + 5, yPos); 
+             doc.setFont(undefined, 'normal');
+             doc.setTextColor('#000000');
+             yPos += (lines.length * 5) + 8;
+        };
+
         // Visual Comparison Bar Chart
         const addComparisonChart = (label, before, after, unit, lowerIsBetter = true) => {
             const bVal = parseFloat(before);
@@ -443,6 +455,16 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('cpuGflopsAfter').value, 
             "GFLOPS", false); // Higher is better
         
+        // Explanation for CPU GFLOPS
+        const cpuGflopsB = parseFloat(document.getElementById('cpuGflopsBefore').value);
+        const cpuGflopsA = parseFloat(document.getElementById('cpuGflopsAfter').value);
+        if (cpuGflopsA > cpuGflopsB) {
+             const imp = ((cpuGflopsA - cpuGflopsB) / cpuGflopsB * 100).toFixed(1);
+             addExplanation(`GFLOPS measures the raw computational speed of your CPU for heavy calculations. The ${imp}% increase means your processor is now faster at demanding tasks like video editing, 3D rendering, and serious multitasking.`);
+        } else {
+             addExplanation(`GFLOPS measures the raw computational speed of your CPU. This score reflects your processor's ability to handle heavy, complex calculations like video editing and multitasking.`);
+        }
+
         addCommentBlock("Analyst Notes", document.getElementById('cpuComments').value);
 
 
@@ -462,6 +484,16 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('gpuGflopsBefore').value, 
             document.getElementById('gpuGflopsAfter').value, 
             "GFLOPS", false); // Higher is better
+
+        // Explanation for GPU GFLOPS
+        const gpuGflopsB = parseFloat(document.getElementById('gpuGflopsBefore').value);
+        const gpuGflopsA = parseFloat(document.getElementById('gpuGflopsAfter').value);
+        if (gpuGflopsA > gpuGflopsB) {
+             const imp = ((gpuGflopsA - gpuGflopsB) / gpuGflopsB * 100).toFixed(1);
+             addExplanation(`GFLOPS here measures the raw mathematical power of your graphics card. The ${imp}% boost means better performance in modern games, faster 3D rendering, and smoother high-resolution video playback.`);
+        } else {
+             addExplanation(`This GFLOPS score measures the raw mathematical power of your graphics card. A higher score translates to better performance in gaming, 3D rendering, and video workloads.`);
+        }
             
         addCommentBlock("Analyst Notes", document.getElementById('gpuComments').value);
 
