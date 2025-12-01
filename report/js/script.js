@@ -44,82 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
     addDiskBtn.addEventListener('click', addDiskInput);
     addDiskInput(); // Add initial disk input
 
-    // --- Fill Example Data Button Logic ---
-    const fillExampleBtn = document.getElementById('fillExampleBtn');
-    if (fillExampleBtn) {
-        fillExampleBtn.addEventListener('click', () => {
-            // Client Info
-            document.getElementById('clientName').value = "John Doe";
-            document.getElementById('machineName').value = "Gaming-Rig-Alpha";
-            
-            // Startup
-            document.getElementById('fullStartupTimeBefore').value = "45";
-            document.getElementById('fullStartupTimeAfter').value = "18";
-            document.getElementById('desktopTimeBefore').value = "30";
-            document.getElementById('desktopTimeAfter').value = "12";
-            document.getElementById('longestProcess').value = "Steam Client Service - 8s";
-            document.getElementById('startupComments').value = "Disabled high-impact startup apps (Steam, Spotify, Discord). Adjusted BIOS fast boot settings.";
-
-            // Disk Health (ensure at least one disk exists)
-            if (diskInputs.children.length === 0) addDiskInput();
-            const firstDisk = diskInputs.children[0];
-            firstDisk.querySelector('.disk-name').value = "Samsung 970 EVO 1TB";
-            firstDisk.querySelector('.disk-health').value = "good";
-            firstDisk.querySelector('.disk-hours').value = "4520";
-            document.getElementById('diskComments').value = "Primary NVMe drive is in excellent health. Recommended routine file cleanup.";
-
-            // CPU
-            document.getElementById('cpuScoreBefore').value = "12500";
-            document.getElementById('cpuScoreAfter').value = "13800";
-            document.getElementById('cpuClockBefore').value = "3.8";
-            document.getElementById('cpuClockAfter').value = "4.6";
-            document.getElementById('cpuGflopsBefore').value = "210";
-            document.getElementById('cpuGflopsAfter').value = "245";
-            document.getElementById('cpuComments').value = "Applied negative voltage offset (-0.05v) to reduce thermals, allowing higher sustained boost clocks.";
-
-            // GPU
-            document.getElementById('gpuScoreBefore').value = "18000";
-            document.getElementById('gpuScoreAfter').value = "19500";
-            document.getElementById('gpuFpsBefore').value = "140";
-            document.getElementById('gpuFpsAfter').value = "165";
-            document.getElementById('gpuGflopsBefore').value = "9500";
-            document.getElementById('gpuGflopsAfter').value = "10200";
-            document.getElementById('gpuComments').value = "Custom fan curve applied. Memory overclocked +800MHz stable.";
-
-            // Overclocking
-            const ocToggle = document.getElementById('ocToggle');
-            if (!ocToggle.checked) {
-                ocToggle.click(); // Trigger change event
-            }
-            document.getElementById('ocCpuVcore').value = "1.32v";
-            document.getElementById('ocGpuCore').value = "+120 MHz";
-            document.getElementById('ocCpuClock').value = "5.1 GHz All-Core";
-            document.getElementById('ocGpuMem').value = "+1000 MHz";
-            document.getElementById('ocCpuLlc').value = "Mode 4 (Flat)";
-            document.getElementById('ocGpuPower').value = "115% Max";
-            
-            // Stability
-            document.getElementById('ocFurmarkTemp').value = "68";
-            document.getElementById('ocFurmarkDuration').value = "30";
-            document.getElementById('ocFurmarkStable').checked = true;
-
-            document.getElementById('ocOcctTemp').value = "82";
-            document.getElementById('ocOcctDuration').value = "60";
-            document.getElementById('ocOcctStable').checked = true;
-
-            // Benchmarks
-            document.getElementById('ocCinebenchScore').value = "18450";
-            document.getElementById('ocCinebenchTemp').value = "85";
-            
-            document.getElementById('ocSuperposScore').value = "8900";
-            document.getElementById('ocSuperposFps').value = "65";
-            document.getElementById('ocSuperposPreset').value = "1080p Extreme";
-            
-            // Comments
-            document.getElementById('screenshotComments').value = "Screenshots confirm stability under load and improved benchmark scores.";
-        });
-    }
-
     // Toggle Overclocking Section
     const ocToggle = document.getElementById('ocToggle');
     const ocSection = document.getElementById('ocSection');
@@ -201,12 +125,133 @@ document.addEventListener('DOMContentLoaded', () => {
         handleFiles(files);
     });
 
-    // Generate PDF
-    generatePdfBtn.addEventListener('click', async () => {
-        const clientName = document.getElementById('clientName').value || 'Client';
-        const machineName = document.getElementById('machineName').value || 'Machine';
-        const date = document.getElementById('date').value;
+    // --- Data Retrieval Functions ---
 
+    const getExampleData = () => {
+        return {
+            clientName: "Testy McTesterson",
+            machineName: "TestBox",
+            date: document.getElementById('date').value,
+            
+            bootBefore: 45,
+            bootAfter: 18,
+            desktopBefore: 30,
+            desktopAfter: 12,
+            longestProcess: "Steam Client Service - 8s",
+            startupComments: "Disabled high-impact startup apps (Steam, Spotify, Discord). Adjusted BIOS fast boot settings.",
+            
+            disks: [
+                { name: "Samsung 970 EVO 1TB", health: "good", hours: "4520" }
+            ],
+            diskComments: "Primary NVMe drive is in excellent health. Recommended routine file cleanup.",
+            
+            cpuScoreBefore: 12500,
+            cpuScoreAfter: 13800,
+            cpuClockBefore: 3.8,
+            cpuClockAfter: 4.6,
+            cpuGflopsBefore: 210,
+            cpuGflopsAfter: 245,
+            cpuComments: "Applied negative voltage offset (-0.05v) to reduce thermals, allowing higher sustained boost clocks.",
+            
+            gpuScoreBefore: 18000,
+            gpuScoreAfter: 19500,
+            gpuFpsBefore: 140,
+            gpuFpsAfter: 165,
+            gpuGflopsBefore: 9500,
+            gpuGflopsAfter: 10200,
+            gpuComments: "Custom fan curve applied. Memory overclocked +800MHz stable.",
+            
+            ocEnabled: true,
+            ocCpuVcore: "1.32v",
+            ocGpuCore: "+120 MHz",
+            ocCpuClock: "5.1 GHz All-Core",
+            ocGpuMem: "+1000 MHz",
+            ocCpuLlc: "Mode 4 (Flat)",
+            ocGpuPower: "115% Max",
+            ocFurmarkTemp: 68,
+            ocFurmarkDuration: 30,
+            ocFurmarkStable: true,
+            ocOcctTemp: 82,
+            ocOcctDuration: 60,
+            ocOcctStable: true,
+            ocCinebenchScore: 18450,
+            ocCinebenchTemp: 85,
+            ocSuperposScore: 8900,
+            ocSuperposFps: 65,
+            ocSuperposPreset: "1080p Extreme",
+            
+            screenshots: [],
+            screenshotComments: "Screenshots confirm stability under load and improved benchmark scores."
+        };
+    };
+
+    const getFormData = () => {
+        const disks = Array.from(document.querySelectorAll('.disk-item')).map(item => ({
+            name: item.querySelector('.disk-name').value,
+            health: item.querySelector('.disk-health').value,
+            hours: item.querySelector('.disk-hours').value
+        }));
+
+        // For screenshots in form data, we need the actual image elements to read src
+        const screenshotImgs = Array.from(document.querySelectorAll('#screenshotPreview img'));
+
+        return {
+            clientName: document.getElementById('clientName').value || 'Client',
+            machineName: document.getElementById('machineName').value || 'Machine',
+            date: document.getElementById('date').value,
+            
+            bootBefore: document.getElementById('fullStartupTimeBefore').value,
+            bootAfter: document.getElementById('fullStartupTimeAfter').value,
+            desktopBefore: document.getElementById('desktopTimeBefore').value,
+            desktopAfter: document.getElementById('desktopTimeAfter').value,
+            longestProcess: document.getElementById('longestProcess').value,
+            startupComments: document.getElementById('startupComments').value,
+            
+            disks: disks,
+            diskComments: document.getElementById('diskComments').value,
+            
+            cpuScoreBefore: document.getElementById('cpuScoreBefore').value,
+            cpuScoreAfter: document.getElementById('cpuScoreAfter').value,
+            cpuClockBefore: document.getElementById('cpuClockBefore').value,
+            cpuClockAfter: document.getElementById('cpuClockAfter').value,
+            cpuGflopsBefore: document.getElementById('cpuGflopsBefore').value,
+            cpuGflopsAfter: document.getElementById('cpuGflopsAfter').value,
+            cpuComments: document.getElementById('cpuComments').value,
+            
+            gpuScoreBefore: document.getElementById('gpuScoreBefore').value,
+            gpuScoreAfter: document.getElementById('gpuScoreAfter').value,
+            gpuFpsBefore: document.getElementById('gpuFpsBefore').value,
+            gpuFpsAfter: document.getElementById('gpuFpsAfter').value,
+            gpuGflopsBefore: document.getElementById('gpuGflopsBefore').value,
+            gpuGflopsAfter: document.getElementById('gpuGflopsAfter').value,
+            gpuComments: document.getElementById('gpuComments').value,
+            
+            ocEnabled: document.getElementById('ocToggle').checked,
+            ocCpuVcore: document.getElementById('ocCpuVcore').value,
+            ocGpuCore: document.getElementById('ocGpuCore').value,
+            ocCpuClock: document.getElementById('ocCpuClock').value,
+            ocGpuMem: document.getElementById('ocGpuMem').value,
+            ocCpuLlc: document.getElementById('ocCpuLlc').value,
+            ocGpuPower: document.getElementById('ocGpuPower').value,
+            ocFurmarkTemp: document.getElementById('ocFurmarkTemp').value,
+            ocFurmarkDuration: document.getElementById('ocFurmarkDuration').value,
+            ocFurmarkStable: document.getElementById('ocFurmarkStable').checked,
+            ocOcctTemp: document.getElementById('ocOcctTemp').value,
+            ocOcctDuration: document.getElementById('ocOcctDuration').value,
+            ocOcctStable: document.getElementById('ocOcctStable').checked,
+            ocCinebenchScore: document.getElementById('ocCinebenchScore').value,
+            ocCinebenchTemp: document.getElementById('ocCinebenchTemp').value,
+            ocSuperposScore: document.getElementById('ocSuperposScore').value,
+            ocSuperposFps: document.getElementById('ocSuperposFps').value,
+            ocSuperposPreset: document.getElementById('ocSuperposPreset').value,
+            
+            screenshots: screenshotImgs, // Array of img elements
+            screenshotComments: document.getElementById('screenshotComments').value
+        };
+    };
+
+    // --- PDF Generation ---
+    const generateReportPdf = async (data) => {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
         let yPos = 20;
@@ -246,7 +291,6 @@ document.addEventListener('DOMContentLoaded', () => {
             yPos += 18;
         };
         
-        // Function to add sub-header for OC page
         const addSubHeader = (title) => {
             checkPageBreak(15);
             yPos += 5;
@@ -304,24 +348,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const bVal = parseFloat(before);
             const aVal = parseFloat(after);
 
-            // Skip if invalid
             if (isNaN(bVal)) return;
 
-            // If we ONLY have a "Before" value (no comparison), render as simple text row
             if (isNaN(aVal)) {
                 addTextRow(label, `${bVal} ${unit}`);
                 return;
             }
 
-            // If we have both, render the chart
-            checkPageBreak(35); // Space for label + 2 bars
+            checkPageBreak(35); 
 
-            // 1. Text Line
             doc.setFontSize(11);
             doc.setFont(undefined, 'bold');
             doc.text(label, margin, yPos);
             
-            // Calculate Improvement
             let text = `${bVal} ${unit}`;
             let improvement = 0;
             let isImproved = false;
@@ -338,11 +377,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             let impText = "";
             if (lowerIsBetter) {
-                 // Lower is better (Time/Temp)
                  if (isImproved) impText = `(Improved by ${displayImp}%)`;
                  else impText = `(Slower/Hotter by ${displayImp}%)`;
             } else {
-                // Higher is better (Score)
                 if (isImproved) impText = `(Improved by ${displayImp}%)`;
                 else impText = `(Decreased by ${displayImp}%)`;
             }
@@ -353,9 +390,9 @@ document.addEventListener('DOMContentLoaded', () => {
             doc.text(text, margin + 60, yPos);
             yPos += 8;
 
-            // 2. Draw Bars
-            const maxVal = Math.max(bVal, aVal) * 1.1; // 10% buffer
-            const chartWidth = 120; // Max width of bar in mm
+            // Draw Bars
+            const maxVal = Math.max(bVal, aVal) * 1.1; 
+            const chartWidth = 120; 
             const barHeight = 6;
 
             // Before Bar
@@ -395,9 +432,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Client Info
             doc.setFontSize(10);
             
-            doc.text(`Date: ${date}`, pageWidth - margin, 15, { align: 'right' });
-            doc.text(`Client: ${clientName}`, pageWidth - margin, 20, { align: 'right' });
-            doc.text(`Machine: ${machineName}`, pageWidth - margin, 25, { align: 'right' });
+            doc.text(`Date: ${data.date}`, pageWidth - margin, 15, { align: 'right' });
+            doc.text(`Client: ${data.clientName}`, pageWidth - margin, 20, { align: 'right' });
+            doc.text(`Machine: ${data.machineName}`, pageWidth - margin, 25, { align: 'right' });
 
             yPos = 50;
             doc.setTextColor('#000000');
@@ -416,42 +453,39 @@ document.addEventListener('DOMContentLoaded', () => {
         let summaryPoints = [];
 
         // 1. Boot Performance
-        const bootBefore = parseFloat(document.getElementById('fullStartupTimeBefore').value) || 0;
-        const bootAfter = parseFloat(document.getElementById('fullStartupTimeAfter').value) || 0;
+        const bootBefore = parseFloat(data.bootBefore) || 0;
+        const bootAfter = parseFloat(data.bootAfter) || 0;
         if (bootBefore > 0 && bootAfter > 0 && bootAfter < bootBefore) {
             const imp = ((bootBefore - bootAfter) / bootBefore * 100).toFixed(0);
             summaryPoints.push(`Your system is starting up ${imp}% faster. We reduced the boot time from ${bootBefore}s to ${bootAfter}s by streamlining startup applications and disabling unnecessary system services.`);
         }
 
         // 2. Processor (CPU)
-        const cpuBefore = parseFloat(document.getElementById('cpuScoreBefore').value) || 0;
-        const cpuAfter = parseFloat(document.getElementById('cpuScoreAfter').value) || 0;
+        const cpuBefore = parseFloat(data.cpuScoreBefore) || 0;
+        const cpuAfter = parseFloat(data.cpuScoreAfter) || 0;
         if (cpuBefore > 0 && cpuAfter > 0 && cpuAfter > cpuBefore) {
             const imp = ((cpuAfter - cpuBefore) / cpuBefore * 100).toFixed(0);
             summaryPoints.push(`Processing power has increased by ${imp}%. This improvement means faster application loading, smoother multitasking, and a more responsive experience overall.`);
         }
 
         // 3. Graphics (GPU)
-        const gpuBefore = parseFloat(document.getElementById('gpuScoreBefore').value) || 0;
-        const gpuAfter = parseFloat(document.getElementById('gpuScoreAfter').value) || 0;
+        const gpuBefore = parseFloat(data.gpuScoreBefore) || 0;
+        const gpuAfter = parseFloat(data.gpuScoreAfter) || 0;
         if (gpuBefore > 0 && gpuAfter > 0 && gpuAfter > gpuBefore) {
             const imp = ((gpuAfter - gpuBefore) / gpuBefore * 100).toFixed(0);
             summaryPoints.push(`Graphics performance saw a ${imp}% boost. You can expect smoother visuals, higher frame rates in games, and better performance in video playback or creative tasks.`);
         }
 
         // 4. Overclocking
-        if (document.getElementById('ocToggle').checked) {
+        if (data.ocEnabled) {
             summaryPoints.push("Advanced enthusiast-level tuning was applied to your hardware. We have safely increased the operating speed of your components while verifying stability, squeezing every bit of performance out of your system.");
         }
 
         // 5. General Health / Maintenance
         summaryPoints.push("We performed a comprehensive system health check, including thermal paste replacement and internal cleaning to ensure optimal airflow. This maintenance helps keep temperatures low and extends the lifespan of your computer.");
 
-        // 6. Disk Warning (if any bad disks)
-        const disks = Array.from(document.querySelectorAll('.disk-item')).map(item => ({
-            health: item.querySelector('.disk-health').value
-        }));
-        const hasBadDisk = disks.some(d => d.health === 'bad');
+        // 6. Disk Warning
+        const hasBadDisk = data.disks.some(d => d.health === 'bad');
         if (hasBadDisk) {
             summaryPoints.push("CRITICAL NOTE: We detected potential issues with one or more storage drives. Please refer to the Disk Health section below and considering backing up your data immediately.");
         }
@@ -466,33 +500,19 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // 1. Startup Time
         addSectionTitle("Startup & Boot Performance");
-        addComparisonChart("Fully Started", 
-            document.getElementById('fullStartupTimeBefore').value, 
-            document.getElementById('fullStartupTimeAfter').value, 
-            "s", true); // Lower is better
-        
-        addComparisonChart("Desktop Shown", 
-            document.getElementById('desktopTimeBefore').value, 
-            document.getElementById('desktopTimeAfter').value, 
-            "s", true);
-
-        addTextRow("Longest Process", document.getElementById('longestProcess').value);
-        addCommentBlock("Analyst Notes", document.getElementById('startupComments').value);
+        addComparisonChart("Fully Started", data.bootBefore, data.bootAfter, "s", true);
+        addComparisonChart("Desktop Shown", data.desktopBefore, data.desktopAfter, "s", true);
+        addTextRow("Longest Process", data.longestProcess);
+        addCommentBlock("Analyst Notes", data.startupComments);
 
 
         // 2. Disk Health
         addSectionTitle("Disk Health Status");
-        const disks = Array.from(document.querySelectorAll('.disk-item')).map(item => ({
-            name: item.querySelector('.disk-name').value,
-            health: item.querySelector('.disk-health').value,
-            hours: item.querySelector('.disk-hours').value
-        }));
-        
-        if (disks.length === 0) {
+        if (data.disks.length === 0) {
             doc.text("No disk data recorded.", margin, yPos);
             yPos += 10;
         } else {
-            disks.forEach(disk => {
+            data.disks.forEach(disk => {
                 checkPageBreak(20);
                 let healthColor = '#009900'; // Green
                 if (disk.health === 'fair') healthColor = '#cc9900'; // Orange
@@ -511,71 +531,49 @@ document.addEventListener('DOMContentLoaded', () => {
                 yPos += 10;
             });
         }
-        addCommentBlock("Analyst Notes", document.getElementById('diskComments').value);
+        addCommentBlock("Analyst Notes", data.diskComments);
 
 
         // 3. CPU Benchmarks
         addSectionTitle("CPU Performance (Novabench)");
-        addComparisonChart("Overall Score", 
-            document.getElementById('cpuScoreBefore').value, 
-            document.getElementById('cpuScoreAfter').value, 
-            "pts", false); // Higher is better
-
-        addComparisonChart("Clock Speed", 
-            document.getElementById('cpuClockBefore').value, 
-            document.getElementById('cpuClockAfter').value, 
-            "GHz", false); // Higher is better
-
-        addComparisonChart("GFLOPS", 
-            document.getElementById('cpuGflopsBefore').value, 
-            document.getElementById('cpuGflopsAfter').value, 
-            "GFLOPS", false); // Higher is better
+        addComparisonChart("Overall Score", data.cpuScoreBefore, data.cpuScoreAfter, "pts", false);
+        addComparisonChart("Clock Speed", data.cpuClockBefore, data.cpuClockAfter, "GHz", false);
+        addComparisonChart("GFLOPS", data.cpuGflopsBefore, data.cpuGflopsAfter, "GFLOPS", false);
         
         // Explanation for CPU GFLOPS
-        const cpuGflopsB = parseFloat(document.getElementById('cpuGflopsBefore').value);
-        const cpuGflopsA = parseFloat(document.getElementById('cpuGflopsAfter').value);
-        if (cpuGflopsA > cpuGflopsB) {
-             const imp = ((cpuGflopsA - cpuGflopsB) / cpuGflopsB * 100).toFixed(1);
+        const cpuGflopsB_val = parseFloat(data.cpuGflopsBefore);
+        const cpuGflopsA_val = parseFloat(data.cpuGflopsAfter);
+        if (cpuGflopsA_val > cpuGflopsB_val) {
+             const imp = ((cpuGflopsA_val - cpuGflopsB_val) / cpuGflopsB_val * 100).toFixed(1);
              addExplanation(`GFLOPS measures the raw computational speed of your CPU for heavy calculations. The ${imp}% increase means your processor is now faster at demanding tasks like video editing, 3D rendering, and serious multitasking.`);
         } else {
              addExplanation(`GFLOPS measures the raw computational speed of your CPU. This score reflects your processor's ability to handle heavy, complex calculations like video editing and multitasking.`);
         }
 
-        addCommentBlock("Analyst Notes", document.getElementById('cpuComments').value);
+        addCommentBlock("Analyst Notes", data.cpuComments);
 
 
         // 4. GPU Benchmarks
         addSectionTitle("GPU Performance (Novabench)");
-        addComparisonChart("Overall Score", 
-            document.getElementById('gpuScoreBefore').value, 
-            document.getElementById('gpuScoreAfter').value, 
-            "pts", false); // Higher is better
-
-        addComparisonChart("FPS", 
-            document.getElementById('gpuFpsBefore').value, 
-            document.getElementById('gpuFpsAfter').value, 
-            "FPS", false); // Higher is better
-
-        addComparisonChart("GFLOPS", 
-            document.getElementById('gpuGflopsBefore').value, 
-            document.getElementById('gpuGflopsAfter').value, 
-            "GFLOPS", false); // Higher is better
+        addComparisonChart("Overall Score", data.gpuScoreBefore, data.gpuScoreAfter, "pts", false);
+        addComparisonChart("FPS", data.gpuFpsBefore, data.gpuFpsAfter, "FPS", false);
+        addComparisonChart("GFLOPS", data.gpuGflopsBefore, data.gpuGflopsAfter, "GFLOPS", false);
 
         // Explanation for GPU GFLOPS
-        const gpuGflopsB = parseFloat(document.getElementById('gpuGflopsBefore').value);
-        const gpuGflopsA = parseFloat(document.getElementById('gpuGflopsAfter').value);
-        if (gpuGflopsA > gpuGflopsB) {
-             const imp = ((gpuGflopsA - gpuGflopsB) / gpuGflopsB * 100).toFixed(1);
+        const gpuGflopsB_val = parseFloat(data.gpuGflopsBefore);
+        const gpuGflopsA_val = parseFloat(data.gpuGflopsAfter);
+        if (gpuGflopsA_val > gpuGflopsB_val) {
+             const imp = ((gpuGflopsA_val - gpuGflopsB_val) / gpuGflopsB_val * 100).toFixed(1);
              addExplanation(`GFLOPS here measures the raw mathematical power of your graphics card. The ${imp}% boost means better performance in modern games, faster 3D rendering, and smoother high-resolution video playback.`);
         } else {
              addExplanation(`This GFLOPS score measures the raw mathematical power of your graphics card. A higher score translates to better performance in gaming, 3D rendering, and video workloads.`);
         }
             
-        addCommentBlock("Analyst Notes", document.getElementById('gpuComments').value);
+        addCommentBlock("Analyst Notes", data.gpuComments);
 
 
         // --- OPTIONAL: Overclocking Section ---
-        if (document.getElementById('ocToggle').checked) {
+        if (data.ocEnabled) {
             doc.addPage();
             yPos = 20; // Reset Y for new page
             drawHeader(); // Re-draw header on new page
@@ -591,9 +589,9 @@ document.addEventListener('DOMContentLoaded', () => {
             doc.text("CPU Settings:", margin, yPos);
             yPos += 6;
             doc.setFont(undefined, 'normal');
-            addTextRow("VCore", document.getElementById('ocCpuVcore').value);
-            addTextRow("Clock / Ratio", document.getElementById('ocCpuClock').value);
-            addTextRow("LLC / Misc", document.getElementById('ocCpuLlc').value);
+            addTextRow("VCore", data.ocCpuVcore);
+            addTextRow("Clock / Ratio", data.ocCpuClock);
+            addTextRow("LLC / Misc", data.ocCpuLlc);
             
             yPos += 5;
 
@@ -602,9 +600,9 @@ document.addEventListener('DOMContentLoaded', () => {
             doc.text("GPU Settings:", margin, yPos);
             yPos += 6;
             doc.setFont(undefined, 'normal');
-            addTextRow("Core Offset", document.getElementById('ocGpuCore').value);
-            addTextRow("Mem Offset", document.getElementById('ocGpuMem').value);
-            addTextRow("Power Limit", document.getElementById('ocGpuPower').value);
+            addTextRow("Core Offset", data.ocGpuCore);
+            addTextRow("Mem Offset", data.ocGpuMem);
+            addTextRow("Power Limit", data.ocGpuPower);
 
             yPos += 10;
 
@@ -616,14 +614,13 @@ document.addEventListener('DOMContentLoaded', () => {
             doc.text("GPU Stability (Furmark):", margin, yPos);
             yPos += 6;
             doc.setFont(undefined, 'normal');
-            addTextRow("Max Temp", document.getElementById('ocFurmarkTemp').value ? `${document.getElementById('ocFurmarkTemp').value} °C` : "");
-            addTextRow("Duration", document.getElementById('ocFurmarkDuration').value ? `${document.getElementById('ocFurmarkDuration').value} min` : "");
+            addTextRow("Max Temp", data.ocFurmarkTemp ? `${data.ocFurmarkTemp} \u00B0C` : "");
+            addTextRow("Duration", data.ocFurmarkDuration ? `${data.ocFurmarkDuration} min` : "");
             
-            let isStable = document.getElementById('ocFurmarkStable').checked;
             doc.setFont(undefined, 'bold');
             doc.text("Status:", margin, yPos);
-            doc.setTextColor(isStable ? '#009900' : '#cc0000');
-            doc.text(isStable ? "STABLE" : "UNSTABLE / NOT PASSING", margin + 50, yPos);
+            doc.setTextColor(data.ocFurmarkStable ? '#009900' : '#cc0000');
+            doc.text(data.ocFurmarkStable ? "STABLE" : "UNSTABLE / NOT PASSING", margin + 50, yPos);
             doc.setTextColor('#000000');
             yPos += 10;
 
@@ -632,14 +629,13 @@ document.addEventListener('DOMContentLoaded', () => {
             doc.text("CPU Stability (OCCT):", margin, yPos);
             yPos += 6;
             doc.setFont(undefined, 'normal');
-            addTextRow("Max Temp", document.getElementById('ocOcctTemp').value ? `${document.getElementById('ocOcctTemp').value} °C` : "");
-            addTextRow("Duration", document.getElementById('ocOcctDuration').value ? `${document.getElementById('ocOcctDuration').value} min` : "");
+            addTextRow("Max Temp", data.ocOcctTemp ? `${data.ocOcctTemp} \u00B0C` : "");
+            addTextRow("Duration", data.ocOcctDuration ? `${data.ocOcctDuration} min` : "");
             
-            isStable = document.getElementById('ocOcctStable').checked; // Reusing variable for clarity
             doc.setFont(undefined, 'bold');
             doc.text("Status:", margin, yPos);
-            doc.setTextColor(isStable ? '#009900' : '#cc0000');
-            doc.text(isStable ? "STABLE" : "UNSTABLE / NOT PASSING", margin + 50, yPos);
+            doc.setTextColor(data.ocOcctStable ? '#009900' : '#cc0000');
+            doc.text(data.ocOcctStable ? "STABLE" : "UNSTABLE / NOT PASSING", margin + 50, yPos);
             doc.setTextColor('#000000');
             yPos += 15;
 
@@ -652,8 +648,8 @@ document.addEventListener('DOMContentLoaded', () => {
             doc.text("Cinebench R23/24:", margin, yPos);
             yPos += 6;
             doc.setFont(undefined, 'normal');
-            addTextRow("Score", document.getElementById('ocCinebenchScore').value);
-            addTextRow("Max Temp", document.getElementById('ocCinebenchTemp').value ? `${document.getElementById('ocCinebenchTemp').value} °C` : "");
+            addTextRow("Score", data.ocCinebenchScore);
+            addTextRow("Max Temp", data.ocCinebenchTemp ? `${data.ocCinebenchTemp} \u00B0C` : "");
             yPos += 5;
 
             // Superposition
@@ -661,26 +657,25 @@ document.addEventListener('DOMContentLoaded', () => {
             doc.text("Unigine Superposition:", margin, yPos);
             yPos += 6;
             doc.setFont(undefined, 'normal');
-            addTextRow("Score", document.getElementById('ocSuperposScore').value);
-            addTextRow("Avg FPS", document.getElementById('ocSuperposFps').value);
-            addTextRow("Preset", document.getElementById('ocSuperposPreset').value);
+            addTextRow("Score", data.ocSuperposScore);
+            addTextRow("Avg FPS", data.ocSuperposFps);
+            addTextRow("Preset", data.ocSuperposPreset);
         }
 
 
         // 5. Screenshots
-        checkPageBreak(50); // Ensure title doesn't start at very bottom
+        checkPageBreak(50); 
         addSectionTitle("Visual Proof of Work");
-        const screenshots = Array.from(document.querySelectorAll('#screenshotPreview img'));
-        if (screenshots.length > 0) {
-            for (let i = 0; i < screenshots.length; i++) {
-                const img = screenshots[i];
+        
+        if (data.screenshots && data.screenshots.length > 0) {
+            for (let i = 0; i < data.screenshots.length; i++) {
+                const img = data.screenshots[i];
                 
-                // Calculate dimensions to fit page width while maintaining aspect ratio
+                // Calculate dimensions
                 const imgRatio = img.naturalHeight / img.naturalWidth;
                 const renderWidth = contentWidth;
                 const renderHeight = renderWidth * imgRatio;
 
-                // Check if image fits on current page, else add new page
                 checkPageBreak(renderHeight + 10);
 
                 try {
@@ -694,7 +689,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                     
                     doc.addImage(imageData, 'JPEG', margin, yPos, renderWidth, renderHeight);
-                    yPos += renderHeight + 10; // Add spacing after image
+                    yPos += renderHeight + 10; 
                 } catch (e) {
                     console.error("Failed to add image to PDF:", e);
                 }
@@ -703,7 +698,7 @@ document.addEventListener('DOMContentLoaded', () => {
             doc.text("No screenshots attached.", margin, yPos);
             yPos += 10;
         }
-        addCommentBlock("General Comments", document.getElementById('screenshotComments').value);
+        addCommentBlock("General Comments", data.screenshotComments);
 
 
         // Footer
@@ -716,11 +711,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Save PDF
-        const formattedClientName = clientName.replace(/\s+/g, '_');
-        const formattedMachineName = machineName.replace(/\s+/g, '_');
-        const formattedDate = date.replace(/\//g, '-');
+        const formattedClientName = String(data.clientName).replace(/\s+/g, '_');
+        const formattedMachineName = String(data.machineName).replace(/\s+/g, '_');
+        const formattedDate = String(data.date).replace(/\//g, '-');
         const filename = `${formattedClientName}_${formattedMachineName}_${formattedDate}_Optimization_Report.pdf`;
 
         doc.save(filename);
+    };
+
+    // --- Event Listeners ---
+    const generateExamplePdfBtn = document.getElementById('generateExamplePdfBtn');
+    if (generateExamplePdfBtn) {
+        generateExamplePdfBtn.addEventListener('click', () => {
+            generateReportPdf(getExampleData());
+        });
+    }
+
+    generatePdfBtn.addEventListener('click', () => {
+        generateReportPdf(getFormData());
     });
 });
