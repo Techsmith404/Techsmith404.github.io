@@ -317,24 +317,62 @@ document.addEventListener('DOMContentLoaded', () => {
         
         drawHeader();
 
-        // --- Executive Summary (New) ---
-        // Auto-generate a summary if "After" values exist
-        let hasAfterValues = false;
-        const inputsToCheck = ['fullStartupTimeAfter', 'cpuScoreAfter', 'gpuScoreAfter'];
-        inputsToCheck.forEach(id => {
-            if (document.getElementById(id).value) hasAfterValues = true;
-        });
+        // --- Executive Summary (Dynamic) ---
+        doc.setFontSize(12);
+        doc.setFont(undefined, 'bold');
+        doc.text("Executive Summary", margin, yPos);
+        yPos += 7;
+        doc.setFont(undefined, 'normal');
+        doc.setFontSize(11);
 
-        if (hasAfterValues) {
-            doc.setFontSize(12);
-            doc.setFont(undefined, 'bold');
-            doc.text("Executive Summary", margin, yPos);
-            yPos += 7;
-            doc.setFont(undefined, 'normal');
-            doc.setFontSize(11);
-            doc.text("The optimization procedures performed on this machine have resulted in the improvements detailed below. The system has been tuned for better performance, lower temperatures, and faster startup times.", margin, yPos, { maxWidth: contentWidth });
-            yPos += 15;
+        let summaryPoints = [];
+
+        // 1. Boot Performance
+        const bootBefore = parseFloat(document.getElementById('fullStartupTimeBefore').value) || 0;
+        const bootAfter = parseFloat(document.getElementById('fullStartupTimeAfter').value) || 0;
+        if (bootBefore > 0 && bootAfter > 0 && bootAfter < bootBefore) {
+            const imp = ((bootBefore - bootAfter) / bootBefore * 100).toFixed(0);
+            summaryPoints.push(`Your system is starting up ${imp}% faster. We reduced the boot time from ${bootBefore}s to ${bootAfter}s by streamlining startup applications and disabling unnecessary system services.`);
         }
+
+        // 2. Processor (CPU)
+        const cpuBefore = parseFloat(document.getElementById('cpuScoreBefore').value) || 0;
+        const cpuAfter = parseFloat(document.getElementById('cpuScoreAfter').value) || 0;
+        if (cpuBefore > 0 && cpuAfter > 0 && cpuAfter > cpuBefore) {
+            const imp = ((cpuAfter - cpuBefore) / cpuBefore * 100).toFixed(0);
+            summaryPoints.push(`Processing power has increased by ${imp}%. This improvement means faster application loading, smoother multitasking, and a more responsive experience overall.`);
+        }
+
+        // 3. Graphics (GPU)
+        const gpuBefore = parseFloat(document.getElementById('gpuScoreBefore').value) || 0;
+        const gpuAfter = parseFloat(document.getElementById('gpuScoreAfter').value) || 0;
+        if (gpuBefore > 0 && gpuAfter > 0 && gpuAfter > gpuBefore) {
+            const imp = ((gpuAfter - gpuBefore) / gpuBefore * 100).toFixed(0);
+            summaryPoints.push(`Graphics performance saw a ${imp}% boost. You can expect smoother visuals, higher frame rates in games, and better performance in video playback or creative tasks.`);
+        }
+
+        // 4. Overclocking
+        if (document.getElementById('ocToggle').checked) {
+            summaryPoints.push("Advanced enthusiast-level tuning was applied to your hardware. We have safely increased the operating speed of your components while verifying stability, squeezing every bit of performance out of your system.");
+        }
+
+        // 5. General Health / Maintenance
+        summaryPoints.push("We performed a comprehensive system health check, including thermal paste replacement and internal cleaning to ensure optimal airflow. This maintenance helps keep temperatures low and extends the lifespan of your computer.");
+
+        // 6. Disk Warning (if any bad disks)
+        const disks = Array.from(document.querySelectorAll('.disk-item')).map(item => ({
+            health: item.querySelector('.disk-health').value
+        }));
+        const hasBadDisk = disks.some(d => d.health === 'bad');
+        if (hasBadDisk) {
+            summaryPoints.push("CRITICAL NOTE: We detected potential issues with one or more storage drives. Please refer to the Disk Health section below and considering backing up your data immediately.");
+        }
+
+        // Combine points
+        const fullSummary = summaryPoints.join(" ");
+        const summaryLines = doc.splitTextToSize(fullSummary, contentWidth);
+        doc.text(summaryLines, margin, yPos);
+        yPos += (summaryLines.length * lineHeight) + 10;
 
         // --- Sections ---
         
