@@ -1,4 +1,5 @@
 # Personal/Project management files
+GEMINI.md
 
 # System files
 .DS_Store
@@ -7,3 +8,5 @@ Thumbs.db
 # Temporary files
 *.log
 tmp/
+temp/
+nohup.out

@@ -170,6 +170,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Event listeners for Formbricks buttons.
     const primaryButton = document.getElementById('request-form-button');
     const stickyButton = document.getElementById('sticky-request-button');
+    const orderWhiteDwarfButton = document.getElementById('order-white-dwarf-btn');
+    
     const buttons = [primaryButton, stickyButton].filter(btn => btn !== null);
     
     buttons.forEach(button => {
@@ -181,6 +183,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    if (orderWhiteDwarfButton) {
+        orderWhiteDwarfButton.addEventListener('click', () => {
+            if (window.formbricks) {
+                window.formbricks.track("order_white_dwarf");
+            } else {
+                console.error("Formbricks object not found. Cannot track event.");
+            }
+        });
+    }
     
     // Function Calls
     setupHeaderScrollClass();
