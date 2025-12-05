@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO: Title & Description -->
+    <title>The White Dwarf | Mini ITX Gaming PC by TechSmith404</title>
+    <meta name="description" content="The White Dwarf: A compact, powerful Mini ITX gaming PC designed for couch gaming and 1080p ultra performance. Custom built by TechSmith404.">
+    <link rel="canonical" href="https://techsmith404.com/white-dwarf.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="product">
+    <meta property="og:title" content="The White Dwarf - Compact Gaming Beast">
+    <meta property="og:description" content="Small form factor. Massive power. Ryzen 5 3600 + RX 6650 XT. Build-to-order now.">
+    <meta property="og:image" content="https://techsmith404.com/images/projects/white-dwarf/white-dwarf-main.png">
+    <meta property="og:url" content="https://techsmith404.com/white-dwarf.html">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css?v=20251204">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Product Specific Styles */
+        .product-hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .product-image-large {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 255, 157, 0.2);
+            border: 1px solid rgba(0, 255, 157, 0.3);
+        }
+
+        .product-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .gallery-thumb {
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-thumb:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(20, 20, 20, 0.7);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .specs-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-weight: bold;
+            color: var(--primary);
+            width: 40%;
+        }
+
+        .price-block {
+            background: rgba(0, 255, 157, 0.1);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--primary);
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .price-main {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--light);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        .price-note {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 0.5rem;
+        }
+
+        .deposit-badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 0.2rem 0.8rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .price-main {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background circuit and glitch overlays -->
+    <div class="circuit-overlay"></div>
+    <div class="glitch-overlay"></div>
+    
+    <!--Header-->
+    <header>
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo">
+                <a href="index.html" style="display: flex; align-items: center; color: inherit; text-decoration: none;">
+                    <span class="tech">TECH</span><span class="smith">SMITH</span><span class="error-code">404</span>
+                </a>
+            </div>
+            <a href="index.html" class="btn-outline" style="padding: 8px 16px; font-size: 0.9rem;">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="product-hero">
+            <div class="container">
+                <div class="product-grid">
+                    <div class="product-visuals">
+                        <img src="images/projects/white-dwarf/white-dwarf-main.png" alt="White Dwarf Gaming PC" class="product-image-large" id="mainImage">
+                        <div class="product-gallery">
+                            <img src="images/projects/white-dwarf/white-dwarf-main.png" alt="Front View" class="gallery-thumb" onclick="document.getElementById('mainImage').src=this.src">
+                            <img src="images/projects/white-dwarf/white-dwarf-side.png" alt="Side View" class="gallery-thumb" onclick="document.getElementById('mainImage').src=this.src">
+                            <img src="images/projects/white-dwarf/white-dwarf-angle.png" alt="Angle View" class="gallery-thumb" onclick="document.getElementById('mainImage').src=this.src">
+                        </div>
+                    </div>
+                    
+                    <div class="product-info">
+                        <div style="margin-bottom: 1rem;">
+                            <span class="deposit-badge">BUILD-TO-ORDER</span>
+                        </div>
+                        <h1 style="font-size: 3rem; margin-bottom: 0.5rem;">The White Dwarf</h1>
+                        <p style="color: var(--primary); font-size: 1.2rem; margin-bottom: 2rem;">Small Form Factor. Massive Power.</p>
+                        
+                        <p>
+                            Don't let the size fool you. The White Dwarf is a compact beast designed for the modern gamer. 
+                            Whether you're couch gaming at 1080p Ultra or need a desktop that doesn't dominate your desk, 
+                            this Mini ITX build delivers uncompromising performance in a sleek, white chassis.
+                        </p>
+                        
+                        <table class="specs-table">
+                            <tr>
+                                <td class="spec-label">CPU</td>
+                                <td>Ryzen 5 3600 (6-Core)</td>
+                            </tr>
+                            <tr>
+                                <td class="spec-label">GPU</td>
+                                <td>Radeon RX 6650 XT 8GB</td>
+                            </tr>
+                            <tr>
+                                <td class="spec-label">RAM</td>
+                                <td>16GB PNY XLR8 DDR4</td>
+                            </tr>
+                            <tr>
+                                <td class="spec-label">Storage</td>
+                                <td>1TB NVMe SSD</td>
+                            </tr>
+                            <tr>
+                                <td class="spec-label">Motherboard</td>
+                                <td>ASRock B550M-ITX/ac</td>
+                            </tr>
+                            <tr>
+                                <td class="spec-label">Case</td>
+                                <td>Thermaltake Core V1 (White)</td>
+                            </tr>
+                        </table>
+
+                        <div class="price-block">
+                            <div class="price-main">$869.99</div>
+                            <p class="price-note">Build-to-Order Total Price</p>
+                            
+                            <div style="margin: 1.5rem 0; border-top: 1px solid rgba(0,0,0,0.2); padding-top: 1rem;">
+                                <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">
+                                    <strong>How it works:</strong>
+                                </p>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 0.5rem;">
+                                    <span>1. Hardware Deposit (Required to start):</span>
+                                    <span>$568.00</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                                    <span>2. Labor Balance (Due on delivery):</span>
+                                    <span>$302.00</span>
+                                </div>
+                            </div>
+
+                            <button id="order-white-dwarf-btn" class="btn pulse" style="width: 100%;">
+                                Order Now <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.7;">Estimated Build Time: 7-10 Business Days</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="tech">TECH</span><span class="smith">SMITH</span><span class="error-code">404</span>
+                </div>
+                <div class="footer-copy">
+                    <p>&copy; 2025 TechSmith. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/script.js?v=20251204"></script>
+</body>
+</html>
