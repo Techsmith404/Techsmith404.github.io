@@ -171,6 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const primaryButton = document.getElementById('request-form-button');
     const stickyButton = document.getElementById('sticky-request-button');
     const orderWhiteDwarfButton = document.getElementById('order-white-dwarf-btn');
+    const orderDarkMatterButton = document.getElementById('order-dark-matter-btn');
     
     const buttons = [primaryButton, stickyButton].filter(btn => btn !== null);
     
@@ -188,6 +189,16 @@ document.addEventListener('DOMContentLoaded', function() {
         orderWhiteDwarfButton.addEventListener('click', () => {
             if (window.formbricks) {
                 window.formbricks.track("order_white_dwarf");
+            } else {
+                console.error("Formbricks object not found. Cannot track event.");
+            }
+        });
+    }
+
+    if (orderDarkMatterButton) {
+        orderDarkMatterButton.addEventListener('click', () => {
+            if (window.formbricks) {
+                window.formbricks.track("order_dark_matter");
             } else {
                 console.error("Formbricks object not found. Cannot track event.");
             }
